@@ -1,0 +1,1091 @@
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace Presentation
+{
+    partial class Main
+    {
+        private IContainer components = null;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && components != null)
+                components.Dispose();
+
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            components = new Container();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(Main));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            toolStripContainer1 = new ToolStripContainer();
+            panelContent = new Panel();
+            pnlContent = new Panel();
+            lstVColumns = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
+            contextDgvData = new ContextMenuStrip(components);
+            EditItem = new ToolStripMenuItem();
+            deleteTheItemToolStripMenuItem = new ToolStripMenuItem();
+            extrnaToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
+            tsmiCopy = new ToolStripMenuItem();
+            cpToolStripMenuItem = new ToolStripMenuItem();
+            pnlFilters = new Panel();
+            lstFilters = new ListView();
+            label2 = new Label();
+            CmbLogical = new ComboBox();
+            label1 = new Label();
+            lblFilter = new Label();
+            BtnAddFilter = new Button();
+            BtnClearFilters = new Button();
+            lblOperator = new Label();
+            cmbValueType = new ComboBox();
+            lblValue = new Label();
+            CbColumnsFilter = new ComboBox();
+            cmbFilterOperator = new ComboBox();
+            txtFilterValue = new TextBox();
+            cmbJoinTable = new ComboBox();
+            BtnStart = new Button();
+            pnlTop = new Panel();
+            lblTitle = new Label();
+            lblColumns = new Label();
+            pnlClbColomns = new Panel();
+            menuStrip1 = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            newToolStripMenuItem = new ToolStripMenuItem();
+            openToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator = new ToolStripSeparator();
+            saveToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            printToolStripMenuItem = new ToolStripMenuItem();
+            saveAsToolStripMenuItem = new ToolStripMenuItem();
+            printPreviewToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator2 = new ToolStripSeparator();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            editToolStripMenuItem = new ToolStripMenuItem();
+            undoToolStripMenuItem = new ToolStripMenuItem();
+            redoToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
+            cutToolStripMenuItem = new ToolStripMenuItem();
+            copyToolStripMenuItem = new ToolStripMenuItem();
+            pasteToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator4 = new ToolStripSeparator();
+            selectAllToolStripMenuItem = new ToolStripMenuItem();
+            toolsToolStripMenuItem = new ToolStripMenuItem();
+            customizeToolStripMenuItem = new ToolStripMenuItem();
+            optionsToolStripMenuItem = new ToolStripMenuItem();
+            helpToolStripMenuItem = new ToolStripMenuItem();
+            contentsToolStripMenuItem = new ToolStripMenuItem();
+            indexToolStripMenuItem = new ToolStripMenuItem();
+            searchToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator5 = new ToolStripSeparator();
+            aboutToolStripMenuItem = new ToolStripMenuItem();
+            runQueryToolStripMenuItem = new ToolStripMenuItem();
+            toolStripContainer2 = new ToolStripContainer();
+            DgvData = new DataGridView();
+            toolStrip1 = new ToolStrip();
+            newToolStripButton = new ToolStripButton();
+            openToolStripButton = new ToolStripButton();
+            saveToolStripButton = new ToolStripButton();
+            printToolStripButton = new ToolStripButton();
+            toolStripSeparator7 = new ToolStripSeparator();
+            cutToolStripButton = new ToolStripButton();
+            copyToolStripButton = new ToolStripButton();
+            pasteToolStripButton = new ToolStripButton();
+            toolStripSeparator8 = new ToolStripSeparator();
+            helpToolStripButton = new ToolStripButton();
+            toolStripSeparator9 = new ToolStripSeparator();
+            toolStripButton1 = new ToolStripButton();
+            BottomToolStripPanel = new ToolStripPanel();
+            miniToolStrip = new StatusStrip();
+            toolStripStatusLabelTables = new ToolStripStatusLabel();
+            StatusLabelCountTables = new ToolStripStatusLabel();
+            toolStripStatusLabelColumns = new ToolStripStatusLabel();
+            StatusLabelCountColumnsSelected = new ToolStripStatusLabel();
+            toolStripSplitBtnHidden = new ToolStripSplitButton();
+            TopToolStripPanel = new ToolStripPanel();
+            RightToolStripPanel = new ToolStripPanel();
+            LeftToolStripPanel = new ToolStripPanel();
+            ContentPanel = new ToolStripContentPanel();
+            splitContainer1 = new SplitContainer();
+            splitContainer2 = new SplitContainer();
+            panel2 = new Panel();
+            trTableInfo = new TreeView();
+            pnlSidebar = new Panel();
+            textBox1 = new TextBox();
+            lblTables = new Label();
+            statusStrip1 = new StatusStrip();
+            statusStripButtom = new StatusStrip();
+            toolStripStatusLabelConnection = new ToolStripStatusLabel();
+            StatusLabelConnection = new ToolStripStatusLabel();
+            printDialog1 = new PrintDialog();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            columnInfoBindingSource = new BindingSource(components);
+            toolStripContainer1.ContentPanel.SuspendLayout();
+            toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            toolStripContainer1.SuspendLayout();
+            panelContent.SuspendLayout();
+            pnlContent.SuspendLayout();
+            contextDgvData.SuspendLayout();
+            pnlFilters.SuspendLayout();
+            pnlTop.SuspendLayout();
+            menuStrip1.SuspendLayout();
+            toolStripContainer2.ContentPanel.SuspendLayout();
+            toolStripContainer2.TopToolStripPanel.SuspendLayout();
+            toolStripContainer2.SuspendLayout();
+            ((ISupportInitialize)DgvData).BeginInit();
+            toolStrip1.SuspendLayout();
+            ((ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((ISupportInitialize)splitContainer2).BeginInit();
+            splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
+            splitContainer2.SuspendLayout();
+            panel2.SuspendLayout();
+            pnlSidebar.SuspendLayout();
+            statusStripButtom.SuspendLayout();
+            ((ISupportInitialize)columnInfoBindingSource).BeginInit();
+            SuspendLayout();
+            // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            toolStripContainer1.ContentPanel.Controls.Add(panelContent);
+            resources.ApplyResources(toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
+            resources.ApplyResources(toolStripContainer1, "toolStripContainer1");
+            toolStripContainer1.LeftToolStripPanelVisible = false;
+            toolStripContainer1.Name = "toolStripContainer1";
+            toolStripContainer1.RightToolStripPanelVisible = false;
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            toolStripContainer1.TopToolStripPanel.Controls.Add(menuStrip1);
+            // 
+            // panelContent
+            // 
+            resources.ApplyResources(panelContent, "panelContent");
+            panelContent.Controls.Add(pnlContent);
+            panelContent.Controls.Add(pnlTop);
+            panelContent.Name = "panelContent";
+            // 
+            // pnlContent
+            // 
+            resources.ApplyResources(pnlContent, "pnlContent");
+            pnlContent.BackColor = Color.FromArgb(18, 18, 20);
+            pnlContent.Controls.Add(lstVColumns);
+            pnlContent.Controls.Add(pnlFilters);
+            pnlContent.Controls.Add(cmbJoinTable);
+            pnlContent.Controls.Add(BtnStart);
+            pnlContent.Name = "pnlContent";
+            // 
+            // lstVColumns
+            // 
+            lstVColumns.BackColor = Color.FromArgb(36, 38, 44);
+            lstVColumns.CheckBoxes = true;
+            lstVColumns.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
+            lstVColumns.ContextMenuStrip = contextDgvData;
+            lstVColumns.ForeColor = SystemColors.Window;
+            lstVColumns.FullRowSelect = true;
+            lstVColumns.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lstVColumns.HoverSelection = true;
+            lstVColumns.LabelEdit = true;
+            resources.ApplyResources(lstVColumns, "lstVColumns");
+            lstVColumns.Name = "lstVColumns";
+            lstVColumns.UseCompatibleStateImageBehavior = false;
+            lstVColumns.View = View.Details;
+            lstVColumns.Click += lstVColumns_Click;
+            // 
+            // columnHeader1
+            // 
+            resources.ApplyResources(columnHeader1, "columnHeader1");
+            // 
+            // columnHeader2
+            // 
+            resources.ApplyResources(columnHeader2, "columnHeader2");
+            // 
+            // columnHeader3
+            // 
+            resources.ApplyResources(columnHeader3, "columnHeader3");
+            // 
+            // columnHeader4
+            // 
+            resources.ApplyResources(columnHeader4, "columnHeader4");
+            // 
+            // columnHeader5
+            // 
+            resources.ApplyResources(columnHeader5, "columnHeader5");
+            // 
+            // contextDgvData
+            // 
+            contextDgvData.BackColor = Color.Black;
+            resources.ApplyResources(contextDgvData, "contextDgvData");
+            contextDgvData.ImageScalingSize = new Size(20, 20);
+            contextDgvData.Items.AddRange(new ToolStripItem[] { EditItem, deleteTheItemToolStripMenuItem, extrnaToolStripMenuItem, toolStripSeparator6, tsmiCopy, cpToolStripMenuItem });
+            contextDgvData.Name = "contextMenuStrip1";
+            contextDgvData.RenderMode = ToolStripRenderMode.System;
+            contextDgvData.ShowCheckMargin = true;
+            // 
+            // EditItem
+            // 
+            EditItem.BackColor = Color.Black;
+            EditItem.ForeColor = Color.White;
+            EditItem.Name = "EditItem";
+            resources.ApplyResources(EditItem, "EditItem");
+            EditItem.Click += EditItem_Click;
+            // 
+            // deleteTheItemToolStripMenuItem
+            // 
+            deleteTheItemToolStripMenuItem.BackColor = Color.Black;
+            deleteTheItemToolStripMenuItem.ForeColor = Color.White;
+            deleteTheItemToolStripMenuItem.Name = "deleteTheItemToolStripMenuItem";
+            resources.ApplyResources(deleteTheItemToolStripMenuItem, "deleteTheItemToolStripMenuItem");
+            // 
+            // extrnaToolStripMenuItem
+            // 
+            extrnaToolStripMenuItem.BackColor = Color.Black;
+            extrnaToolStripMenuItem.ForeColor = Color.White;
+            extrnaToolStripMenuItem.Name = "extrnaToolStripMenuItem";
+            resources.ApplyResources(extrnaToolStripMenuItem, "extrnaToolStripMenuItem");
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.BackColor = Color.Black;
+            toolStripSeparator6.ForeColor = SystemColors.ButtonFace;
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(toolStripSeparator6, "toolStripSeparator6");
+            // 
+            // tsmiCopy
+            // 
+            tsmiCopy.BackColor = Color.Black;
+            tsmiCopy.ForeColor = Color.White;
+            tsmiCopy.Name = "tsmiCopy";
+            resources.ApplyResources(tsmiCopy, "tsmiCopy");
+            tsmiCopy.Click += tsmiCopy_Click;
+            // 
+            // cpToolStripMenuItem
+            // 
+            cpToolStripMenuItem.ForeColor = Color.White;
+            cpToolStripMenuItem.Name = "cpToolStripMenuItem";
+            resources.ApplyResources(cpToolStripMenuItem, "cpToolStripMenuItem");
+            cpToolStripMenuItem.Click += cpToolStripMenuItem_Click;
+            // 
+            // pnlFilters
+            // 
+            pnlFilters.BackColor = Color.FromArgb(28, 30, 35);
+            pnlFilters.BorderStyle = BorderStyle.FixedSingle;
+            pnlFilters.Controls.Add(lstFilters);
+            pnlFilters.Controls.Add(label2);
+            pnlFilters.Controls.Add(CmbLogical);
+            pnlFilters.Controls.Add(label1);
+            pnlFilters.Controls.Add(lblFilter);
+            pnlFilters.Controls.Add(BtnAddFilter);
+            pnlFilters.Controls.Add(BtnClearFilters);
+            pnlFilters.Controls.Add(lblOperator);
+            pnlFilters.Controls.Add(cmbValueType);
+            pnlFilters.Controls.Add(lblValue);
+            pnlFilters.Controls.Add(CbColumnsFilter);
+            pnlFilters.Controls.Add(cmbFilterOperator);
+            pnlFilters.Controls.Add(txtFilterValue);
+            resources.ApplyResources(pnlFilters, "pnlFilters");
+            pnlFilters.Name = "pnlFilters";
+            // 
+            // lstFilters
+            // 
+            lstFilters.BackColor = Color.FromArgb(36, 38, 44);
+            lstFilters.ForeColor = Color.White;
+            resources.ApplyResources(lstFilters, "lstFilters");
+            lstFilters.Name = "lstFilters";
+            lstFilters.UseCompatibleStateImageBehavior = false;
+            // 
+            // label2
+            // 
+            resources.ApplyResources(label2, "label2");
+            label2.ForeColor = Color.FromArgb(160, 163, 175);
+            label2.Name = "label2";
+            // 
+            // CmbLogical
+            // 
+            CmbLogical.BackColor = Color.FromArgb(36, 38, 44);
+            CmbLogical.DropDownStyle = ComboBoxStyle.DropDownList;
+            resources.ApplyResources(CmbLogical, "CmbLogical");
+            CmbLogical.ForeColor = Color.FromArgb(235, 235, 240);
+            CmbLogical.Name = "CmbLogical";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(label1, "label1");
+            label1.ForeColor = Color.FromArgb(160, 163, 175);
+            label1.Name = "label1";
+            // 
+            // lblFilter
+            // 
+            resources.ApplyResources(lblFilter, "lblFilter");
+            lblFilter.ForeColor = Color.FromArgb(160, 163, 175);
+            lblFilter.Name = "lblFilter";
+            // 
+            // BtnAddFilter
+            // 
+            BtnAddFilter.BackColor = Color.FromArgb(99, 102, 241);
+            BtnAddFilter.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(BtnAddFilter, "BtnAddFilter");
+            BtnAddFilter.ForeColor = Color.White;
+            BtnAddFilter.Name = "BtnAddFilter";
+            BtnAddFilter.UseVisualStyleBackColor = false;
+            BtnAddFilter.Click += BtnAddFilter_Click;
+            // 
+            // BtnClearFilters
+            // 
+            BtnClearFilters.BackColor = Color.FromArgb(36, 38, 44);
+            BtnClearFilters.FlatAppearance.BorderColor = Color.FromArgb(55, 58, 66);
+            resources.ApplyResources(BtnClearFilters, "BtnClearFilters");
+            BtnClearFilters.ForeColor = Color.FromArgb(160, 163, 175);
+            BtnClearFilters.Name = "BtnClearFilters";
+            BtnClearFilters.UseVisualStyleBackColor = false;
+            BtnClearFilters.Click += BtnClearFilters_Click;
+            // 
+            // lblOperator
+            // 
+            resources.ApplyResources(lblOperator, "lblOperator");
+            lblOperator.ForeColor = Color.FromArgb(160, 163, 175);
+            lblOperator.Name = "lblOperator";
+            // 
+            // cmbValueType
+            // 
+            cmbValueType.BackColor = Color.FromArgb(36, 38, 44);
+            cmbValueType.DropDownStyle = ComboBoxStyle.DropDownList;
+            resources.ApplyResources(cmbValueType, "cmbValueType");
+            cmbValueType.ForeColor = Color.FromArgb(235, 235, 240);
+            cmbValueType.Name = "cmbValueType";
+            // 
+            // lblValue
+            // 
+            resources.ApplyResources(lblValue, "lblValue");
+            lblValue.ForeColor = Color.FromArgb(160, 163, 175);
+            lblValue.Name = "lblValue";
+            // 
+            // CbColumnsFilter
+            // 
+            CbColumnsFilter.BackColor = Color.FromArgb(36, 38, 44);
+            CbColumnsFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            resources.ApplyResources(CbColumnsFilter, "CbColumnsFilter");
+            CbColumnsFilter.ForeColor = Color.FromArgb(235, 235, 240);
+            CbColumnsFilter.Name = "CbColumnsFilter";
+            // 
+            // cmbFilterOperator
+            // 
+            cmbFilterOperator.BackColor = Color.FromArgb(36, 38, 44);
+            cmbFilterOperator.DropDownStyle = ComboBoxStyle.DropDownList;
+            resources.ApplyResources(cmbFilterOperator, "cmbFilterOperator");
+            cmbFilterOperator.ForeColor = Color.FromArgb(235, 235, 240);
+            cmbFilterOperator.Name = "cmbFilterOperator";
+            // 
+            // txtFilterValue
+            // 
+            txtFilterValue.AcceptsReturn = true;
+            txtFilterValue.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            txtFilterValue.BackColor = Color.FromArgb(36, 38, 44);
+            txtFilterValue.BorderStyle = BorderStyle.FixedSingle;
+            resources.ApplyResources(txtFilterValue, "txtFilterValue");
+            txtFilterValue.ForeColor = Color.FromArgb(235, 235, 240);
+            txtFilterValue.Name = "txtFilterValue";
+            // 
+            // cmbJoinTable
+            // 
+            cmbJoinTable.BackColor = Color.FromArgb(36, 38, 44);
+            cmbJoinTable.DropDownStyle = ComboBoxStyle.DropDownList;
+            resources.ApplyResources(cmbJoinTable, "cmbJoinTable");
+            cmbJoinTable.ForeColor = Color.FromArgb(235, 235, 240);
+            cmbJoinTable.Name = "cmbJoinTable";
+            // 
+            // BtnStart
+            // 
+            BtnStart.BackColor = Color.OrangeRed;
+            BtnStart.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(BtnStart, "BtnStart");
+            BtnStart.ForeColor = Color.White;
+            BtnStart.Name = "BtnStart";
+            BtnStart.UseVisualStyleBackColor = false;
+            BtnStart.Click += BtnStart_Click;
+            // 
+            // pnlTop
+            // 
+            pnlTop.BackColor = Color.FromArgb(18, 18, 20);
+            pnlTop.Controls.Add(lblTitle);
+            pnlTop.Controls.Add(lblColumns);
+            pnlTop.Controls.Add(pnlClbColomns);
+            resources.ApplyResources(pnlTop, "pnlTop");
+            pnlTop.Name = "pnlTop";
+            // 
+            // lblTitle
+            // 
+            resources.ApplyResources(lblTitle, "lblTitle");
+            lblTitle.ForeColor = Color.FromArgb(235, 235, 240);
+            lblTitle.Name = "lblTitle";
+            // 
+            // lblColumns
+            // 
+            resources.ApplyResources(lblColumns, "lblColumns");
+            lblColumns.ForeColor = Color.FromArgb(235, 235, 240);
+            lblColumns.Name = "lblColumns";
+            // 
+            // pnlClbColomns
+            // 
+            resources.ApplyResources(pnlClbColomns, "pnlClbColomns");
+            pnlClbColomns.Name = "pnlClbColomns";
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.BackColor = Color.FromArgb(23, 24, 28);
+            resources.ApplyResources(menuStrip1, "menuStrip1");
+            menuStrip1.ForeColor = Color.White;
+            menuStrip1.GripStyle = ToolStripGripStyle.Visible;
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem, runQueryToolStripMenuItem });
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.RenderMode = ToolStripRenderMode.Professional;
+            // 
+            // fileToolStripMenuItem
+            // 
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { newToolStripMenuItem, openToolStripMenuItem, toolStripSeparator, saveToolStripMenuItem, toolStripSeparator1, printToolStripMenuItem, saveAsToolStripMenuItem, printPreviewToolStripMenuItem, toolStripSeparator2, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            resources.ApplyResources(fileToolStripMenuItem, "fileToolStripMenuItem");
+            // 
+            // newToolStripMenuItem
+            // 
+            resources.ApplyResources(newToolStripMenuItem, "newToolStripMenuItem");
+            newToolStripMenuItem.Name = "newToolStripMenuItem";
+            // 
+            // openToolStripMenuItem
+            // 
+            resources.ApplyResources(openToolStripMenuItem, "openToolStripMenuItem");
+            openToolStripMenuItem.Name = "openToolStripMenuItem";
+            // 
+            // toolStripSeparator
+            // 
+            toolStripSeparator.Name = "toolStripSeparator";
+            resources.ApplyResources(toolStripSeparator, "toolStripSeparator");
+            // 
+            // saveToolStripMenuItem
+            // 
+            resources.ApplyResources(saveToolStripMenuItem, "saveToolStripMenuItem");
+            saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // printToolStripMenuItem
+            // 
+            resources.ApplyResources(printToolStripMenuItem, "printToolStripMenuItem");
+            printToolStripMenuItem.Name = "printToolStripMenuItem";
+            printToolStripMenuItem.Click += BtnPrint_Click;
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            resources.ApplyResources(saveAsToolStripMenuItem, "saveAsToolStripMenuItem");
+            // 
+            // printPreviewToolStripMenuItem
+            // 
+            resources.ApplyResources(printPreviewToolStripMenuItem, "printPreviewToolStripMenuItem");
+            printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(toolStripSeparator2, "toolStripSeparator2");
+            // 
+            // exitToolStripMenuItem
+            // 
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            resources.ApplyResources(exitToolStripMenuItem, "exitToolStripMenuItem");
+            // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, toolStripSeparator3, cutToolStripMenuItem, copyToolStripMenuItem, pasteToolStripMenuItem, toolStripSeparator4, selectAllToolStripMenuItem });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            resources.ApplyResources(editToolStripMenuItem, "editToolStripMenuItem");
+            // 
+            // undoToolStripMenuItem
+            // 
+            undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            resources.ApplyResources(undoToolStripMenuItem, "undoToolStripMenuItem");
+            // 
+            // redoToolStripMenuItem
+            // 
+            redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            resources.ApplyResources(redoToolStripMenuItem, "redoToolStripMenuItem");
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // cutToolStripMenuItem
+            // 
+            resources.ApplyResources(cutToolStripMenuItem, "cutToolStripMenuItem");
+            cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            // 
+            // copyToolStripMenuItem
+            // 
+            resources.ApplyResources(copyToolStripMenuItem, "copyToolStripMenuItem");
+            copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            resources.ApplyResources(pasteToolStripMenuItem, "pasteToolStripMenuItem");
+            pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(toolStripSeparator4, "toolStripSeparator4");
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            resources.ApplyResources(selectAllToolStripMenuItem, "selectAllToolStripMenuItem");
+            // 
+            // toolsToolStripMenuItem
+            // 
+            toolsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { customizeToolStripMenuItem, optionsToolStripMenuItem });
+            toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            resources.ApplyResources(toolsToolStripMenuItem, "toolsToolStripMenuItem");
+            // 
+            // customizeToolStripMenuItem
+            // 
+            customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
+            resources.ApplyResources(customizeToolStripMenuItem, "customizeToolStripMenuItem");
+            // 
+            // optionsToolStripMenuItem
+            // 
+            optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            resources.ApplyResources(optionsToolStripMenuItem, "optionsToolStripMenuItem");
+            // 
+            // helpToolStripMenuItem
+            // 
+            helpToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { contentsToolStripMenuItem, indexToolStripMenuItem, searchToolStripMenuItem, toolStripSeparator5, aboutToolStripMenuItem });
+            helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // contentsToolStripMenuItem
+            // 
+            contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
+            resources.ApplyResources(contentsToolStripMenuItem, "contentsToolStripMenuItem");
+            // 
+            // indexToolStripMenuItem
+            // 
+            indexToolStripMenuItem.Name = "indexToolStripMenuItem";
+            resources.ApplyResources(indexToolStripMenuItem, "indexToolStripMenuItem");
+            // 
+            // searchToolStripMenuItem
+            // 
+            searchToolStripMenuItem.Name = "searchToolStripMenuItem";
+            resources.ApplyResources(searchToolStripMenuItem, "searchToolStripMenuItem");
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(toolStripSeparator5, "toolStripSeparator5");
+            // 
+            // aboutToolStripMenuItem
+            // 
+            aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            // 
+            // runQueryToolStripMenuItem
+            // 
+            runQueryToolStripMenuItem.Name = "runQueryToolStripMenuItem";
+            resources.ApplyResources(runQueryToolStripMenuItem, "runQueryToolStripMenuItem");
+            runQueryToolStripMenuItem.Click += BtnStart_Click;
+            // 
+            // toolStripContainer2
+            // 
+            // 
+            // toolStripContainer2.ContentPanel
+            // 
+            toolStripContainer2.ContentPanel.Controls.Add(DgvData);
+            toolStripContainer2.ContentPanel.Controls.Add(statusStrip1);
+            resources.ApplyResources(toolStripContainer2.ContentPanel, "toolStripContainer2.ContentPanel");
+            resources.ApplyResources(toolStripContainer2, "toolStripContainer2");
+            toolStripContainer2.LeftToolStripPanelVisible = false;
+            toolStripContainer2.Name = "toolStripContainer2";
+            toolStripContainer2.RightToolStripPanelVisible = false;
+            // 
+            // toolStripContainer2.TopToolStripPanel
+            // 
+            toolStripContainer2.TopToolStripPanel.BackColor = SystemColors.ActiveCaptionText;
+            toolStripContainer2.TopToolStripPanel.Controls.Add(toolStrip1);
+            toolStripContainer2.TopToolStripPanel.RenderMode = ToolStripRenderMode.Professional;
+            toolStripContainer2.TopToolStripPanel.UseWaitCursor = true;
+            // 
+            // DgvData
+            // 
+            DgvData.AllowUserToDeleteRows = false;
+            DgvData.AllowUserToResizeRows = false;
+            DgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DgvData.BackgroundColor = Color.FromArgb(36, 38, 44);
+            DgvData.BorderStyle = BorderStyle.None;
+            DgvData.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            DgvData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(38, 40, 47);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(235, 235, 240);
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            DgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            resources.ApplyResources(DgvData, "DgvData");
+            DgvData.ContextMenuStrip = contextDgvData;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(36, 38, 44);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(235, 235, 240);
+            dataGridViewCellStyle2.Padding = new Padding(8, 0, 8, 0);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(55, 58, 70);
+            dataGridViewCellStyle2.SelectionForeColor = Color.White;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            DgvData.DefaultCellStyle = dataGridViewCellStyle2;
+            DgvData.EnableHeadersVisualStyles = false;
+            DgvData.GridColor = Color.FromArgb(55, 58, 66);
+            DgvData.Name = "DgvData";
+            DgvData.ReadOnly = true;
+            DgvData.RowHeadersVisible = false;
+            DgvData.RowTemplate.Height = 32;
+            DgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            // 
+            // toolStrip1
+            // 
+            resources.ApplyResources(toolStrip1, "toolStrip1");
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator7, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator8, helpToolStripButton, toolStripSeparator9, toolStripButton1 });
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.RenderMode = ToolStripRenderMode.System;
+            toolStrip1.UseWaitCursor = true;
+            toolStrip1.ItemClicked += toolStrip1_ItemClicked;
+            // 
+            // newToolStripButton
+            // 
+            newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(newToolStripButton, "newToolStripButton");
+            newToolStripButton.Name = "newToolStripButton";
+            // 
+            // openToolStripButton
+            // 
+            openToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(openToolStripButton, "openToolStripButton");
+            openToolStripButton.Name = "openToolStripButton";
+            // 
+            // saveToolStripButton
+            // 
+            saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
+            saveToolStripButton.Name = "saveToolStripButton";
+            // 
+            // printToolStripButton
+            // 
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(printToolStripButton, "printToolStripButton");
+            printToolStripButton.Name = "printToolStripButton";
+            // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
+            // 
+            // cutToolStripButton
+            // 
+            cutToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(cutToolStripButton, "cutToolStripButton");
+            cutToolStripButton.Name = "cutToolStripButton";
+            // 
+            // copyToolStripButton
+            // 
+            copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
+            copyToolStripButton.Name = "copyToolStripButton";
+            copyToolStripButton.Click += tsmiCopy_Click;
+            // 
+            // pasteToolStripButton
+            // 
+            pasteToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(pasteToolStripButton, "pasteToolStripButton");
+            pasteToolStripButton.Name = "pasteToolStripButton";
+            // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // helpToolStripButton
+            // 
+            helpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(helpToolStripButton, "helpToolStripButton");
+            helpToolStripButton.Name = "helpToolStripButton";
+            // 
+            // toolStripSeparator9
+            // 
+            toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.ForeColor = Color.Black;
+            toolStripButton1.Image = Properties.Resources.logo_480;
+            resources.ApplyResources(toolStripButton1, "toolStripButton1");
+            toolStripButton1.Name = "toolStripButton1";
+            // 
+            // BottomToolStripPanel
+            // 
+            resources.ApplyResources(BottomToolStripPanel, "BottomToolStripPanel");
+            BottomToolStripPanel.Name = "BottomToolStripPanel";
+            BottomToolStripPanel.Orientation = Orientation.Horizontal;
+            BottomToolStripPanel.RowMargin = new Padding(4, 0, 0, 0);
+            // 
+            // miniToolStrip
+            // 
+            miniToolStrip.AccessibleRole = AccessibleRole.ButtonDropDown;
+            miniToolStrip.BackColor = Color.FromArgb(23, 24, 28);
+            resources.ApplyResources(miniToolStrip, "miniToolStrip");
+            miniToolStrip.ForeColor = Color.FromArgb(160, 163, 175);
+            miniToolStrip.ImageScalingSize = new Size(20, 20);
+            miniToolStrip.Name = "miniToolStrip";
+            // 
+            // toolStripStatusLabelTables
+            // 
+            toolStripStatusLabelTables.Name = "toolStripStatusLabelTables";
+            resources.ApplyResources(toolStripStatusLabelTables, "toolStripStatusLabelTables");
+            // 
+            // StatusLabelCountTables
+            // 
+            StatusLabelCountTables.Name = "StatusLabelCountTables";
+            resources.ApplyResources(StatusLabelCountTables, "StatusLabelCountTables");
+            // 
+            // toolStripStatusLabelColumns
+            // 
+            toolStripStatusLabelColumns.Name = "toolStripStatusLabelColumns";
+            resources.ApplyResources(toolStripStatusLabelColumns, "toolStripStatusLabelColumns");
+            // 
+            // StatusLabelCountColumnsSelected
+            // 
+            StatusLabelCountColumnsSelected.Name = "StatusLabelCountColumnsSelected";
+            resources.ApplyResources(StatusLabelCountColumnsSelected, "StatusLabelCountColumnsSelected");
+            // 
+            // toolStripSplitBtnHidden
+            // 
+            toolStripSplitBtnHidden.BackColor = Color.Silver;
+            toolStripSplitBtnHidden.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripSplitBtnHidden.DoubleClickEnabled = true;
+            resources.ApplyResources(toolStripSplitBtnHidden, "toolStripSplitBtnHidden");
+            toolStripSplitBtnHidden.Name = "toolStripSplitBtnHidden";
+            toolStripSplitBtnHidden.ButtonClick += toolStripSplitBtnHidden_ButtonClick;
+            // 
+            // TopToolStripPanel
+            // 
+            resources.ApplyResources(TopToolStripPanel, "TopToolStripPanel");
+            TopToolStripPanel.Name = "TopToolStripPanel";
+            TopToolStripPanel.Orientation = Orientation.Horizontal;
+            TopToolStripPanel.RowMargin = new Padding(4, 0, 0, 0);
+            // 
+            // RightToolStripPanel
+            // 
+            resources.ApplyResources(RightToolStripPanel, "RightToolStripPanel");
+            RightToolStripPanel.Name = "RightToolStripPanel";
+            RightToolStripPanel.Orientation = Orientation.Horizontal;
+            RightToolStripPanel.RowMargin = new Padding(4, 0, 0, 0);
+            // 
+            // LeftToolStripPanel
+            // 
+            resources.ApplyResources(LeftToolStripPanel, "LeftToolStripPanel");
+            LeftToolStripPanel.Name = "LeftToolStripPanel";
+            LeftToolStripPanel.Orientation = Orientation.Horizontal;
+            LeftToolStripPanel.RowMargin = new Padding(4, 0, 0, 0);
+            // 
+            // ContentPanel
+            // 
+            resources.ApplyResources(ContentPanel, "ContentPanel");
+            // 
+            // splitContainer1
+            // 
+            splitContainer1.BackColor = SystemColors.ControlDarkDark;
+            resources.ApplyResources(splitContainer1, "splitContainer1");
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(splitContainer2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(toolStripContainer2);
+            // 
+            // splitContainer2
+            // 
+            resources.ApplyResources(splitContainer2, "splitContainer2");
+            splitContainer2.FixedPanel = FixedPanel.Panel1;
+            splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            splitContainer2.Panel1.Controls.Add(panel2);
+            splitContainer2.Panel1.Controls.Add(pnlSidebar);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(toolStripContainer1);
+            // 
+            // panel2
+            // 
+            resources.ApplyResources(panel2, "panel2");
+            panel2.BackColor = Color.FromArgb(23, 24, 28);
+            panel2.Controls.Add(trTableInfo);
+            panel2.Name = "panel2";
+            // 
+            // trTableInfo
+            // 
+            trTableInfo.BackColor = Color.FromArgb(23, 24, 28);
+            resources.ApplyResources(trTableInfo, "trTableInfo");
+            trTableInfo.ForeColor = SystemColors.ButtonHighlight;
+            trTableInfo.Name = "trTableInfo";
+            trTableInfo.AfterSelect += trTableInfo_AfterSelect;
+            // 
+            // pnlSidebar
+            // 
+            pnlSidebar.BackColor = Color.FromArgb(23, 24, 28);
+            pnlSidebar.Controls.Add(textBox1);
+            pnlSidebar.Controls.Add(lblTables);
+            resources.ApplyResources(pnlSidebar, "pnlSidebar");
+            pnlSidebar.Name = "pnlSidebar";
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.FromArgb(36, 38, 44);
+            textBox1.BorderStyle = BorderStyle.FixedSingle;
+            resources.ApplyResources(textBox1, "textBox1");
+            textBox1.ForeColor = Color.FromArgb(235, 235, 240);
+            textBox1.Name = "textBox1";
+            // 
+            // lblTables
+            // 
+            resources.ApplyResources(lblTables, "lblTables");
+            lblTables.ForeColor = Color.FromArgb(235, 235, 240);
+            lblTables.Name = "lblTables";
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.BackColor = Color.FromArgb(35, 38, 49);
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            resources.ApplyResources(statusStrip1, "statusStrip1");
+            statusStrip1.Name = "statusStrip1";
+            // 
+            // statusStripButtom
+            // 
+            statusStripButtom.BackColor = Color.FromArgb(23, 24, 28);
+            statusStripButtom.ForeColor = Color.FromArgb(160, 163, 175);
+            statusStripButtom.ImageScalingSize = new Size(20, 20);
+            statusStripButtom.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelTables, StatusLabelCountTables, toolStripStatusLabelColumns, StatusLabelCountColumnsSelected, toolStripSplitBtnHidden, toolStripStatusLabelConnection, StatusLabelConnection });
+            resources.ApplyResources(statusStripButtom, "statusStripButtom");
+            statusStripButtom.Name = "statusStripButtom";
+            // 
+            // toolStripStatusLabelConnection
+            // 
+            toolStripStatusLabelConnection.Name = "toolStripStatusLabelConnection";
+            resources.ApplyResources(toolStripStatusLabelConnection, "toolStripStatusLabelConnection");
+            // 
+            // StatusLabelConnection
+            // 
+            StatusLabelConnection.Name = "StatusLabelConnection";
+            resources.ApplyResources(StatusLabelConnection, "StatusLabelConnection");
+            // 
+            // printDialog1
+            // 
+            printDialog1.UseEXDialog = true;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.BackColor = Color.FromArgb(36, 38, 44);
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(contextMenuStrip1, "contextMenuStrip1");
+            // 
+            // columnInfoBindingSource
+            // 
+            columnInfoBindingSource.DataSource = typeof(Domain.Entities.ColumnInfo);
+            // 
+            // Main
+            // 
+            resources.ApplyResources(this, "$this");
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(18, 18, 20);
+            Controls.Add(splitContainer1);
+            Controls.Add(statusStripButtom);
+            ForeColor = Color.FromArgb(235, 235, 240);
+            Name = "Main";
+            Load += Main_Load;
+            toolStripContainer1.ContentPanel.ResumeLayout(false);
+            toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            toolStripContainer1.TopToolStripPanel.PerformLayout();
+            toolStripContainer1.ResumeLayout(false);
+            toolStripContainer1.PerformLayout();
+            panelContent.ResumeLayout(false);
+            pnlContent.ResumeLayout(false);
+            contextDgvData.ResumeLayout(false);
+            pnlFilters.ResumeLayout(false);
+            pnlFilters.PerformLayout();
+            pnlTop.ResumeLayout(false);
+            pnlTop.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            toolStripContainer2.ContentPanel.ResumeLayout(false);
+            toolStripContainer2.ContentPanel.PerformLayout();
+            toolStripContainer2.TopToolStripPanel.ResumeLayout(false);
+            toolStripContainer2.TopToolStripPanel.PerformLayout();
+            toolStripContainer2.ResumeLayout(false);
+            toolStripContainer2.PerformLayout();
+            ((ISupportInitialize)DgvData).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            splitContainer2.Panel1.ResumeLayout(false);
+            splitContainer2.Panel2.ResumeLayout(false);
+            ((ISupportInitialize)splitContainer2).EndInit();
+            splitContainer2.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            pnlSidebar.ResumeLayout(false);
+            pnlSidebar.PerformLayout();
+            statusStripButtom.ResumeLayout(false);
+            statusStripButtom.PerformLayout();
+            ((ISupportInitialize)columnInfoBindingSource).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        private ContextMenuStrip contextDgvData;
+        private ToolStripMenuItem EditItem;
+        private ToolStripMenuItem deleteTheItemToolStripMenuItem;
+        private ToolStripMenuItem extrnaToolStripMenuItem;
+        private ToolStripPanel BottomToolStripPanel;
+        private StatusStrip miniToolStrip;
+        private ToolStripStatusLabel toolStripStatusLabelTables;
+        private ToolStripStatusLabel StatusLabelCountTables;
+        private ToolStripStatusLabel toolStripStatusLabelColumns;
+        private ToolStripStatusLabel StatusLabelCountColumnsSelected;
+        private ToolStripSplitButton toolStripSplitBtnHidden;
+        private ToolStripPanel TopToolStripPanel;
+        private ToolStripPanel RightToolStripPanel;
+        private ToolStripPanel LeftToolStripPanel;
+        //private ToolStripContentPanel toolstrContentPanel;
+        private SplitContainer splitContainer1;
+        private SplitContainer splitContainer2;
+        private Panel panel2;
+        private Panel pnlSidebar;
+        private TextBox textBox1;
+        private Label lblTables;
+        private Panel panelContent;
+        private Panel pnlContent;
+        private Panel pnlClbColomns;
+        private Label lblColumns;
+        private Panel pnlFilters;
+        private Label lblFilter;
+        private Label lblOperator;
+        private Label lblValue;
+        private ComboBox CbColumnsFilter;
+        private ComboBox cmbFilterOperator;
+        private TextBox txtFilterValue;
+        private Button BtnAddFilter;
+        private Button BtnClearFilters;
+        private Button BtnStart;
+        private Panel pnlTop;
+        private Label lblTitle;
+        private DataGridView DgvData;
+        private StatusStrip statusStripButtom;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fileToolStripMenuItem;
+        private ToolStripMenuItem newToolStripMenuItem;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem printToolStripMenuItem;
+        private ToolStripMenuItem printPreviewToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem undoToolStripMenuItem;
+        private ToolStripMenuItem redoToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem cutToolStripMenuItem;
+        private ToolStripMenuItem copyToolStripMenuItem;
+        private ToolStripMenuItem pasteToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem selectAllToolStripMenuItem;
+        private ToolStripMenuItem toolsToolStripMenuItem;
+        private ToolStripMenuItem customizeToolStripMenuItem;
+        private ToolStripMenuItem optionsToolStripMenuItem;
+        private ToolStripMenuItem helpToolStripMenuItem;
+        private ToolStripMenuItem contentsToolStripMenuItem;
+        private ToolStripMenuItem indexToolStripMenuItem;
+        private ToolStripMenuItem searchToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem aboutToolStripMenuItem;
+        private ToolStripContainer toolStripContainer1;
+        private ToolStripContentPanel ContentPanel;
+        private ToolStripStatusLabel toolStripStatusLabelConnection;
+        private ToolStripStatusLabel StatusLabelConnection;
+        private PrintDialog printDialog1;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private ComboBox cmbJoinTable;
+        private Label label2;
+        private ComboBox CmbLogical;
+        private Label label1;
+        private ComboBox cmbValueType;
+        private TreeView trTableInfo;
+        private ListView lstVColumns;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private ListView lstFilters;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripMenuItem tsmiCopy;
+        private ToolStripMenuItem cpToolStripMenuItem;
+        private ToolStrip toolStrip1;
+        private ToolStripButton newToolStripButton;
+        private ToolStripButton openToolStripButton;
+        private ToolStripButton saveToolStripButton;
+        private ToolStripButton printToolStripButton;
+        private ToolStripSeparator toolStripSeparator7;
+        private ToolStripButton cutToolStripButton;
+        private ToolStripButton copyToolStripButton;
+        private ToolStripButton pasteToolStripButton;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripButton helpToolStripButton;
+        private StatusStrip statusStrip1;
+        private ToolStripSeparator toolStripSeparator9;
+        private ToolStripContainer toolStripContainer2;
+        private ToolStripButton toolStripButton1;
+        private ToolStripMenuItem runQueryToolStripMenuItem;
+        private BindingSource columnInfoBindingSource;
+    }
+}

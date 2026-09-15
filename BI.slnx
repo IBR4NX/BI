@@ -1,0 +1,13 @@
+<Solution>
+  <Project Path="Business/Business.csproj">
+  </Project>
+  <Project Path="DataAccess/DataAccess.csproj">
+  </Project>
+  <Project Path="Domain/Domain.csproj">
+  </Project>
+  <Project Path="Forntend/Forntend.csproj" Id="4a6eaa0e-c507-4fbd-a837-c704566a5859" />
+  <Project Path="Infrastructure/Infrastructure.csproj">
+  </Project>
+  <Project Path="Presentation/Presentation.csproj" />
+  <Project Path="Testing/Testing.csproj" Id="89b68355-43cc-402b-8e1e-657023891c60" />
+</Solution>
