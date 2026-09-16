@@ -2,6 +2,8 @@
 using Domain.Definition;
 using Domain.Entities;
 using System.Data;
+using System.Text;
+
 
 namespace DataAccess.QueryBuilder
 {
@@ -75,8 +77,67 @@ namespace DataAccess.QueryBuilder
 
             return this;
         }
-
+        public List<IDbDataParameter> GetParameters()
+        {
+            return _parameters;
+        }
         public string Build()
+        {
+            if (string.IsNullOrWhiteSpace(_table))
+                throw new InvalidOperationException("Table is required.");
+
+            string columns = _columns.Count > 0
+                ? string.Join(", ", _columns.Select(c =>
+                    string.IsNullOrWhiteSpace(c.SchemaName)
+                        ? $"[{c.TableName}].[{c.Name}]"
+                        : $"[{c.SchemaName}].[{c.TableName}].[{c.Name}]"))
+                : "*";
+
+            string from = string.IsNullOrWhiteSpace(_schema)
+                ? _table
+                : $"[{_schema}].[{_table}]";
+
+            StringBuilder query = new StringBuilder();
+
+            query.Append($"SELECT {columns} FROM {from}");
+
+            foreach (JoinDefinition join in _joins)
+            {
+                ColumnInfo fk = join.ForeignKeyColumn;
+
+                string joinType = join.JoinType switch
+                {
+                    JoinType.Inner => "INNER JOIN",
+                    JoinType.Left => "LEFT JOIN",
+                    JoinType.Right => "RIGHT JOIN",
+                    JoinType.Full => "FULL OUTER JOIN",
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+
+                string referencedTable = string.IsNullOrWhiteSpace(fk.ReferencedSchema)
+                    ? fk.ReferencedTable!
+                    : $"[{fk.ReferencedSchema}].[{fk.ReferencedTable}]";
+
+                query.Append($" {joinType} {referencedTable}");
+                query.Append($" ON [{fk.TableName}].[{fk.Name}] = {referencedTable}.[{fk.ReferencedColumn}]");
+            }
+
+            if (_conditions.Count > 0)
+            {
+                query.Append(" WHERE ");
+                query.Append(string.Join(" AND ", _conditions));
+            }
+
+            if (!string.IsNullOrWhiteSpace(_orderBy))
+            {
+                query.Append($" ORDER BY {_orderBy}");
+            }
+
+            return query.ToString();
+        }
+
+        #region Backward Compatibility old methods
+        public string Build2()
         {
             if (string.IsNullOrWhiteSpace(_table))
                 throw new InvalidOperationException("Table is required.");
@@ -124,40 +185,43 @@ namespace DataAccess.QueryBuilder
 
             return query;
         }
-        public List<IDbDataParameter> GetParameters()
-        {
-            return _parameters;
-        }
-    //    private string BuildWhere(
-    //QueryDefinition query,
-    //Dictionary<string, object?> queryParameters)
-    //    {
-    //        if (query.Filters.Count == 0)
-    //            return string.Empty;
-
-    //        var conditions = new List<string>();
-
-    //        int parameterIndex = 0;
-    //        for (int i = 0; i < query.Filters.Count; i++)
-    //        {
-
-    //            FilterResult filterResult = _filterBuilder.Build(query.Filters[i], ref parameterIndex);
-    //            string condition = filterResult.Sql;
-    //            Debug.WriteLine(condition);
-
-    //            foreach (var parameter in filterResult.Parameters)
-    //                queryParameters.Add(parameter.Key, parameter.Value);
-
-    //            if (i > 0)
-    //            {
-    //                string logicalOperator =
-    //                    query.Filters[i].LogicalOperator
-    //                        == LogicalOperator.And ? "AND" : "OR";
-
-    //                condition = $"{logicalOperator} {condition}";
-    //            }
-
-    //            conditions.Add(condition);
-    //        }
-        }
+        #endregion
+       
+        
+    }
 }
+
+#region backward compatibility old methods commented out
+
+//    private string BuildWhere(
+//QueryDefinition query,
+//Dictionary<string, object?> queryParameters)
+//    {
+//        if (query.Filters.Count == 0)
+//            return string.Empty;
+
+//        var conditions = new List<string>();
+
+//        int parameterIndex = 0;
+//        for (int i = 0; i < query.Filters.Count; i++)
+//        {
+
+//            FilterResult filterResult = _filterBuilder.Build(query.Filters[i], ref parameterIndex);
+//            string condition = filterResult.Sql;
+//            Debug.WriteLine(condition);
+
+//            foreach (var parameter in filterResult.Parameters)
+//                queryParameters.Add(parameter.Key, parameter.Value);
+
+//            if (i > 0)
+//            {
+//                string logicalOperator =
+//                    query.Filters[i].LogicalOperator
+//                        == LogicalOperator.And ? "AND" : "OR";
+
+//                condition = $"{logicalOperator} {condition}";
+//            }
+
+//            conditions.Add(condition);
+//        }
+#endregion

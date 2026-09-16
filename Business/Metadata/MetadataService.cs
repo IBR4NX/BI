@@ -4,17 +4,17 @@ using Domain.Entities;
 
 namespace Business.Metadata;
 
-public class MetadataService
+public static class MetadataService
 {
-    private readonly IDbMetadataProviderFactory _dbMetadataProvider;
+    private static IDbMetadataProviderFactory _dbMetadataProvider;
 
-    public DbMetadata Metadata { get; private set; } = new();
-    public MetadataService(IDbMetadataProviderFactory dbMetadataProvider)
+    public static DbMetadata Metadata { get; private set; } = new();
+    public static void MetadataProvider(IDbMetadataProviderFactory dbMetadataProvider)
     {
         _dbMetadataProvider = dbMetadataProvider;
-
+        //return this;
     }
-    public MetadataService GetMetadata()
+    public static void GetMetadata()
     {
         if (Metadata.Tables.Count < 1 || Metadata.Columns.Count < 1)
         {
@@ -33,10 +33,9 @@ public class MetadataService
             }
             Metadata.TablesInfo.Add(t, col);
         }
-        return this;
 
     }
-    public MetadataService StorTables()
+    public static void StorTables()
     {
         if (Metadata.Tables.Count < 1 )
         {
@@ -56,16 +55,15 @@ public class MetadataService
 
             }
         }
-        return this;
 
     }
 
-    public void LoadAllTable()
+    public static void LoadAllTable()
     {
         Metadata.Tables = _dbMetadataProvider.GetTables();
 
     }
-    public void LoadAllColumns()
+    public static void LoadAllColumns()
     {
         Metadata.Columns = _dbMetadataProvider.GetColumns();
 
@@ -77,14 +75,14 @@ public class MetadataService
 
     //    return infos;
     //}
-    public List<ColumnInfo> GetColumns(TableInfo table)
+    public static List<ColumnInfo> GetColumns(TableInfo table)
     {
         if (!Metadata.TablesInfo.TryGetValue(table, out var columns))
             return new List<ColumnInfo>();
 
         return columns;
     }
-    public ColumnInfo GetColumn(string name)
+    public static ColumnInfo GetColumn(string name)
     {
         ColumnInfo columnInfo = Metadata.Columns.FirstOrDefault(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase))!;
         if (columnInfo is null)
@@ -93,14 +91,14 @@ public class MetadataService
         return columnInfo;
     }
 
-    public List<ColumnInfo> GetForeignKeyColumns(TableInfo tableName)
+    public static List<ColumnInfo> GetForeignKeyColumns(TableInfo tableName)
     {
         return GetColumns(tableName)
             .Where(c => c.IsForeignKey)
             .ToList();
     }
 
-    public void PrintMetadata(TableInfo table)
+    public static void PrintMetadata(TableInfo table)
     {
         Console.WriteLine("========== DATABASE METADATA ==========");
 

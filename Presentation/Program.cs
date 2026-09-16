@@ -1,5 +1,6 @@
 using Business.Metadata;
 using DataAccess;
+using Presentation.Forms;
 using System.Diagnostics;
 
 namespace Presentation;
@@ -13,8 +14,9 @@ internal static class Program
         Debug.WriteLine($"\n [Startup] Begin ({DateTime.Now:O})");
 
         ApplicationConfiguration.Initialize();
-        //Debug.WriteLine($"\n [Startup] After ApplicationConfiguration.Initialize - Elapsed {sw.Elapsed}");
 
+        #region Comented out code
+        //Debug.WriteLine($"\n [Startup] After ApplicationConfiguration.Initialize - Elapsed {sw.Elapsed}");
         //using var login = new Login(); 
         //Debug.WriteLine($"\n [Startup] Showing Login dialog - Elapsed {sw.Elapsed}");
         //Debug.WriteLine(nameof(login));
@@ -40,9 +42,10 @@ internal static class Program
 
         //var validator = new QueryValidator(metadataService.Metadata);
         //Debug.WriteLine($"\n [Startup] Created QueryValidator - Elapsed {sw.Elapsed}");
-
+        #endregion
         try
         {
+            #region Commented out code for future reference
             //var queryBuilder = new QueryBuilder();
             //Debug.WriteLine($"\n [Startup] Created QueryBuilder - Elapsed {sw.Elapsed}");
 
@@ -51,9 +54,10 @@ internal static class Program
             //    queryBuilder,
             //    validator);
             //Debug.WriteLine($"\n [Startup] Created QueryService - Elapsed {sw.Elapsed}");
+            #endregion
 
             Debug.WriteLine($"\n [Startup] About to start Main form - Elapsed {sw.Elapsed}");
-            Application.Run(new Main());
+            Application.Run(new MainForm());
             Debug.WriteLine($"[Shutdown] Main form closed - Elapsed {sw.Elapsed}");
         }
         catch (Exception ex)
@@ -72,21 +76,3 @@ internal static class Program
         }
     }
 }
-
-//namespace Presentation
-//{
-//    internal static class Program
-//    {
-//        /// <summary>
-//        ///  The main entry point for the application.
-//        /// </summary>
-//        [STAThread]
-//        static void Main()
-//        {
-//            // To customize application configuration such as set high DPI settings or default font,
-//            // see https://aka.ms/applicationconfiguration.
-//            ApplicationConfiguration.Initialize();
-//            Application.Run(new Login());
-//        }
-//    }
-//}

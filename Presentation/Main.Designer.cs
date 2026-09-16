@@ -25,12 +25,19 @@ namespace Presentation
             toolStripContainer1 = new ToolStripContainer();
             panelContent = new Panel();
             pnlContent = new Panel();
+            dockPanel1 = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            panel1 = new Panel();
+            clbJoinColumns = new CheckedListBox();
+            btnRemoveJoin = new Button();
+            btnAddJoin = new Button();
+            cmbJoinType = new ComboBox();
+            cmbForeignKey = new ComboBox();
             lstVColumns = new ListView();
-            columnHeader1 = new ColumnHeader();
-            columnHeader2 = new ColumnHeader();
-            columnHeader3 = new ColumnHeader();
-            columnHeader4 = new ColumnHeader();
-            columnHeader5 = new ColumnHeader();
+            cHeader1 = new ColumnHeader();
+            cHeader2 = new ColumnHeader();
+            cHeader3 = new ColumnHeader();
+            cHeader4 = new ColumnHeader();
+            cHeader5 = new ColumnHeader();
             contextDgvData = new ContextMenuStrip(components);
             EditItem = new ToolStripMenuItem();
             deleteTheItemToolStripMenuItem = new ToolStripMenuItem();
@@ -52,13 +59,33 @@ namespace Presentation
             CbColumnsFilter = new ComboBox();
             cmbFilterOperator = new ComboBox();
             txtFilterValue = new TextBox();
-            cmbJoinTable = new ComboBox();
             BtnStart = new Button();
             pnlTop = new Panel();
             lblTitle = new Label();
             lblColumns = new Label();
+            lvJoins = new ListView();
+            columnHeader6 = new ColumnHeader();
+            columnHeader7 = new ColumnHeader();
+            columnHeader8 = new ColumnHeader();
+            columnHeader9 = new ColumnHeader();
+            columnHeader10 = new ColumnHeader();
             pnlClbColomns = new Panel();
+            toolStrip1 = new ToolStrip();
+            newToolStripButton = new ToolStripButton();
+            openToolStripButton = new ToolStripButton();
+            saveToolStripButton = new ToolStripButton();
+            printToolStripButton = new ToolStripButton();
+            toolStripSeparator7 = new ToolStripSeparator();
+            cutToolStripButton = new ToolStripButton();
+            copyToolStripButton = new ToolStripButton();
+            pasteToolStripButton = new ToolStripButton();
+            toolStripSeparator8 = new ToolStripSeparator();
+            helpToolStripButton = new ToolStripButton();
+            toolStripSeparator9 = new ToolStripSeparator();
+            toolStripButton1 = new ToolStripButton();
             menuStrip1 = new MenuStrip();
+            openMenu = new ToolStripMenuItem();
+            closeMenu1 = new ToolStripMenuItem();
             fileToolStripMenuItem = new ToolStripMenuItem();
             newToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
@@ -91,19 +118,7 @@ namespace Presentation
             runQueryToolStripMenuItem = new ToolStripMenuItem();
             toolStripContainer2 = new ToolStripContainer();
             DgvData = new DataGridView();
-            toolStrip1 = new ToolStrip();
-            newToolStripButton = new ToolStripButton();
-            openToolStripButton = new ToolStripButton();
-            saveToolStripButton = new ToolStripButton();
-            printToolStripButton = new ToolStripButton();
-            toolStripSeparator7 = new ToolStripSeparator();
-            cutToolStripButton = new ToolStripButton();
-            copyToolStripButton = new ToolStripButton();
-            pasteToolStripButton = new ToolStripButton();
-            toolStripSeparator8 = new ToolStripSeparator();
-            helpToolStripButton = new ToolStripButton();
-            toolStripSeparator9 = new ToolStripSeparator();
-            toolStripButton1 = new ToolStripButton();
+            statusStrip1 = new StatusStrip();
             BottomToolStripPanel = new ToolStripPanel();
             miniToolStrip = new StatusStrip();
             toolStripStatusLabelTables = new ToolStripStatusLabel();
@@ -119,10 +134,10 @@ namespace Presentation
             splitContainer2 = new SplitContainer();
             panel2 = new Panel();
             trTableInfo = new TreeView();
+            iconlist = new ImageList(components);
             pnlSidebar = new Panel();
             textBox1 = new TextBox();
             lblTables = new Label();
-            statusStrip1 = new StatusStrip();
             statusStripButtom = new StatusStrip();
             toolStripStatusLabelConnection = new ToolStripStatusLabel();
             StatusLabelConnection = new ToolStripStatusLabel();
@@ -130,20 +145,21 @@ namespace Presentation
             printDocument1 = new System.Drawing.Printing.PrintDocument();
             contextMenuStrip1 = new ContextMenuStrip(components);
             columnInfoBindingSource = new BindingSource(components);
+            largeIcons = new ImageList(components);
             toolStripContainer1.ContentPanel.SuspendLayout();
             toolStripContainer1.TopToolStripPanel.SuspendLayout();
             toolStripContainer1.SuspendLayout();
             panelContent.SuspendLayout();
             pnlContent.SuspendLayout();
+            panel1.SuspendLayout();
             contextDgvData.SuspendLayout();
             pnlFilters.SuspendLayout();
             pnlTop.SuspendLayout();
+            toolStrip1.SuspendLayout();
             menuStrip1.SuspendLayout();
             toolStripContainer2.ContentPanel.SuspendLayout();
-            toolStripContainer2.TopToolStripPanel.SuspendLayout();
             toolStripContainer2.SuspendLayout();
             ((ISupportInitialize)DgvData).BeginInit();
-            toolStrip1.SuspendLayout();
             ((ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -160,9 +176,11 @@ namespace Presentation
             // 
             // toolStripContainer1
             // 
+            toolStripContainer1.BottomToolStripPanelVisible = false;
             // 
             // toolStripContainer1.ContentPanel
             // 
+            toolStripContainer1.ContentPanel.BackColor = SystemColors.ActiveCaptionText;
             toolStripContainer1.ContentPanel.Controls.Add(panelContent);
             resources.ApplyResources(toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
             resources.ApplyResources(toolStripContainer1, "toolStripContainer1");
@@ -173,29 +191,93 @@ namespace Presentation
             // toolStripContainer1.TopToolStripPanel
             // 
             toolStripContainer1.TopToolStripPanel.Controls.Add(menuStrip1);
+            toolStripContainer1.Click += toolStripContainer1_Click;
             // 
             // panelContent
             // 
             resources.ApplyResources(panelContent, "panelContent");
+            panelContent.BackColor = Color.Black;
             panelContent.Controls.Add(pnlContent);
             panelContent.Controls.Add(pnlTop);
+            panelContent.Controls.Add(toolStrip1);
             panelContent.Name = "panelContent";
             // 
             // pnlContent
             // 
             resources.ApplyResources(pnlContent, "pnlContent");
             pnlContent.BackColor = Color.FromArgb(18, 18, 20);
+            pnlContent.Controls.Add(dockPanel1);
+            pnlContent.Controls.Add(panel1);
             pnlContent.Controls.Add(lstVColumns);
             pnlContent.Controls.Add(pnlFilters);
-            pnlContent.Controls.Add(cmbJoinTable);
             pnlContent.Controls.Add(BtnStart);
             pnlContent.Name = "pnlContent";
+            // 
+            // dockPanel1
+            // 
+            resources.ApplyResources(dockPanel1, "dockPanel1");
+            dockPanel1.Name = "dockPanel1";
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(clbJoinColumns);
+            panel1.Controls.Add(btnRemoveJoin);
+            panel1.Controls.Add(btnAddJoin);
+            panel1.Controls.Add(cmbJoinType);
+            panel1.Controls.Add(cmbForeignKey);
+            resources.ApplyResources(panel1, "panel1");
+            panel1.Name = "panel1";
+            // 
+            // clbJoinColumns
+            // 
+            clbJoinColumns.BackColor = Color.FromArgb(36, 38, 44);
+            clbJoinColumns.ForeColor = Color.White;
+            clbJoinColumns.FormattingEnabled = true;
+            resources.ApplyResources(clbJoinColumns, "clbJoinColumns");
+            clbJoinColumns.Name = "clbJoinColumns";
+            // 
+            // btnRemoveJoin
+            // 
+            btnRemoveJoin.BackColor = Color.FromArgb(36, 38, 44);
+            btnRemoveJoin.FlatAppearance.BorderColor = Color.FromArgb(55, 58, 66);
+            resources.ApplyResources(btnRemoveJoin, "btnRemoveJoin");
+            btnRemoveJoin.ForeColor = Color.FromArgb(160, 163, 175);
+            btnRemoveJoin.Name = "btnRemoveJoin";
+            btnRemoveJoin.UseVisualStyleBackColor = false;
+            // 
+            // btnAddJoin
+            // 
+            btnAddJoin.BackColor = Color.FromArgb(99, 102, 241);
+            btnAddJoin.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(btnAddJoin, "btnAddJoin");
+            btnAddJoin.ForeColor = Color.White;
+            btnAddJoin.Name = "btnAddJoin";
+            btnAddJoin.UseVisualStyleBackColor = false;
+            btnAddJoin.Click += btnAddJoin_Click;
+            // 
+            // cmbJoinType
+            // 
+            cmbJoinType.BackColor = Color.FromArgb(36, 38, 44);
+            cmbJoinType.DropDownStyle = ComboBoxStyle.DropDownList;
+            resources.ApplyResources(cmbJoinType, "cmbJoinType");
+            cmbJoinType.ForeColor = Color.FromArgb(235, 235, 240);
+            cmbJoinType.Name = "cmbJoinType";
+            // 
+            // cmbForeignKey
+            // 
+            cmbForeignKey.BackColor = Color.FromArgb(36, 38, 44);
+            cmbForeignKey.DropDownStyle = ComboBoxStyle.DropDownList;
+            resources.ApplyResources(cmbForeignKey, "cmbForeignKey");
+            cmbForeignKey.ForeColor = Color.FromArgb(235, 235, 240);
+            cmbForeignKey.Name = "cmbForeignKey";
+            cmbForeignKey.SelectedIndexChanged += cmbForeignKey_SelectedIndexChanged;
             // 
             // lstVColumns
             // 
             lstVColumns.BackColor = Color.FromArgb(36, 38, 44);
+            lstVColumns.BorderStyle = BorderStyle.FixedSingle;
             lstVColumns.CheckBoxes = true;
-            lstVColumns.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5 });
+            lstVColumns.Columns.AddRange(new ColumnHeader[] { cHeader1, cHeader2, cHeader3, cHeader4, cHeader5 });
             lstVColumns.ContextMenuStrip = contextDgvData;
             lstVColumns.ForeColor = SystemColors.Window;
             lstVColumns.FullRowSelect = true;
@@ -206,27 +288,28 @@ namespace Presentation
             lstVColumns.Name = "lstVColumns";
             lstVColumns.UseCompatibleStateImageBehavior = false;
             lstVColumns.View = View.Details;
+            lstVColumns.SelectedIndexChanged += lstVColumns_SelectedIndexChanged;
             lstVColumns.Click += lstVColumns_Click;
             // 
-            // columnHeader1
+            // cHeader1
             // 
-            resources.ApplyResources(columnHeader1, "columnHeader1");
+            resources.ApplyResources(cHeader1, "cHeader1");
             // 
-            // columnHeader2
+            // cHeader2
             // 
-            resources.ApplyResources(columnHeader2, "columnHeader2");
+            resources.ApplyResources(cHeader2, "cHeader2");
             // 
-            // columnHeader3
+            // cHeader3
             // 
-            resources.ApplyResources(columnHeader3, "columnHeader3");
+            resources.ApplyResources(cHeader3, "cHeader3");
             // 
-            // columnHeader4
+            // cHeader4
             // 
-            resources.ApplyResources(columnHeader4, "columnHeader4");
+            resources.ApplyResources(cHeader4, "cHeader4");
             // 
-            // columnHeader5
+            // cHeader5
             // 
-            resources.ApplyResources(columnHeader5, "columnHeader5");
+            resources.ApplyResources(cHeader5, "cHeader5");
             // 
             // contextDgvData
             // 
@@ -402,14 +485,6 @@ namespace Presentation
             txtFilterValue.ForeColor = Color.FromArgb(235, 235, 240);
             txtFilterValue.Name = "txtFilterValue";
             // 
-            // cmbJoinTable
-            // 
-            cmbJoinTable.BackColor = Color.FromArgb(36, 38, 44);
-            cmbJoinTable.DropDownStyle = ComboBoxStyle.DropDownList;
-            resources.ApplyResources(cmbJoinTable, "cmbJoinTable");
-            cmbJoinTable.ForeColor = Color.FromArgb(235, 235, 240);
-            cmbJoinTable.Name = "cmbJoinTable";
-            // 
             // BtnStart
             // 
             BtnStart.BackColor = Color.OrangeRed;
@@ -425,9 +500,11 @@ namespace Presentation
             pnlTop.BackColor = Color.FromArgb(18, 18, 20);
             pnlTop.Controls.Add(lblTitle);
             pnlTop.Controls.Add(lblColumns);
+            pnlTop.Controls.Add(lvJoins);
             pnlTop.Controls.Add(pnlClbColomns);
             resources.ApplyResources(pnlTop, "pnlTop");
             pnlTop.Name = "pnlTop";
+            pnlTop.Paint += pnlTop_Paint;
             // 
             // lblTitle
             // 
@@ -441,10 +518,127 @@ namespace Presentation
             lblColumns.ForeColor = Color.FromArgb(235, 235, 240);
             lblColumns.Name = "lblColumns";
             // 
+            // lvJoins
+            // 
+            lvJoins.BackColor = Color.FromArgb(36, 38, 44);
+            lvJoins.CheckBoxes = true;
+            lvJoins.Columns.AddRange(new ColumnHeader[] { columnHeader6, columnHeader7, columnHeader8, columnHeader9, columnHeader10 });
+            lvJoins.ContextMenuStrip = contextDgvData;
+            lvJoins.ForeColor = SystemColors.Window;
+            lvJoins.FullRowSelect = true;
+            lvJoins.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lvJoins.HoverSelection = true;
+            lvJoins.LabelEdit = true;
+            resources.ApplyResources(lvJoins, "lvJoins");
+            lvJoins.Name = "lvJoins";
+            lvJoins.UseCompatibleStateImageBehavior = false;
+            lvJoins.View = View.Details;
+            // 
+            // columnHeader6
+            // 
+            resources.ApplyResources(columnHeader6, "columnHeader6");
+            // 
+            // columnHeader7
+            // 
+            resources.ApplyResources(columnHeader7, "columnHeader7");
+            // 
+            // columnHeader8
+            // 
+            resources.ApplyResources(columnHeader8, "columnHeader8");
+            // 
+            // columnHeader9
+            // 
+            resources.ApplyResources(columnHeader9, "columnHeader9");
+            // 
+            // columnHeader10
+            // 
+            resources.ApplyResources(columnHeader10, "columnHeader10");
+            // 
             // pnlClbColomns
             // 
             resources.ApplyResources(pnlClbColomns, "pnlClbColomns");
             pnlClbColomns.Name = "pnlClbColomns";
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.BackColor = SystemColors.ActiveCaptionText;
+            resources.ApplyResources(toolStrip1, "toolStrip1");
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator7, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator8, helpToolStripButton, toolStripSeparator9, toolStripButton1 });
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.RenderMode = ToolStripRenderMode.System;
+            toolStrip1.UseWaitCursor = true;
+            toolStrip1.ItemClicked += toolStrip1_ItemClicked;
+            // 
+            // newToolStripButton
+            // 
+            newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(newToolStripButton, "newToolStripButton");
+            newToolStripButton.Name = "newToolStripButton";
+            // 
+            // openToolStripButton
+            // 
+            openToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(openToolStripButton, "openToolStripButton");
+            openToolStripButton.Name = "openToolStripButton";
+            // 
+            // saveToolStripButton
+            // 
+            saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
+            saveToolStripButton.Name = "saveToolStripButton";
+            // 
+            // printToolStripButton
+            // 
+            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(printToolStripButton, "printToolStripButton");
+            printToolStripButton.Name = "printToolStripButton";
+            // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
+            // 
+            // cutToolStripButton
+            // 
+            cutToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(cutToolStripButton, "cutToolStripButton");
+            cutToolStripButton.Name = "cutToolStripButton";
+            // 
+            // copyToolStripButton
+            // 
+            copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
+            copyToolStripButton.Name = "copyToolStripButton";
+            copyToolStripButton.Click += tsmiCopy_Click;
+            // 
+            // pasteToolStripButton
+            // 
+            pasteToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(pasteToolStripButton, "pasteToolStripButton");
+            pasteToolStripButton.Name = "pasteToolStripButton";
+            // 
+            // toolStripSeparator8
+            // 
+            toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // helpToolStripButton
+            // 
+            helpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(helpToolStripButton, "helpToolStripButton");
+            helpToolStripButton.Name = "helpToolStripButton";
+            // 
+            // toolStripSeparator9
+            // 
+            toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.ForeColor = Color.Black;
+            resources.ApplyResources(toolStripButton1, "toolStripButton1");
+            toolStripButton1.Name = "toolStripButton1";
             // 
             // menuStrip1
             // 
@@ -453,9 +647,24 @@ namespace Presentation
             menuStrip1.ForeColor = Color.White;
             menuStrip1.GripStyle = ToolStripGripStyle.Visible;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem, runQueryToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { openMenu, closeMenu1, fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem, runQueryToolStripMenuItem });
             menuStrip1.Name = "menuStrip1";
             menuStrip1.RenderMode = ToolStripRenderMode.Professional;
+            // 
+            // openMenu
+            // 
+            openMenu.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            openMenu.Image = Properties.Resources.icons8_close_pane_32;
+            openMenu.Name = "openMenu";
+            resources.ApplyResources(openMenu, "openMenu");
+            openMenu.Click += openToolStripMenuItem1_Click;
+            // 
+            // closeMenu1
+            // 
+            closeMenu1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            resources.ApplyResources(closeMenu1, "closeMenu1");
+            closeMenu1.Name = "closeMenu1";
+            closeMenu1.Click += closeMenu1_Click;
             // 
             // fileToolStripMenuItem
             // 
@@ -629,7 +838,6 @@ namespace Presentation
             // toolStripContainer2.TopToolStripPanel
             // 
             toolStripContainer2.TopToolStripPanel.BackColor = SystemColors.ActiveCaptionText;
-            toolStripContainer2.TopToolStripPanel.Controls.Add(toolStrip1);
             toolStripContainer2.TopToolStripPanel.RenderMode = ToolStripRenderMode.Professional;
             toolStripContainer2.TopToolStripPanel.UseWaitCursor = true;
             // 
@@ -669,86 +877,12 @@ namespace Presentation
             DgvData.RowTemplate.Height = 32;
             DgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             // 
-            // toolStrip1
+            // statusStrip1
             // 
-            resources.ApplyResources(toolStrip1, "toolStrip1");
-            toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator7, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator8, helpToolStripButton, toolStripSeparator9, toolStripButton1 });
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.RenderMode = ToolStripRenderMode.System;
-            toolStrip1.UseWaitCursor = true;
-            toolStrip1.ItemClicked += toolStrip1_ItemClicked;
-            // 
-            // newToolStripButton
-            // 
-            newToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(newToolStripButton, "newToolStripButton");
-            newToolStripButton.Name = "newToolStripButton";
-            // 
-            // openToolStripButton
-            // 
-            openToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(openToolStripButton, "openToolStripButton");
-            openToolStripButton.Name = "openToolStripButton";
-            // 
-            // saveToolStripButton
-            // 
-            saveToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(saveToolStripButton, "saveToolStripButton");
-            saveToolStripButton.Name = "saveToolStripButton";
-            // 
-            // printToolStripButton
-            // 
-            printToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(printToolStripButton, "printToolStripButton");
-            printToolStripButton.Name = "printToolStripButton";
-            // 
-            // toolStripSeparator7
-            // 
-            toolStripSeparator7.Name = "toolStripSeparator7";
-            resources.ApplyResources(toolStripSeparator7, "toolStripSeparator7");
-            // 
-            // cutToolStripButton
-            // 
-            cutToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(cutToolStripButton, "cutToolStripButton");
-            cutToolStripButton.Name = "cutToolStripButton";
-            // 
-            // copyToolStripButton
-            // 
-            copyToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(copyToolStripButton, "copyToolStripButton");
-            copyToolStripButton.Name = "copyToolStripButton";
-            copyToolStripButton.Click += tsmiCopy_Click;
-            // 
-            // pasteToolStripButton
-            // 
-            pasteToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(pasteToolStripButton, "pasteToolStripButton");
-            pasteToolStripButton.Name = "pasteToolStripButton";
-            // 
-            // toolStripSeparator8
-            // 
-            toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // helpToolStripButton
-            // 
-            helpToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            resources.ApplyResources(helpToolStripButton, "helpToolStripButton");
-            helpToolStripButton.Name = "helpToolStripButton";
-            // 
-            // toolStripSeparator9
-            // 
-            toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(toolStripSeparator9, "toolStripSeparator9");
-            // 
-            // toolStripButton1
-            // 
-            toolStripButton1.ForeColor = Color.Black;
-            toolStripButton1.Image = Properties.Resources.logo_480;
-            resources.ApplyResources(toolStripButton1, "toolStripButton1");
-            toolStripButton1.Name = "toolStripButton1";
+            statusStrip1.BackColor = Color.FromArgb(35, 38, 49);
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            resources.ApplyResources(statusStrip1, "statusStrip1");
+            statusStrip1.Name = "statusStrip1";
             // 
             // BottomToolStripPanel
             // 
@@ -833,6 +967,7 @@ namespace Presentation
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(toolStripContainer2);
+            splitContainer1.SplitterMoved += splitContainer1_SplitterMoved;
             // 
             // splitContainer2
             // 
@@ -847,6 +982,7 @@ namespace Presentation
             // 
             // splitContainer2.Panel2
             // 
+            splitContainer2.Panel2.BackColor = SystemColors.ActiveCaptionText;
             splitContainer2.Panel2.Controls.Add(toolStripContainer1);
             // 
             // panel2
@@ -858,11 +994,21 @@ namespace Presentation
             // 
             // trTableInfo
             // 
-            trTableInfo.BackColor = Color.FromArgb(23, 24, 28);
+            trTableInfo.BackColor = Color.FromArgb(36, 38, 44);
             resources.ApplyResources(trTableInfo, "trTableInfo");
             trTableInfo.ForeColor = SystemColors.ButtonHighlight;
+            trTableInfo.ImageList = iconlist;
             trTableInfo.Name = "trTableInfo";
             trTableInfo.AfterSelect += trTableInfo_AfterSelect;
+            // 
+            // iconlist
+            // 
+            iconlist.ColorDepth = ColorDepth.Depth32Bit;
+            iconlist.ImageStream = (ImageListStreamer)resources.GetObject("iconlist.ImageStream");
+            iconlist.TransparentColor = Color.Transparent;
+            iconlist.Images.SetKeyName(0, "schema");
+            iconlist.Images.SetKeyName(1, "table");
+            iconlist.Images.SetKeyName(2, "key");
             // 
             // pnlSidebar
             // 
@@ -886,13 +1032,6 @@ namespace Presentation
             lblTables.ForeColor = Color.FromArgb(235, 235, 240);
             lblTables.Name = "lblTables";
             // 
-            // statusStrip1
-            // 
-            statusStrip1.BackColor = Color.FromArgb(35, 38, 49);
-            statusStrip1.ImageScalingSize = new Size(20, 20);
-            resources.ApplyResources(statusStrip1, "statusStrip1");
-            statusStrip1.Name = "statusStrip1";
-            // 
             // statusStripButtom
             // 
             statusStripButtom.BackColor = Color.FromArgb(23, 24, 28);
@@ -909,6 +1048,7 @@ namespace Presentation
             // 
             // StatusLabelConnection
             // 
+            StatusLabelConnection.Image = Properties.Resources.icons8_connection_status_on_32;
             StatusLabelConnection.Name = "StatusLabelConnection";
             resources.ApplyResources(StatusLabelConnection, "StatusLabelConnection");
             // 
@@ -927,6 +1067,17 @@ namespace Presentation
             // 
             columnInfoBindingSource.DataSource = typeof(Domain.Entities.ColumnInfo);
             // 
+            // largeIcons
+            // 
+            largeIcons.ColorDepth = ColorDepth.Depth32Bit;
+            largeIcons.ImageStream = (ImageListStreamer)resources.GetObject("largeIcons.ImageStream");
+            largeIcons.TransparentColor = Color.Transparent;
+            largeIcons.Images.SetKeyName(0, "disconnect");
+            largeIcons.Images.SetKeyName(1, "connect");
+            largeIcons.Images.SetKeyName(2, "copy");
+            largeIcons.Images.SetKeyName(3, "key");
+            largeIcons.Images.SetKeyName(4, "search");
+            // 
             // Main
             // 
             resources.ApplyResources(this, "$this");
@@ -943,23 +1094,23 @@ namespace Presentation
             toolStripContainer1.ResumeLayout(false);
             toolStripContainer1.PerformLayout();
             panelContent.ResumeLayout(false);
+            panelContent.PerformLayout();
             pnlContent.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             contextDgvData.ResumeLayout(false);
             pnlFilters.ResumeLayout(false);
             pnlFilters.PerformLayout();
             pnlTop.ResumeLayout(false);
             pnlTop.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             toolStripContainer2.ContentPanel.ResumeLayout(false);
             toolStripContainer2.ContentPanel.PerformLayout();
-            toolStripContainer2.TopToolStripPanel.ResumeLayout(false);
-            toolStripContainer2.TopToolStripPanel.PerformLayout();
             toolStripContainer2.ResumeLayout(false);
             toolStripContainer2.PerformLayout();
             ((ISupportInitialize)DgvData).EndInit();
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((ISupportInitialize)splitContainer1).EndInit();
@@ -1053,18 +1204,12 @@ namespace Presentation
         private ToolStripStatusLabel StatusLabelConnection;
         private PrintDialog printDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
-        private ComboBox cmbJoinTable;
+        private ComboBox cmbForeignKey;
         private Label label2;
         private ComboBox CmbLogical;
         private Label label1;
         private ComboBox cmbValueType;
         private TreeView trTableInfo;
-        private ListView lstVColumns;
-        private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader2;
-        private ColumnHeader columnHeader3;
-        private ColumnHeader columnHeader4;
-        private ColumnHeader columnHeader5;
         private ListView lstFilters;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripSeparator toolStripSeparator6;
@@ -1087,5 +1232,27 @@ namespace Presentation
         private ToolStripButton toolStripButton1;
         private ToolStripMenuItem runQueryToolStripMenuItem;
         private BindingSource columnInfoBindingSource;
+        private Panel panel1;
+        private Button btnAddJoin;
+        private ComboBox cmbJoinType;
+        private Button btnRemoveJoin;
+        private ListView lvJoins;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
+        private ColumnHeader columnHeader8;
+        private ColumnHeader columnHeader9;
+        private ColumnHeader columnHeader10;
+        private CheckedListBox clbJoinColumns;
+        private ImageList iconlist;
+        private ImageList largeIcons;
+        private ToolStripMenuItem openMenu;
+        private ToolStripMenuItem closeMenu1;
+        private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
+        private ListView lstVColumns;
+        private ColumnHeader cHeader1;
+        private ColumnHeader cHeader2;
+        private ColumnHeader cHeader3;
+        private ColumnHeader cHeader4;
+        private ColumnHeader cHeader5;
     }
 }

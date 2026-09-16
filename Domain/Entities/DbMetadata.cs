@@ -8,7 +8,6 @@ namespace Domain.Entities
         public List<TableInfo> Tables { get; set; } = new();
         public Dictionary<TableInfo, List<ColumnInfo>> TablesInfo { get; set; } = new();
         public Dictionary<string, List<TableInfo>> treeTableInfo { get; set; } = new();
-
         public List<ColumnInfo> Columns { get; set; }= new();
     }
 }

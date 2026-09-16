@@ -13,17 +13,18 @@ using System.Data;
 using System.Diagnostics;
 using System.Text.Json;
 
+using System.Windows.Forms;
 
 namespace Presentation
 {
     public partial class Main : Form
     {
-        private readonly MetadataService _metadataService;
+        //private readonly MetadataService MetadataService;
         private readonly QueryService _queryService;
         private readonly List<FilterDefinition> _filters = new();
         private int _targetSplitterDistance = 500;
         private int dgvOpenDistance;
-        //private readonly List<JoinDefinition> _joins = new();
+        private readonly List<JoinDefinition> _joins = new();
         private TableInfo? _selectedTableInfo;
         private List<ColumnInfo>? _selectedColumnInfos = new List<ColumnInfo>();
         //private readonly IQueryBuilder queryBuilder ;
@@ -33,15 +34,16 @@ namespace Presentation
             InitializeComponent();
             string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=AdventureWorks2025;Trusted_Connection=True;TrustServerCertificate=True;";
             IDbProviderFactory providerFactory = new SqlServerDatabaseProviderFactory(connectionString);
-            _metadataService = new MetadataService(providerFactory.MetadataProvider); ;
-            Debug.WriteLine("Main");
+              MetadataService.MetadataProvider(providerFactory.MetadataProvider);
             _queryService = new QueryService(providerFactory);
             _providerFactory = providerFactory;
+            Debug.WriteLine("Main");
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
-            _metadataService.GetMetadata().StorTables();
+            MetadataService.GetMetadata();
+            MetadataService.StorTables();
             dgvOpenDistance = splitContainer1.SplitterDistance;
             ConfigureControls();
             LoadTables();
@@ -49,14 +51,15 @@ namespace Presentation
         private void LoadTables()
         {
 
-            foreach (var info in _metadataService.Metadata.treeTableInfo
+            foreach (var info in MetadataService.Metadata.treeTableInfo
                 .Where(table => table.Key.Contains(textBox1.Text.Trim(), StringComparison.OrdinalIgnoreCase)))
             {
                 TreeNode node = new TreeNode(info.Key);
                 node.Tag = info;
+                node.ImageIndex = 0;
 
                 List<TreeNode> childNodes = info.Value
-                    .Select(table => new TreeNode(table.Name) { Tag = table })
+                    .Select(table => new TreeNode(table.Name) { Tag = table, ImageIndex = 1 })
                     .ToList();
 
                 node.Nodes.AddRange(childNodes.ToArray());
@@ -77,7 +80,7 @@ namespace Presentation
             ClearFiltersList();
             CbColumnsFilter.Items.Clear();
             lstVColumns.Items.Clear();
-            List<ColumnInfo> columns = _metadataService.GetColumns(tableInfo);
+            List<ColumnInfo> columns = MetadataService.GetColumns(tableInfo);
             if (columns.Count == 0)
             {
                 Helper.Show($"No columns found for table {tableInfo.Name} {tableInfo.Schema}.");
@@ -105,12 +108,10 @@ namespace Presentation
                 txtFilterValue.AutoCompleteCustomSource.Add(column.Name);
             }
             CbColumnsFilter.SelectedIndex = 0;
-            UpdateSelectedColumnsStatus();
-        }
-        private void LoadJoinTables(string tableName)
-        {
-            cmbJoinTable.Items.Clear();
 
+            LoadJoinForeignKeys();
+
+            UpdateSelectedColumnsStatus();
         }
 
         private void trTableInfo_AfterSelect(object sender, TreeViewEventArgs e)
@@ -138,11 +139,7 @@ namespace Presentation
 
         private void BtnStart_Click(object sender, EventArgs e)
         {
-            //if (lstVColumns.CheckedItems.Count == 0)
-            //{
-            //    Helper.Show("Choose a table.");
-            //    return;
-            //}
+
             try
             {
                 _selectedColumnInfos!.Clear();
@@ -198,7 +195,7 @@ namespace Presentation
                 var selectedItem = lstVColumns.SelectedItems[0];
                 selectedItem.Checked = !selectedItem.Checked;
                 string columnName = selectedItem.SubItems[0].Text;
-                var columnInfo = _metadataService.GetColumns(_selectedTableInfo!).FirstOrDefault(c => c.Name == columnName);
+                var columnInfo = MetadataService.GetColumns(_selectedTableInfo!).FirstOrDefault(c => c.Name == columnName);
                 if (columnInfo != null)
                 {
                     _selectedColumnInfos!.Add(columnInfo);
@@ -217,7 +214,7 @@ namespace Presentation
             }
             var filter = new FilterDefinition
             {
-                Column = _metadataService.GetColumn(CbColumnsFilter.Text),
+                Column = MetadataService.GetColumn(CbColumnsFilter.Text),
                 Operator = (ComparisonOperator)cmbFilterOperator.SelectedItem!,
                 ValueType = (FilterValueType)cmbValueType.SelectedItem!,
                 LogicalOperator = (LogicalOperator)CmbLogical.SelectedItem!
@@ -246,6 +243,8 @@ namespace Presentation
             CmbLogical.SelectedItem = 0;
             cmbFilterOperator.DataSource = Enum.GetValues<ComparisonOperator>();
             cmbFilterOperator.SelectedItem = nameof(ComparisonOperator.Equal);
+
+            cmbJoinType.DataSource = Enum.GetValues<JoinType>();
         }
 
         private void BtnAddFilter_Click(object? sender, EventArgs e)
@@ -333,6 +332,109 @@ namespace Presentation
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void btnAddJoin_Click(object sender, EventArgs e)
+        {
+            ColumnInfo fk = (ColumnInfo)cmbForeignKey.SelectedItem!;
+            JoinType joinType = (JoinType)cmbJoinType.SelectedItem!;
+
+            _joins.Add(new JoinDefinition
+            {
+                JoinType = joinType,
+                ForeignKeyColumn = fk
+            });
+
+            ListViewItem item = new ListViewItem(joinType.ToString());
+            item.SubItems.Add(fk.TableName);
+            item.SubItems.Add(fk.Name);
+            item.SubItems.Add(fk.ReferencedTable);
+            item.SubItems.Add(fk.ReferencedColumn);
+
+            item.Tag = _joins[0];
+
+            lvJoins.Items.Add(item);
+        }
+        private void cmbForeignKey_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbForeignKey.SelectedItem is not ColumnInfo foreignKey)
+                return;
+
+            LoadReferencedColumns(foreignKey);
+        }
+        private void LoadJoinForeignKeys()
+        {
+            cmbForeignKey.Items.Clear();
+
+            if (_selectedTableInfo == null)
+                return;
+
+            List<ColumnInfo> foreignKeys = MetadataService.Metadata.Columns
+                .Where(c =>
+                    c.SchemaName == _selectedTableInfo.Schema &&
+                    c.TableName == _selectedTableInfo.Name &&
+                    c.IsForeignKey)
+                .ToList();
+
+            foreach (ColumnInfo column in foreignKeys)
+            {
+                cmbForeignKey.Items.Add(column);
+            }
+
+            cmbForeignKey.DisplayMember = "Name";
+        }
+
+        private void LoadReferencedColumns(ColumnInfo foreignKey)
+        {
+            clbJoinColumns.Items.Clear();
+
+            List<ColumnInfo> columns = MetadataService.Metadata.Columns
+                .Where(c =>
+                    c.SchemaName == foreignKey.ReferencedSchema &&
+                    c.TableName == foreignKey.ReferencedTable)
+                .ToList();
+
+            foreach (ColumnInfo column in columns)
+            {
+                clbJoinColumns.Items.Add(column, false);
+            }
+
+            clbJoinColumns.DisplayMember = "Name";
+        }
+
+        private void pnlTop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lstVColumns_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            splitContainer2.SplitterDistance = 300;
+            openMenu.Visible = false;
+            closeMenu1.Visible = true;
+        }
+
+        private void closeMenu1_Click(object sender, EventArgs e)
+        {
+            splitContainer2.SplitterDistance = 0;
+            openMenu.Visible = true;
+            closeMenu1.Visible = false;
+
+        }
+
+        private void toolStripContainer1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
 
         }
