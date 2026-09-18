@@ -38,17 +38,11 @@
             saveToolStripMenuItem = new ToolStripMenuItem();
             moveToolStripMenuItem = new ToolStripMenuItem();
             comboBox1 = new ComboBox();
-            richTextBox1 = new RichTextBox();
             saveFileDialog1 = new SaveFileDialog();
             openFileDialog1 = new OpenFileDialog();
             folderBrowserDialog1 = new FolderBrowserDialog();
             textBox1 = new TextBox();
-            panel1 = new Panel();
-            panel3 = new Panel();
-            panel2 = new Panel();
-            splitter1 = new Splitter();
             menuStrip1.SuspendLayout();
-            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -117,18 +111,10 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(12, 54);
+            comboBox1.Location = new Point(162, 31);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(159, 28);
             comboBox1.TabIndex = 1;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(12, 121);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(159, 188);
-            richTextBox1.TabIndex = 2;
-            richTextBox1.Text = "";
             // 
             // openFileDialog1
             // 
@@ -136,63 +122,27 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(46, 88);
+            textBox1.Location = new Point(12, 31);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(125, 27);
             textBox1.TabIndex = 3;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(panel3);
-            panel1.Controls.Add(panel2);
-            panel1.Controls.Add(splitter1);
-            panel1.Dock = DockStyle.Right;
-            panel1.Location = new Point(218, 28);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(220, 315);
-            panel1.TabIndex = 4;
-            // 
-            // panel3
-            // 
-            panel3.Dock = DockStyle.Left;
-            panel3.Location = new Point(309, 0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(91, 315);
-            panel3.TabIndex = 8;
-            // 
-            // panel2
-            // 
-            panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(115, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(105, 315);
-            panel2.TabIndex = 7;
-            // 
-            // splitter1
-            // 
-            splitter1.Location = new Point(0, 0);
-            splitter1.Name = "splitter1";
-            splitter1.Size = new Size(309, 315);
-            splitter1.TabIndex = 9;
-            splitter1.TabStop = false;
             // 
             // richForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(438, 343);
-            Controls.Add(panel1);
             Controls.Add(textBox1);
-            Controls.Add(richTextBox1);
             Controls.Add(comboBox1);
             Controls.Add(menuStrip1);
+            HideOnClose = true;
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "richForm";
             Text = "Form1";
+            Load += richForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -209,14 +159,9 @@
         private ToolStripMenuItem saveToolStripMenuItem;
         private ToolStripMenuItem moveToolStripMenuItem;
         private ComboBox comboBox1;
-        private RichTextBox richTextBox1;
         private SaveFileDialog saveFileDialog1;
         private OpenFileDialog openFileDialog1;
         private FolderBrowserDialog folderBrowserDialog1;
         private TextBox textBox1;
-        private Panel panel1;
-        private Panel panel3;
-        private Panel panel2;
-        private Splitter splitter1;
     }
 }

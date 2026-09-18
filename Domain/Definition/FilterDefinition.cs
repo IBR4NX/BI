@@ -24,4 +24,9 @@ public class FilterDefinition
 
     public LogicalOperator? LogicalOperator { get; set; }
 
+    public string GetValuesString()
+    {
+        return $"{string.Join(", ", Values.Select(x => x?.ToString() ?? ""))}";
+    }
+
 }

@@ -1,8 +1,9 @@
+using Presentation.Forms.Docks;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Presentation.Forms.Windows
 {
-    public partial class richForm : DockContent
+    public partial class richForm : frmDockWindowBase
     {
         public richForm()
         {
@@ -37,13 +38,18 @@ namespace Presentation.Forms.Windows
             {
                 //File.WriteAllText(saveFileDialog1.FileName, richTextBox1.Text);
                 FileStream f = new FileStream(saveFileDialog1.FileName, FileMode.Create);
-                StreamWriter s = new StreamWriter(f);
-                s.Write(richTextBox1.Text);
-                s.Close();
-                richTextBox1.Clear();
+                //StreamWriter s = new StreamWriter(f);
+                //s.Write(richTextBox1.Text);
+                //s.Close();
+                //richTextBox1.Clear();
 
             }
 
+
+        }
+
+        private void richForm_Load(object sender, EventArgs e)
+        {
 
         }
     }

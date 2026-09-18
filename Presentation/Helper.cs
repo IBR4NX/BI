@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Definition;
 using Domain.Entities;
 using System.Data;
 
@@ -34,6 +35,7 @@ namespace Presentation
     {
         public static event Action? RefreshNavigator;
         public static TableInfo _selectedTableInfo= new();
+        public static List<FilterDefinition> _filters = new();
 
         public static void NotifyRefresh()
         {

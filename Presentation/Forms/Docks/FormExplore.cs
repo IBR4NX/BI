@@ -10,9 +10,9 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 namespace Presentation.Forms.Docks;
 
-public partial class FormObjects : DockContent
+public partial class FormExplore : frmDockWindowBase
 {
-    public FormObjects()
+    public FormExplore()
     {
         InitializeComponent();
         //Text = "Database Explorer";
@@ -21,7 +21,7 @@ public partial class FormObjects : DockContent
         trTableInfo.ForeColor = txtSearch.ForeColor = AppTheme.Text;
         DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
     }
-    public FormObjects LoadTables()
+    public FormExplore LoadTables()
     {
 
 
@@ -52,7 +52,7 @@ public partial class FormObjects : DockContent
 
     private void txtSearch_TextChanged(object sender, EventArgs e)
     {
-        this.LoadTables();
+        //this.LoadTables();
     }
 
     private void trTableInfo_AfterSelect(object sender, TreeViewEventArgs e)
@@ -71,5 +71,11 @@ public partial class FormObjects : DockContent
     public void ConfigureControls()
     {
 
+    }
+
+    private void FormObjects_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        e.Cancel = true;
+        Hide();
     }
 }

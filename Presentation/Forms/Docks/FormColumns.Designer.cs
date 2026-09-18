@@ -1,6 +1,6 @@
 ﻿namespace Presentation.Forms.Docks
 {
-    partial class frmColumnsInfo
+    partial class FormColumns
     {
         /// <summary>
         /// Required designer variable.
@@ -47,7 +47,6 @@
             lstVColumns.FullRowSelect = true;
             lstVColumns.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lstVColumns.HoverSelection = true;
-            lstVColumns.LabelEdit = true;
             lstVColumns.LabelWrap = false;
             lstVColumns.Location = new Point(0, 0);
             lstVColumns.Name = "lstVColumns";
@@ -80,13 +79,14 @@
             // 
             cHeader5.Text = "Key";
             // 
-            // frmColumnsInfo
+            // FormColumns
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(575, 450);
             Controls.Add(lstVColumns);
-            Name = "frmColumnsInfo";
+            HideOnClose = true;
+            Name = "FormColumns";
             Text = "frmColumnsInfo";
             ResumeLayout(false);
         }

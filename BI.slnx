@@ -2,17 +2,9 @@
  <Folder Name="/Tests/">
   <Project Path="SolutionItems/WpfApp1/WpfApp1.csproj" Id="25f59ca2-8801-4868-afa2-5616514687b4" />
  </Folder>
-
- <Folder Name="/01. DatabaseInterpreter/">
-  <Project Path="DatabaseInterpreter/DatabaseInterpreter.Core/DatabaseInterpreter.Core.csproj" />
-  <Project Path="DatabaseInterpreter/DatabaseInterpreter.Geometry/DatabaseInterpreter.Geometry.csproj" />
-  <Project Path="DatabaseInterpreter/DatabaseInterpreter.Model/DatabaseInterpreter.Model.csproj" />
-  <Project Path="DatabaseInterpreter/DatabaseInterpreter.Utility/DatabaseInterpreter.Utility.csproj" />
- </Folder>
  <Project Path="Business/Business.csproj" />
  <Project Path="DataAccess/DataAccess.csproj" />
  <Project Path="Domain/Domain.csproj" />
- <Project Path="Forntend/Forntend.csproj" Id="4a6eaa0e-c507-4fbd-a837-c704566a5859" />
  <Project Path="Infrastructure/Infrastructure.csproj" />
  <Project Path="Presentation/Presentation.csproj" />
  <Project Path="Testing/Testing.csproj" Id="89b68355-43cc-402b-8e1e-657023891c60" />

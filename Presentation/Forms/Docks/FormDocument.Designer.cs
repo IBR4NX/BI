@@ -43,6 +43,9 @@ namespace Presentation.Forms.Docks
             helpToolStripButton = new ToolStripButton();
             toolStripSeparator9 = new ToolStripSeparator();
             toolStripButton1 = new ToolStripButton();
+            vS2015DarkTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme();
+            rtbox = new RichTextBox();
+            ssbtm = new StatusStrip();
             tpToolStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -159,13 +162,34 @@ namespace Presentation.Forms.Docks
             toolStripButton1.Size = new Size(58, 24);
             toolStripButton1.Text = "Run";
             // 
+            // rtbox
+            // 
+            rtbox.Dock = DockStyle.Fill;
+            rtbox.Location = new Point(0, 35);
+            rtbox.Name = "rtbox";
+            rtbox.Size = new Size(1114, 757);
+            rtbox.TabIndex = 8;
+            rtbox.Text = "";
+            // 
+            // ssbtm
+            // 
+            ssbtm.ImageScalingSize = new Size(20, 20);
+            ssbtm.Location = new Point(0, 768);
+            ssbtm.Name = "ssbtm";
+            ssbtm.Size = new Size(1114, 24);
+            ssbtm.TabIndex = 9;
+            ssbtm.Text = "statusStrip1";
+            // 
             // FormDocument
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(21, 27, 35);
             ClientSize = new Size(1114, 792);
+            Controls.Add(ssbtm);
+            Controls.Add(rtbox);
             Controls.Add(tpToolStrip);
+            HideOnClose = true;
             Name = "FormDocument";
             Text = "Form Document";
             tpToolStrip.ResumeLayout(false);
@@ -189,5 +213,8 @@ namespace Presentation.Forms.Docks
         private ToolStripButton helpToolStripButton;
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripButton toolStripButton1;
+        private WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme vS2015DarkTheme1;
+        private RichTextBox rtbox;
+        private StatusStrip ssbtm;
     }
 }

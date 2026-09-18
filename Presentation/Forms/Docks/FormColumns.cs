@@ -1,4 +1,5 @@
 ﻿using Business.Metadata;
+using Domain.Definition;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,12 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace Presentation.Forms.Docks
 {
-    public partial class frmColumnsInfo : DockContent
+    public partial class FormColumns : frmDockWindowBase
     {
-        public frmColumnsInfo()
+        public FormColumns()
         {
             InitializeComponent();
             lstVColumns.BackColor = AppTheme.Surface;
-            DockAreas = DockAreas.DockRight;
             ConfigureControls();
         }
 
@@ -50,6 +50,16 @@ namespace Presentation.Forms.Docks
                 lstVColumns.Items.Add(item);
             }
         }
+        public List<ColumnInfo> GetColumns()
+        {
+            List<ColumnInfo> columns = new();
+               columns= lstVColumns.CheckedItems
+    .Cast<ListViewItem>()
+    .Select(item => (ColumnInfo)item.Tag!)
+    .ToList()!;
+            return columns;
+        }
+
 
         public void ConfigureControls()
         {

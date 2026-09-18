@@ -29,6 +29,7 @@ namespace Presentation
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             dockPanel = new DockPanel();
             vS2015DarkTheme1 = new VS2015DarkTheme();
@@ -41,6 +42,11 @@ namespace Presentation
             toolStripSplitBtnHidden = new ToolStripSplitButton();
             toolStripStatusLabelConnection = new ToolStripStatusLabel();
             StatusLabelConnection = new ToolStripStatusLabel();
+            toolStripSplitButton1 = new ToolStripSplitButton();
+            tsLabel = new ToolStripStatusLabel();
+            tsltest1 = new ToolStripStatusLabel();
+            tsltest2 = new ToolStripStatusLabel();
+            tsslabel = new ToolStripStatusLabel();
             menuStrip1 = new MenuStrip();
             openMenu = new ToolStripMenuItem();
             closeMenu1 = new ToolStripMenuItem();
@@ -74,8 +80,23 @@ namespace Presentation
             toolStripSeparator5 = new ToolStripSeparator();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             runQueryToolStripMenuItem = new ToolStripMenuItem();
+            testToolStripMenuItem = new ToolStripMenuItem();
+            showToolStripMenuItem1 = new ToolStripMenuItem();
+            hideToolStripMenuItem = new ToolStripMenuItem();
+            fliterToolStripMenuItem = new ToolStripMenuItem();
+            newFilterToolStripMenuItem = new ToolStripMenuItem();
+            viewToolStripMenuItem = new ToolStripMenuItem();
+            listColumnsToolStripMenuItem = new ToolStripMenuItem();
+            listFilterToolStripMenuItem = new ToolStripMenuItem();
+            listDataBoxToolStripMenuItem = new ToolStripMenuItem();
+            listExploreToolStripMenuItem = new ToolStripMenuItem();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            showToolStripMenuItem = new ToolStripMenuItem();
+            errProvider = new ErrorProvider(components);
             btmStatusStrip.SuspendLayout();
             menuStrip1.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errProvider).BeginInit();
             SuspendLayout();
             // 
             // dockPanel
@@ -87,18 +108,19 @@ namespace Presentation
             dockPanel.Name = "dockPanel";
             dockPanel.Padding = new Padding(6);
             dockPanel.ShowAutoHideContentOnHover = false;
-            dockPanel.Size = new Size(1382, 718);
+            dockPanel.Size = new Size(1382, 692);
             dockPanel.TabIndex = 0;
             dockPanel.TabStop = true;
             dockPanel.Theme = vS2015DarkTheme1;
+            dockPanel.ActiveContentChanged += dockPanel_ActiveContentChanged;
             // 
             // btmStatusStrip
             // 
-            btmStatusStrip.BackColor = Color.FromArgb(23, 24, 28);
-            btmStatusStrip.ForeColor = Color.FromArgb(160, 163, 175);
+            btmStatusStrip.BackColor = Color.FromArgb(22, 27, 34);
+            btmStatusStrip.ForeColor = Color.FromArgb(230, 237, 243);
             btmStatusStrip.GripStyle = ToolStripGripStyle.Visible;
             btmStatusStrip.ImageScalingSize = new Size(20, 20);
-            btmStatusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelTables, StatusLabelCountTables, toolStripStatusLabelColumns, StatusLabelCountColumnsSelected, toolStripSplitBtnHidden, toolStripStatusLabelConnection, StatusLabelConnection });
+            btmStatusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelTables, StatusLabelCountTables, toolStripStatusLabelColumns, StatusLabelCountColumnsSelected, toolStripSplitBtnHidden, toolStripStatusLabelConnection, StatusLabelConnection, toolStripSplitButton1, tsLabel, tsltest1, tsltest2, tsslabel });
             btmStatusStrip.Location = new Point(0, 727);
             btmStatusStrip.Name = "btmStatusStrip";
             btmStatusStrip.RenderMode = ToolStripRenderMode.Professional;
@@ -153,14 +175,57 @@ namespace Presentation
             StatusLabelConnection.Size = new Size(119, 20);
             StatusLabelConnection.Text = "Disconnected";
             // 
+            // toolStripSplitButton1
+            // 
+            toolStripSplitButton1.Image = Properties.Resources.icons8_table_321;
+            toolStripSplitButton1.ImageTransparentColor = Color.Magenta;
+            toolStripSplitButton1.Name = "toolStripSplitButton1";
+            toolStripSplitButton1.Size = new Size(84, 24);
+            toolStripSplitButton1.Text = "Show";
+            toolStripSplitButton1.ButtonClick += toolStripSplitButton1_ButtonClick;
+            // 
+            // tsLabel
+            // 
+            tsLabel.Name = "tsLabel";
+            tsLabel.Size = new Size(27, 20);
+            tsLabel.Text = "---";
+            tsLabel.Click += tsLabel_Click;
+            // 
+            // tsltest1
+            // 
+            tsltest1.ForeColor = Color.Red;
+            tsltest1.Name = "tsltest1";
+            tsltest1.Size = new Size(129, 20);
+            tsltest1.Text = "********************";
+            tsltest1.Click += tsltest1_Click;
+            tsltest1.MouseHover += tsltest1_MouseHover;
+            // 
+            // tsltest2
+            // 
+            tsltest2.BackColor = Color.Red;
+            tsltest2.ForeColor = Color.FromArgb(0, 0, 192);
+            tsltest2.Name = "tsltest2";
+            tsltest2.Size = new Size(56, 20);
+            tsltest2.Text = "tsltest2";
+            // 
+            // tsslabel
+            // 
+            tsslabel.BackColor = Color.Red;
+            tsslabel.BorderStyle = Border3DStyle.SunkenInner;
+            tsslabel.DoubleClickEnabled = true;
+            tsslabel.ForeColor = Color.Yellow;
+            tsslabel.Name = "tsslabel";
+            tsslabel.Size = new Size(47, 20);
+            tsslabel.Text = "status";
+            // 
             // menuStrip1
             // 
-            menuStrip1.BackColor = Color.FromArgb(23, 24, 28);
+            menuStrip1.BackColor = Color.FromArgb(22, 27, 34);
             menuStrip1.Font = new Font("Segoe UI", 10.2F);
-            menuStrip1.ForeColor = Color.White;
+            menuStrip1.ForeColor = Color.FromArgb(230, 237, 243);
             menuStrip1.GripStyle = ToolStripGripStyle.Visible;
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { openMenu, closeMenu1, fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem, runQueryToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { openMenu, closeMenu1, fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem, helpToolStripMenuItem, runQueryToolStripMenuItem, testToolStripMenuItem, viewToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(3, 4, 0, 4);
@@ -390,15 +455,106 @@ namespace Presentation
             runQueryToolStripMenuItem.ShortcutKeys = Keys.F5;
             runQueryToolStripMenuItem.Size = new Size(105, 27);
             runQueryToolStripMenuItem.Text = "Run Query";
+            runQueryToolStripMenuItem.Click += BtnStart_Click;
+            // 
+            // testToolStripMenuItem
+            // 
+            testToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { showToolStripMenuItem1, hideToolStripMenuItem, fliterToolStripMenuItem, newFilterToolStripMenuItem });
+            testToolStripMenuItem.Name = "testToolStripMenuItem";
+            testToolStripMenuItem.ShortcutKeys = Keys.F11;
+            testToolStripMenuItem.Size = new Size(52, 27);
+            testToolStripMenuItem.Text = "test";
+            // 
+            // showToolStripMenuItem1
+            // 
+            showToolStripMenuItem1.Name = "showToolStripMenuItem1";
+            showToolStripMenuItem1.Size = new Size(164, 28);
+            showToolStripMenuItem1.Text = "show";
+            showToolStripMenuItem1.Click += showToolStripMenuItem1_Click;
+            // 
+            // hideToolStripMenuItem
+            // 
+            hideToolStripMenuItem.Name = "hideToolStripMenuItem";
+            hideToolStripMenuItem.Size = new Size(164, 28);
+            hideToolStripMenuItem.Text = "hide";
+            hideToolStripMenuItem.Click += hideToolStripMenuItem_Click;
+            // 
+            // fliterToolStripMenuItem
+            // 
+            fliterToolStripMenuItem.Name = "fliterToolStripMenuItem";
+            fliterToolStripMenuItem.Size = new Size(164, 28);
+            fliterToolStripMenuItem.Text = "fliter";
+            fliterToolStripMenuItem.Click += fliterToolStripMenuItem_Click;
+            // 
+            // newFilterToolStripMenuItem
+            // 
+            newFilterToolStripMenuItem.Name = "newFilterToolStripMenuItem";
+            newFilterToolStripMenuItem.Size = new Size(164, 28);
+            newFilterToolStripMenuItem.Text = "new filter";
+            newFilterToolStripMenuItem.Click += newFilterToolStripMenuItem_Click;
+            // 
+            // viewToolStripMenuItem
+            // 
+            viewToolStripMenuItem.BackColor = Color.FromArgb(22, 27, 34);
+            viewToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { listColumnsToolStripMenuItem, listFilterToolStripMenuItem, listDataBoxToolStripMenuItem, listExploreToolStripMenuItem });
+            viewToolStripMenuItem.ForeColor = Color.FromArgb(230, 237, 243);
+            viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            viewToolStripMenuItem.Size = new Size(60, 27);
+            viewToolStripMenuItem.Text = "View";
+            // 
+            // listColumnsToolStripMenuItem
+            // 
+            listColumnsToolStripMenuItem.Name = "listColumnsToolStripMenuItem";
+            listColumnsToolStripMenuItem.Size = new Size(224, 28);
+            listColumnsToolStripMenuItem.Text = "list columns";
+            listColumnsToolStripMenuItem.Click += listColumnsToolStripMenuItem_Click;
+            // 
+            // listFilterToolStripMenuItem
+            // 
+            listFilterToolStripMenuItem.Name = "listFilterToolStripMenuItem";
+            listFilterToolStripMenuItem.Size = new Size(224, 28);
+            listFilterToolStripMenuItem.Text = "list filter";
+            listFilterToolStripMenuItem.Click += listFilterToolStripMenuItem_Click;
+            // 
+            // listDataBoxToolStripMenuItem
+            // 
+            listDataBoxToolStripMenuItem.Name = "listDataBoxToolStripMenuItem";
+            listDataBoxToolStripMenuItem.Size = new Size(224, 28);
+            listDataBoxToolStripMenuItem.Text = "list data box";
+            listDataBoxToolStripMenuItem.Click += listDataBoxToolStripMenuItem_Click;
+            // 
+            // listExploreToolStripMenuItem
+            // 
+            listExploreToolStripMenuItem.Name = "listExploreToolStripMenuItem";
+            listExploreToolStripMenuItem.Size = new Size(224, 28);
+            listExploreToolStripMenuItem.Text = "List Explore ";
+            listExploreToolStripMenuItem.Click += listExploreToolStripMenuItem_Click;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { showToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(113, 28);
+            // 
+            // showToolStripMenuItem
+            // 
+            showToolStripMenuItem.Name = "showToolStripMenuItem";
+            showToolStripMenuItem.Size = new Size(112, 24);
+            showToolStripMenuItem.Text = "show";
+            // 
+            // errProvider
+            // 
+            errProvider.ContainerControl = this;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1382, 753);
-            Controls.Add(btmStatusStrip);
             Controls.Add(dockPanel);
             Controls.Add(menuStrip1);
+            Controls.Add(btmStatusStrip);
             Name = "MainForm";
             Text = "MainForm";
             WindowState = FormWindowState.Maximized;
@@ -407,6 +563,8 @@ namespace Presentation
             btmStatusStrip.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)errProvider).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -456,5 +614,23 @@ namespace Presentation
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem runQueryToolStripMenuItem;
+        private ToolStripSplitButton toolStripSplitButton1;
+        private ToolStripStatusLabel tsLabel;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem testToolStripMenuItem;
+        private ToolStripMenuItem showToolStripMenuItem1;
+        private ToolStripMenuItem showToolStripMenuItem;
+        private ToolStripMenuItem hideToolStripMenuItem;
+        private ToolStripMenuItem fliterToolStripMenuItem;
+        private ToolStripMenuItem newFilterToolStripMenuItem;
+        private ToolStripStatusLabel tsltest1;
+        private ToolStripStatusLabel tsltest2;
+        private ToolStripStatusLabel tsslabel;
+        private ToolStripMenuItem viewToolStripMenuItem;
+        private ToolStripMenuItem listColumnsToolStripMenuItem;
+        private ToolStripMenuItem listFilterToolStripMenuItem;
+        private ToolStripMenuItem listDataBoxToolStripMenuItem;
+        private ToolStripMenuItem listExploreToolStripMenuItem;
+        private ErrorProvider errProvider;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Presentation.Forms.Docks
 {
-    partial class frmFilters
+    partial class FormFilters
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lstFilters = new ListView();
+            components = new System.ComponentModel.Container();
             label2 = new Label();
             CmbLogical = new ComboBox();
             lblFilter = new Label();
@@ -38,19 +38,14 @@
             lblValue = new Label();
             CbColumnsFilter = new ComboBox();
             cmbFilterOperator = new ComboBox();
-            txtFilterValue = new TextBox();
+            lstFilters = new ListView();
+            cHeader1 = new ColumnHeader();
+            cHeader2 = new ColumnHeader();
+            cHeader3 = new ColumnHeader();
+            cbFilterValue = new ComboBox();
+            errorProvider1 = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
-            // 
-            // lstFilters
-            // 
-            lstFilters.BackColor = Color.FromArgb(36, 38, 44);
-            lstFilters.BorderStyle = BorderStyle.None;
-            lstFilters.ForeColor = Color.White;
-            lstFilters.Location = new Point(10, 90);
-            lstFilters.Name = "lstFilters";
-            lstFilters.Size = new Size(378, 80);
-            lstFilters.TabIndex = 15;
-            lstFilters.UseCompatibleStateImageBehavior = false;
             // 
             // label2
             // 
@@ -71,7 +66,7 @@
             CmbLogical.FlatStyle = FlatStyle.Flat;
             CmbLogical.Font = new Font("Segoe UI", 9F);
             CmbLogical.ForeColor = Color.FromArgb(235, 235, 240);
-            CmbLogical.Location = new Point(462, 30);
+            CmbLogical.Location = new Point(482, 30);
             CmbLogical.Name = "CmbLogical";
             CmbLogical.Size = new Size(75, 28);
             CmbLogical.TabIndex = 12;
@@ -96,12 +91,13 @@
             BtnAddFilter.Font = new Font("Segoe UI Semibold", 9F);
             BtnAddFilter.ForeColor = Color.White;
             BtnAddFilter.ImeMode = ImeMode.NoControl;
-            BtnAddFilter.Location = new Point(417, 90);
+            BtnAddFilter.Location = new Point(462, 84);
             BtnAddFilter.Name = "BtnAddFilter";
             BtnAddFilter.Size = new Size(120, 29);
             BtnAddFilter.TabIndex = 6;
             BtnAddFilter.Text = "Add Filter";
             BtnAddFilter.UseVisualStyleBackColor = false;
+            BtnAddFilter.Click += BtnAddFilter_Click;
             // 
             // BtnClearFilters
             // 
@@ -111,12 +107,13 @@
             BtnClearFilters.Font = new Font("Segoe UI", 9F);
             BtnClearFilters.ForeColor = Color.FromArgb(160, 163, 175);
             BtnClearFilters.ImeMode = ImeMode.NoControl;
-            BtnClearFilters.Location = new Point(417, 140);
+            BtnClearFilters.Location = new Point(462, 136);
             BtnClearFilters.Name = "BtnClearFilters";
             BtnClearFilters.Size = new Size(120, 30);
             BtnClearFilters.TabIndex = 8;
             BtnClearFilters.Text = "Clear Filters";
             BtnClearFilters.UseVisualStyleBackColor = false;
+            BtnClearFilters.Click += BtnClearFilters_Click;
             // 
             // lblOperator
             // 
@@ -167,47 +164,80 @@
             cmbFilterOperator.Size = new Size(120, 28);
             cmbFilterOperator.TabIndex = 4;
             // 
-            // txtFilterValue
+            // lstFilters
             // 
-            txtFilterValue.AcceptsReturn = true;
-            txtFilterValue.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            txtFilterValue.BackColor = Color.FromArgb(36, 38, 44);
-            txtFilterValue.BorderStyle = BorderStyle.FixedSingle;
-            txtFilterValue.Font = new Font("Segoe UI", 9F);
-            txtFilterValue.ForeColor = Color.FromArgb(235, 235, 240);
-            txtFilterValue.Location = new Point(313, 30);
-            txtFilterValue.Name = "txtFilterValue";
-            txtFilterValue.PlaceholderText = "Enter value...";
-            txtFilterValue.Size = new Size(120, 27);
-            txtFilterValue.TabIndex = 5;
+            lstFilters.BackColor = Color.FromArgb(36, 38, 44);
+            lstFilters.BorderStyle = BorderStyle.FixedSingle;
+            lstFilters.Columns.AddRange(new ColumnHeader[] { cHeader1, cHeader2, cHeader3 });
+            lstFilters.ForeColor = SystemColors.Window;
+            lstFilters.FullRowSelect = true;
+            lstFilters.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lstFilters.HoverSelection = true;
+            lstFilters.LabelEdit = true;
+            lstFilters.LabelWrap = false;
+            lstFilters.Location = new Point(25, 68);
+            lstFilters.Name = "lstFilters";
+            lstFilters.Size = new Size(418, 143);
+            lstFilters.TabIndex = 17;
+            lstFilters.UseCompatibleStateImageBehavior = false;
+            lstFilters.View = View.Details;
+            lstFilters.DoubleClick += lstFilters_DoubleClick;
             // 
-            // frmFilters
+            // cHeader1
+            // 
+            cHeader1.Text = "Name";
+            cHeader1.Width = 150;
+            // 
+            // cHeader2
+            // 
+            cHeader2.Text = "Operator";
+            cHeader2.TextAlign = HorizontalAlignment.Center;
+            cHeader2.Width = 100;
+            // 
+            // cHeader3
+            // 
+            cHeader3.Text = "values";
+            cHeader3.TextAlign = HorizontalAlignment.Center;
+            cHeader3.Width = 100;
+            // 
+            // cbFilterValue
+            // 
+            cbFilterValue.FormattingEnabled = true;
+            cbFilterValue.Location = new Point(317, 30);
+            cbFilterValue.Name = "cbFilterValue";
+            cbFilterValue.Size = new Size(111, 28);
+            cbFilterValue.TabIndex = 19;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
+            // 
+            // FormFilters
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(563, 223);
-            Controls.Add(label2);
+            ClientSize = new Size(686, 223);
+            Controls.Add(cbFilterValue);
             Controls.Add(lstFilters);
+            Controls.Add(label2);
             Controls.Add(CmbLogical);
             Controls.Add(lblFilter);
             Controls.Add(BtnClearFilters);
             Controls.Add(lblOperator);
             Controls.Add(BtnAddFilter);
-            Controls.Add(txtFilterValue);
             Controls.Add(lblValue);
             Controls.Add(cmbFilterOperator);
             Controls.Add(CbColumnsFilter);
             ForeColor = SystemColors.Control;
-            Name = "frmFilters";
-            Text = "frmFilters";
+            HideOnClose = true;
+            Name = "FormFilters";
+            Text = "Filters";
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private ListView lstFilters;
         private Label label2;
         private ComboBox CmbLogical;
         private Label lblFilter;
@@ -217,6 +247,11 @@
         private Label lblValue;
         private ComboBox CbColumnsFilter;
         private ComboBox cmbFilterOperator;
-        private TextBox txtFilterValue;
+        private ListView lstFilters;
+        private ColumnHeader cHeader1;
+        private ColumnHeader cHeader2;
+        private ColumnHeader cHeader3;
+        private ComboBox cbFilterValue;
+        private ErrorProvider errorProvider1;
     }
 }

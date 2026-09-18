@@ -1,31 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-namespace Presentation.Forms.Docks
+﻿namespace Presentation.Forms.Docks
 {
-    public partial class FormDocument : DockContent
+    public partial class FormDocument : frmDockWindowBase
     {
+        //FormText frmText = new FormText();
         public FormDocument()
         {
             InitializeComponent();
-            DockAreas = DockAreas.Document;
-        }
+            //DockAreas = DockAreas.Document| DockAreas.Float;
+            this.Tag = "";
+            ShowFormDock();
+            SetupStyle();
 
-        private void lstVColumns_SelectedIndexChanged(object sender, EventArgs e)
+
+        }
+        private void ShowFormDock()
         {
-
+            //frmText = new FormText();
+            //frmText.Dock = DockStyle.Fill;
+            //frmText.Show(dockPanel);
         }
+
+
         public void SetupStyle()
         {
             BackColor = AppTheme.Background;
 
             tpToolStrip.BackColor = AppTheme.Background;
             tpToolStrip.ForeColor = AppTheme.Text;
+            ssbtm.BackColor = AppTheme.Background;
+            ssbtm.ForeColor = AppTheme.Text;
+
+            rtbox.BackColor = AppTheme.Surface;
+            rtbox.ForeColor = AppTheme.Text;
 
         }
     }

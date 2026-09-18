@@ -1,6 +1,6 @@
 ﻿namespace Presentation.Forms.Docks
 {
-    partial class FormObjects
+    partial class FormExplore
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormObjects));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormExplore));
             trTableInfo = new TreeView();
             iconlist = new ImageList(components);
             txtSearch = new TextBox();
@@ -74,6 +74,7 @@
             Controls.Add(trTableInfo);
             Name = "FormObjects";
             Text = "Dock Content";
+            FormClosing += FormObjects_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }

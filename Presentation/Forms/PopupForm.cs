@@ -1,4 +1,5 @@
-﻿using Presentation.Forms.Windows;
+﻿using Presentation.Forms.Docks;
+using Presentation.Forms.Windows;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 namespace Presentation.Forms
 {
-    public partial class PopupForm : Form
+    public partial class PopupForm : BaseForm
     {
         public PopupForm()
         {
