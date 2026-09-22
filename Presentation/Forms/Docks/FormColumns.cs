@@ -17,7 +17,7 @@ namespace Presentation.Forms.Docks
         public FormColumns()
         {
             InitializeComponent();
-            lstVColumns.BackColor = AppTheme.Surface;
+            lstVColumns.BackColor = Theme.Surface;
             ConfigureControls();
         }
 

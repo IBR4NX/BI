@@ -17,7 +17,7 @@ internal static class Program
 
         #region Comented out code
         //Debug.WriteLine($"\n [Startup] After ApplicationConfiguration.Initialize - Elapsed {sw.Elapsed}");
-        //using var login = new Login(); 
+        //using var login = new Login();
         //Debug.WriteLine($"\n [Startup] Showing Login dialog - Elapsed {sw.Elapsed}");
         //Debug.WriteLine(nameof(login));
         //if (login.ShowDialog() != DialogResult.OK)

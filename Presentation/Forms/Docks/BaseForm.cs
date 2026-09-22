@@ -14,8 +14,8 @@ namespace Presentation.Forms.Docks
         {
             base.OnLoad(e);
 
-            BackColor = AppTheme.Background;
-            ForeColor = AppTheme.Text;
+            BackColor = Theme.Background;
+            ForeColor = Theme.Text;
         }
         public  Color ColorBackground = Color.FromArgb(22, 27, 34);
         public  Color ColorSurface = Color.FromArgb(13, 17, 23);
@@ -25,8 +25,8 @@ namespace Presentation.Forms.Docks
         public  Color ColorPrimary = Color.FromArgb(124, 58, 237);
         public void SetupStyle(Control control)
         {
-            control.BackColor = AppTheme.Background;
-            control.ForeColor = AppTheme.Text;
+            control.BackColor = Theme.Background;
+            control.ForeColor = Theme.Text;
         }
     }
 }

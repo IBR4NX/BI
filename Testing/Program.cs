@@ -15,29 +15,30 @@ try
     string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=AdventureWorks2025;Trusted_Connection=True;TrustServerCertificate=True;";
 
     IDbProviderFactory providerFactory = new SqlServerDatabaseProviderFactory(connectionString);
+    Console.WriteLine("typeof: "+typeof(SqlServerDatabaseProviderFactory));
 
-    MetadataService meta = new MetadataService(providerFactory.MetadataProvider);
-    //meta.LoadAllTable();
-    //meta.LoadAllColumns();
-    meta.GetMetadata();
-    meta.PrintMetadata(meta.Metadata.Tables[46]);
-    //foreach (var item in meta.Metadata.TablesInfo)
+    //MetadataService meta = new MetadataService(providerFactory.MetadataProvider);
+    ////meta.LoadAllTable();
+    ////meta.LoadAllColumns();
+    //meta.GetMetadata();
+    //meta.PrintMetadata(meta.Metadata.Tables[46]);
+    ////foreach (var item in meta.Metadata.TablesInfo)
+    ////{
+
+    ////Console.WriteLine($"Count columns: {item.Key.Schema} - {item.Key.Name} - {item.Value.Count}");
+    ////}
+    //Console.WriteLine(providerFactory.MetadataProvider.GetPrimaryKeys(meta.Metadata.Tables[5]).ToString());
+
+    //ColumnInfo foreignKeyColumn = meta.Metadata.Columns.First(c =>
+    //    c.IsForeignKey &&
+    //    c.TableName == "SalesOrderHeader" &&
+    //    c.Name == "CustomerID");
+
+    //JoinDefinition join = new JoinDefinition
     //{
-
-    //Console.WriteLine($"Count columns: {item.Key.Schema} - {item.Key.Name} - {item.Value.Count}");
-    //}
-    Console.WriteLine(providerFactory.MetadataProvider.GetPrimaryKeys(meta.Metadata.Tables[5]).ToString());
-
-    ColumnInfo foreignKeyColumn = meta.Metadata.Columns.First(c =>
-        c.IsForeignKey &&
-        c.TableName == "SalesOrderHeader" &&
-        c.Name == "CustomerID");
-
-    JoinDefinition join = new JoinDefinition
-    {
-        ForeignKeyColumn = foreignKeyColumn,
-        JoinType = JoinType.Inner
-    };
+    //    ForeignKeyColumn = foreignKeyColumn,
+    //    JoinType = JoinType.Inner
+    //};
 
     //IQueryBuilder builder = new QueryBuilder();
 

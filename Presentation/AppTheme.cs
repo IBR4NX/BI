@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Presentation
 {
-    public static class AppTheme
+    public static class ApTheme
     {
         public static Color Background = Color.FromArgb(22, 27, 34);
         public static Color Surface = Color.FromArgb(13, 17, 23);
@@ -14,24 +14,22 @@ namespace Presentation
         public static Color Primary = Color.FromArgb(124, 58, 237);
         public static void SetupStyle(Control control)
         {
-            control.BackColor = AppTheme.Background;
-            control.ForeColor = AppTheme.Text;
+            control.BackColor = ApTheme.Background;
+            control.ForeColor = ApTheme.Text;
         }
     }
 
-namespace Presentation.Theme
-    {
         public class BasePanel : Panel
         {
             protected override void OnCreateControl()
             {
                 base.OnCreateControl();
 
-                BackColor = ProjectTheme.Surface;
-                ForeColor = ProjectTheme.Text;
+                BackColor = Theme.Surface;
+                ForeColor = Theme.Text;
             }
         }
-    public static class ProjectTheme
+    public static class ProTheme
     {
         // Main
         public static Color Background =>

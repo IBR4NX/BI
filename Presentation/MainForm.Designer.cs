@@ -93,6 +93,7 @@ namespace Presentation
             contextMenuStrip1 = new ContextMenuStrip(components);
             showToolStripMenuItem = new ToolStripMenuItem();
             errProvider = new ErrorProvider(components);
+            timer1 = new System.Windows.Forms.Timer(components);
             btmStatusStrip.SuspendLayout();
             menuStrip1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
@@ -505,28 +506,28 @@ namespace Presentation
             // listColumnsToolStripMenuItem
             // 
             listColumnsToolStripMenuItem.Name = "listColumnsToolStripMenuItem";
-            listColumnsToolStripMenuItem.Size = new Size(224, 28);
+            listColumnsToolStripMenuItem.Size = new Size(187, 28);
             listColumnsToolStripMenuItem.Text = "list columns";
             listColumnsToolStripMenuItem.Click += listColumnsToolStripMenuItem_Click;
             // 
             // listFilterToolStripMenuItem
             // 
             listFilterToolStripMenuItem.Name = "listFilterToolStripMenuItem";
-            listFilterToolStripMenuItem.Size = new Size(224, 28);
+            listFilterToolStripMenuItem.Size = new Size(187, 28);
             listFilterToolStripMenuItem.Text = "list filter";
             listFilterToolStripMenuItem.Click += listFilterToolStripMenuItem_Click;
             // 
             // listDataBoxToolStripMenuItem
             // 
             listDataBoxToolStripMenuItem.Name = "listDataBoxToolStripMenuItem";
-            listDataBoxToolStripMenuItem.Size = new Size(224, 28);
+            listDataBoxToolStripMenuItem.Size = new Size(187, 28);
             listDataBoxToolStripMenuItem.Text = "list data box";
             listDataBoxToolStripMenuItem.Click += listDataBoxToolStripMenuItem_Click;
             // 
             // listExploreToolStripMenuItem
             // 
             listExploreToolStripMenuItem.Name = "listExploreToolStripMenuItem";
-            listExploreToolStripMenuItem.Size = new Size(224, 28);
+            listExploreToolStripMenuItem.Size = new Size(187, 28);
             listExploreToolStripMenuItem.Text = "List Explore ";
             listExploreToolStripMenuItem.Click += listExploreToolStripMenuItem_Click;
             // 
@@ -546,6 +547,11 @@ namespace Presentation
             // errProvider
             // 
             errProvider.ContainerControl = this;
+            // 
+            // timer1
+            // 
+            timer1.Interval = 5000;
+            timer1.Tick += timer1_Tick;
             // 
             // MainForm
             // 
@@ -632,5 +638,6 @@ namespace Presentation
         private ToolStripMenuItem listDataBoxToolStripMenuItem;
         private ToolStripMenuItem listExploreToolStripMenuItem;
         private ErrorProvider errProvider;
+        private System.Windows.Forms.Timer timer1;
     }
 }

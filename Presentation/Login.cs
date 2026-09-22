@@ -1,18 +1,25 @@
 ﻿using Business.Builder;
 using DataAccess;
+using DataAccess.Factory;
+using DataAccess.Interfaces;
+using DataAccess.SqlServer;
 using Domain.Settings;
 using Infrastructure.Configuration;
 using Infrastructure.Settings;
 
 using Microsoft.Data.SqlClient;
+using System.Data;
+using System.Data.Common;
 namespace Presentation;
 
 public partial class Login : Form
 {
-    public string ConnectionString { get; private set; } = string.Empty;
     private ConnectionSettingsStore store = new ConnectionSettingsStore(AppPaths.ConnectionsFile);
-    public Microsoft.Data.SqlClient.SqlConnection sqlConnection;
-    //public DbConnection Connection;
+    public string ConnectionString { get; private set; } = string.Empty;
+    public string server { get; private set; } = string.Empty;
+
+    public IDbProviderFactory providerFactory;
+    public IDbConnectionStringBuilder dbConnectionStringBuilder;
 
     public Login()
     {
@@ -37,7 +44,6 @@ public partial class Login : Form
             var last = settings.Connections[^1];
 
             CmBxServer.SelectedText = last.Server;
-            CmBxDatabase.SelectedText = last.Database;
 
             CmbxAuthentication.SelectedIndex =
                 last.Authentication == AuthenticationType.SqlServer ? 1 : 0;
@@ -47,6 +53,7 @@ public partial class Login : Form
 
         UpdateAuthenticationState();
         CmbxAuthentication.SelectedIndex = 0;
+        cmbTypeDB.SelectedIndex = 0;
         CmBxServer.Focus();
     }
 
@@ -74,7 +81,6 @@ public partial class Login : Form
     private void BtnLogin_Click(object? sender, EventArgs e)
     {
         string server = CmBxServer.Text.Trim();
-        string database = CmBxDatabase.Text.Trim();
         string Username = TxtUsername.Text.Trim();
         string Password = TxtPassword.Text.Trim();
         bool sqlAuthentication = CmbxAuthentication.SelectedIndex == 1;
@@ -86,12 +92,12 @@ public partial class Login : Form
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(database))
-        {
-            Helper.Show("Please enter the database name.");
-            CmBxDatabase.Focus();
-            return;
-        }
+        //if (string.IsNullOrWhiteSpace(database))
+        //{
+        //    Helper.Show("Please enter the database name.");
+        //    CmBxDatabase.Focus();
+        //    return;
+        //}
 
         if (sqlAuthentication && string.IsNullOrWhiteSpace(Username))
         {
@@ -109,23 +115,20 @@ public partial class Login : Form
 
         try
         {
-            //string connectionString =
-            //    DatabaseConnectionBuilder.sqlBuild(server, database, sqlAuthentication, Username, Password);
+            if(cmbTypeDB.SelectedItem?.ToString()== "sqlServer")
+            {
+                dbConnectionStringBuilder = new SqlServerConnectionStringBuilder(new ConnectionSettings { Server = server });
+                dbConnectionStringBuilder.Server = server;
+                ConnectionString =   dbConnectionStringBuilder.Build();
+            providerFactory = new SqlServerDatabaseProviderFactory(ConnectionString);
+            providerFactory.ConnectionFactory.OpenConnection();
 
-            //BtnLogin.Enabled = false;
-            //BtnLogin.Text = "Connecting...";
-
-            //Connection = new DbConnection(connectionString);
-            //sqlConnection = Connection.CreateConnection();
-
-
-
-            //ConnectionString = connectionString;
-
-            SaveConnection(server, database, sqlAuthentication);
-
+            BtnLogin.Enabled = false;
+            BtnLogin.Text = "Connecting...";
+            SaveConnection(server, "", sqlAuthentication);
             DialogResult = DialogResult.OK;
             Close();
+            }
         }
         catch (SqlException ex)
         {
@@ -171,6 +174,11 @@ public partial class Login : Form
     }
 
     private void BtnCancel_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void CmBxServer_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }

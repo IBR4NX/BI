@@ -26,9 +26,17 @@ public class ConnectionSettingsStore
 
         if (string.IsNullOrWhiteSpace(json))
             return new ConnectionSettingsCollection();
+        try
+        {
 
-        return JsonSerializer.Deserialize<ConnectionSettingsCollection>(json)
-               ?? new ConnectionSettingsCollection();
+
+            return JsonSerializer.Deserialize<ConnectionSettingsCollection>(json);
+        }
+        catch
+        {
+
+        return new ConnectionSettingsCollection();
+        }
     }
 
     public void Save(ConnectionSettings settings)

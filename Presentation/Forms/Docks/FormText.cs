@@ -18,8 +18,8 @@ namespace Presentation.Forms.Docks
 
         private void FormText_Load(object sender, EventArgs e)
         {
-            rTextBox.BackColor = AppTheme.Surface;
-            rTextBox.ForeColor = AppTheme.Text;
+            rTextBox.BackColor = Theme.Surface;
+            rTextBox.ForeColor = Theme.Text;
 
         }
     }

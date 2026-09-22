@@ -41,8 +41,8 @@ namespace Presentation.Forms.Docks
 
         public void SetupStyle()
         {
-            BtnAddFilter.BackColor = AppTheme.Primary;
-            BtnAddFilter.ForeColor = AppTheme.Text;
+            BtnAddFilter.BackColor = Theme.Primary;
+            BtnAddFilter.ForeColor = Theme.Text;
         }
 
         private void BtnAddFilter_Click(object sender, EventArgs e)

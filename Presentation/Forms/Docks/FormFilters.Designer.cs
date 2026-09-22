@@ -216,7 +216,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(686, 223);
+            ClientSize = new Size(611, 223);
             Controls.Add(cbFilterValue);
             Controls.Add(lstFilters);
             Controls.Add(label2);

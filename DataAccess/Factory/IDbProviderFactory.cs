@@ -6,12 +6,13 @@ namespace DataAccess.Factory
 {
     public interface IDbProviderFactory
     {
-        IDbConnectionFactory ConnectionFactory { get; }
+        IDbConnectionFactory ConnectionFactory { get; set; }
 
-        IDbExecutorFactory DatabaseExecutor { get; }
+        IDbExecutorFactory DatabaseExecutor { get; set; }
 
-        IDbParameterFactory ParameterFactory { get; }
+        IDbParameterFactory ParameterFactory { get; set; }
 
-        IDbMetadataProviderFactory MetadataProvider { get; }
+        IDbMetadataProviderFactory MetadataProvider { get; set; }
+        void ReBuild(string connectionString);
     }
 }

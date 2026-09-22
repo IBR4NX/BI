@@ -1,6 +1,7 @@
 ﻿
 using DataAccess.Factory;
 using Domain.Entities;
+using System.Diagnostics;
 
 namespace Business.Metadata;
 
@@ -8,19 +9,47 @@ public static class MetadataService
 {
     private static IDbMetadataProviderFactory _dbMetadataProvider;
 
-    public static DbMetadata Metadata { get; private set; } = new();
+    //public static DbMetadata Metadata { get; private set; } = new();
+    public static clsMetadata Metadata { get; private set; } = new clsMetadata();
+    public static event Action DatabaseChanged;
+    public static void NotifyRefreshDataBase()
+    {
+        DatabaseChanged?.Invoke();
+    }
     public static void MetadataProvider(IDbMetadataProviderFactory dbMetadataProvider)
     {
         _dbMetadataProvider = dbMetadataProvider;
         //return this;
     }
+    public static void CorrectDataBase(string database)
+    {
+        Metadata.NameOfDatabase=database;
+        Debug.WriteLine("MetadataService.CorrectDataBase: " + database);
+        System.Diagnostics.StackTrace stackTrace = new();
+        Console.WriteLine(stackTrace);
+        //return this;
+        NotifyRefreshDataBase();
+    }
+    public static void GetDatabases()
+    {
+        if (_dbMetadataProvider == null)
+        {
+            return;
+        }
+        Metadata.Databases= _dbMetadataProvider.GetDatabases();
+    }
+
     public static void GetMetadata()
     {
+        Debug.WriteLine("MetadataService.GetMetadata: "  );
         if (Metadata.Tables.Count < 1 || Metadata.Columns.Count < 1)
         {
             LoadAllTable();
             LoadAllColumns();
         }
+        if (Metadata.TablesInfo.Count > 0)
+            return;
+
         foreach (var t in Metadata.Tables)
         {
             List<ColumnInfo> col = new List<ColumnInfo>();
@@ -37,10 +66,14 @@ public static class MetadataService
     }
     public static void StorTables()
     {
-        if (Metadata.Tables.Count < 1 )
+        Debug.WriteLine("MetadataService.StorTables: " );
+        if (Metadata.Tables.Count==0 )
         {
             LoadAllTable();
         }
+        if (Metadata.treeTableInfo.Count > 0)
+            return;
+
         foreach (var tableInfo in Metadata.Tables)
         {
             if (Metadata.treeTableInfo.ContainsKey(tableInfo.Schema))
@@ -60,23 +93,22 @@ public static class MetadataService
 
     public static void LoadAllTable()
     {
+        Debug.WriteLine("MetadataService.LoadAllTable: ");
+
         Metadata.Tables = _dbMetadataProvider.GetTables();
 
     }
     public static void LoadAllColumns()
     {
+        Debug.WriteLine("MetadataService.LoadAllColumns: ");
+
         Metadata.Columns = _dbMetadataProvider.GetColumns();
 
     }
-    //public TableInfo GetTable(TableInfo table)
-    //{
-    //    if (!Metadata.TablesInfo.ContainsKey())
-    //        return new TableInfo();
 
-    //    return infos;
-    //}
     public static List<ColumnInfo> GetColumns(TableInfo table)
     {
+        Debug.WriteLine("MetadataService.GetColumns: ");
         if (!Metadata.TablesInfo.TryGetValue(table, out var columns))
             return new List<ColumnInfo>();
 
@@ -84,6 +116,7 @@ public static class MetadataService
     }
     public static ColumnInfo GetColumn(string name)
     {
+        Debug.WriteLine("MetadataService.GetColumn: ");
         ColumnInfo columnInfo = Metadata.Columns.FirstOrDefault(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase))!;
         if (columnInfo is null)
             return new ColumnInfo();
@@ -98,6 +131,8 @@ public static class MetadataService
             .ToList();
     }
 
+
+    #region PrintMetadata in console
     public static void PrintMetadata(TableInfo table)
     {
         Console.WriteLine("========== DATABASE METADATA ==========");
@@ -140,4 +175,5 @@ public static class MetadataService
 
         Console.WriteLine("\n========== END METADATA ==========");
     }
+    #endregion
 }

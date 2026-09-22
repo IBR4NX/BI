@@ -33,6 +33,8 @@
             trTableInfo = new TreeView();
             iconlist = new ImageList(components);
             txtSearch = new TextBox();
+            comboBox1 = new ComboBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // trTableInfo
@@ -41,10 +43,10 @@
             trTableInfo.ForeColor = SystemColors.InfoText;
             trTableInfo.ImageIndex = 0;
             trTableInfo.ImageList = iconlist;
-            trTableInfo.Location = new Point(0, 60);
+            trTableInfo.Location = new Point(0, 82);
             trTableInfo.Name = "trTableInfo";
             trTableInfo.SelectedImageIndex = 0;
-            trTableInfo.Size = new Size(230, 390);
+            trTableInfo.Size = new Size(230, 368);
             trTableInfo.TabIndex = 0;
             trTableInfo.AfterSelect += trTableInfo_AfterSelect;
             // 
@@ -65,16 +67,38 @@
             txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
-            // FormObjects
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(65, 48);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(151, 28);
+            comboBox1.TabIndex = 2;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 53);
+            label1.Name = "label1";
+            label1.Size = new Size(29, 20);
+            label1.TabIndex = 3;
+            label1.Text = "DB";
+            // 
+            // FormExplore
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(230, 450);
+            Controls.Add(label1);
+            Controls.Add(comboBox1);
             Controls.Add(txtSearch);
             Controls.Add(trTableInfo);
-            Name = "FormObjects";
+            HideOnClose = true;
+            Name = "FormExplore";
             Text = "Dock Content";
             FormClosing += FormObjects_FormClosing;
+            Load += FormExplore_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -84,5 +108,7 @@
         public TreeView trTableInfo;
         private TextBox txtSearch;
         private ImageList iconlist;
+        private ComboBox comboBox1;
+        private Label label1;
     }
 }

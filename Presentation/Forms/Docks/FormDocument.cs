@@ -23,15 +23,15 @@
 
         public void SetupStyle()
         {
-            BackColor = AppTheme.Background;
+            BackColor = Theme.Background;
 
-            tpToolStrip.BackColor = AppTheme.Background;
-            tpToolStrip.ForeColor = AppTheme.Text;
-            ssbtm.BackColor = AppTheme.Background;
-            ssbtm.ForeColor = AppTheme.Text;
+            tpToolStrip.BackColor = Theme.Background;
+            tpToolStrip.ForeColor = Theme.Text;
+            ssbtm.BackColor = Theme.Background;
+            ssbtm.ForeColor = Theme.Text;
 
-            rtbox.BackColor = AppTheme.Surface;
-            rtbox.ForeColor = AppTheme.Text;
+            rtbox.BackColor = Theme.Surface;
+            rtbox.ForeColor = Theme.Text;
 
         }
     }

@@ -1,17 +1,20 @@
 ﻿using DataAccess.Interfaces;
 using DataAccess.SqlServer;
-using Microsoft.Data.SqlClient;
+using System.Data;
+
 
 namespace Business.Builder;
 
 public static class DatabaseConnectionBuilder
 {
-    public static string Build( IDbConnectionStringBuilder builder)
+    public static SqlServerConnectionStringBuilder s;
+
+    public static string Build( string Server)
     {
 
-        string connectionString = builder.Build();
+         //s = new SqlServerConnectionStringBuilder();
 
-
-        return connectionString;
+        return s.Build();
     }
+
 }

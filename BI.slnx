@@ -1,7 +1,5 @@
 <Solution>
- <Folder Name="/Tests/">
-  <Project Path="SolutionItems/WpfApp1/WpfApp1.csproj" Id="25f59ca2-8801-4868-afa2-5616514687b4" />
- </Folder>
+ <Folder Name="/Tests/" />
  <Project Path="Business/Business.csproj" />
  <Project Path="DataAccess/DataAccess.csproj" />
  <Project Path="Domain/Domain.csproj" />

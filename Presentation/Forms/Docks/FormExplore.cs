@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -16,14 +17,14 @@ public partial class FormExplore : frmDockWindowBase
     {
         InitializeComponent();
         //Text = "Database Explorer";
-        BackColor = AppTheme.Background;
-        trTableInfo.BackColor = txtSearch.BackColor = AppTheme.Surface;
-        trTableInfo.ForeColor = txtSearch.ForeColor = AppTheme.Text;
+        BackColor = Theme.Background;
+        trTableInfo.BackColor = txtSearch.BackColor = Theme.Surface;
+        trTableInfo.ForeColor = txtSearch.ForeColor = Theme.Text;
         DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
     }
     public FormExplore LoadTables()
     {
-
+        trTableInfo.Nodes.Clear();
 
         foreach (var info in MetadataService.Metadata.treeTableInfo
             .Where(table => table.Key.Contains(txtSearch.Text.Trim(), StringComparison.OrdinalIgnoreCase)))
@@ -48,6 +49,18 @@ public partial class FormExplore : frmDockWindowBase
             trTableInfo.TopNode = trTableInfo.Nodes[0];
         }
         return this;
+    }
+    public void loaddatabases()
+    {
+        MetadataService.GetDatabases();
+
+            comboBox1.DataSource = MetadataService.Metadata.Databases;
+        //Debug.WriteLine("###############for:");
+
+        comboBox1.SelectedIndex= 0;
+        Debug.WriteLine("###############"+comboBox1.SelectedItem);
+        if (comboBox1.Items.Count > 0)
+            MetadataService.CorrectDataBase(comboBox1.SelectedItem.ToString());
     }
 
     private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -77,5 +90,17 @@ public partial class FormExplore : frmDockWindowBase
     {
         e.Cancel = true;
         Hide();
+    }
+
+    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        MetadataService.CorrectDataBase(comboBox1.SelectedItem.ToString());
+
+
+    }
+
+    private void FormExplore_Load(object sender, EventArgs e)
+    {
+
     }
 }

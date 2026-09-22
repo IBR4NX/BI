@@ -17,13 +17,15 @@ namespace Presentation
         }
 
     }
-    public class AppEvents
+    public static class EventsDB
     {
-        public event EventHandler? TablesChanged;
+        public static event Action DatabaseChanged;
+        public static string _database;
 
-        public void NotifyTablesChanged()
+        public static void NotifyDatabasesChanged(string? database)
         {
-            TablesChanged?.Invoke(this, EventArgs.Empty);
+            _database = database;
+            DatabaseChanged?.Invoke();
         }
     }
     public delegate void RefreshNavigatorFolderHandler();
@@ -34,9 +36,10 @@ namespace Presentation
     public static class EventCenterAction
     {
         public static event Action? RefreshNavigator;
+        public static event Action? RefreshDatabase;
         public static TableInfo _selectedTableInfo= new();
         public static List<FilterDefinition> _filters = new();
-
+        public static List<string> _database = new();
         public static void NotifyRefresh()
         {
             RefreshNavigator?.Invoke();

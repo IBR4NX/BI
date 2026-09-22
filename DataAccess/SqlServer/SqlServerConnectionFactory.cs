@@ -10,6 +10,7 @@ namespace DataAccess.SqlServer
     public class SqlServerConnectionFactory : IDbConnectionFactory
     {
         private readonly string _connectionString;
+        public IDbConnection connection { get; set; }
 
 
         public SqlServerConnectionFactory(string connectionString)
@@ -19,7 +20,17 @@ namespace DataAccess.SqlServer
 
         public IDbConnection CreateConnection()
         {
-            return new SqlConnection(_connectionString);
+
+            connection = new SqlConnection(_connectionString);
+
+            return connection;
         }
+        public IDbConnection OpenConnection()
+        {
+            IDbConnection dbConnection = CreateConnection();
+            dbConnection.Open();
+            return dbConnection;
+        }
+   
     }
 }

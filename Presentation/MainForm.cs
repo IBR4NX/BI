@@ -1,12 +1,17 @@
 ﻿using Business.Metadata;
 using Business.Services;
 using DataAccess.Factory;
+using DataAccess.Interfaces;
 using DataAccess.QueryBuilder;
 using DataAccess.SqlServer;
 using Domain.Definition;
 using Domain.Entities;
+using Domain.Settings;
+using Microsoft.VisualBasic.Logging;
 using Presentation.Forms.Docks;
 using System.Data;
+using System.Data.Common;
+using System.Diagnostics;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using WeifenLuo.WinFormsUI.Docking;
@@ -15,11 +20,11 @@ namespace Presentation
 {
     public partial class MainForm : Form
     {
-        private readonly QueryService _queryService;
+        private QueryService _queryService;
         private readonly List<FilterDefinition> _filters = new();
         private int dgvOpenDistance;
         private readonly List<JoinDefinition> _joins = new();
-        private readonly IDbProviderFactory providerFactory;
+        private IDbProviderFactory providerFactory;
 
         public FormExplore frmExplore = new FormExplore();
         public FormColumns frmColumns = new FormColumns();
@@ -29,36 +34,74 @@ namespace Presentation
         public DockPane documentPane;
         public DockPane documentPane2;
 
+        public string ConnectionString = "";
+        public string server = "";
+        public IDbConnectionStringBuilder dbConnectionStringBuilder;
+
+
+
 
         #region MainForm fun
         public MainForm()
         {
             InitializeComponent();
-            string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=AdventureWorks2025;Trusted_Connection=True;TrustServerCertificate=True;";
-            providerFactory = new SqlServerDatabaseProviderFactory(connectionString);
-            MetadataService.MetadataProvider(providerFactory.MetadataProvider);
-            MetadataService.GetMetadata();
-            MetadataService.StorTables();
-            _queryService = new QueryService(providerFactory);
-            ConfigureControls();
-            SetupStyle();
-            ShowFormDock();
+            string connectionString = @"Server=.;Database=AdventureWorks2025;Trusted_Connection=True;TrustServerCertificate=True;";
+
         }
 
+        [STAThread]
         private void MainForm_Load(object sender, EventArgs e)
         {
+            var login = new Login();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                ConnectionString = login.ConnectionString.Trim();
+                server = login.server.Trim();
+                dbConnectionStringBuilder = login.dbConnectionStringBuilder;
+                providerFactory = login.providerFactory;
+                MetadataService.MetadataProvider(login.providerFactory.MetadataProvider);
+                MetadataService.DatabaseChanged += notifi;
+            }
+            else
+            {
+                errProvider.SetError(login, " no");
+            }
+
+            ShowFormDock();
+
+            ConfigureControls();
+            SetupStyle();
         }
         #endregion
 
+
+        public void notifi()
+        {
+            try
+            {
+                string database = MetadataService.Metadata.NameOfDatabase;
+                dbConnectionStringBuilder.Database = database;
+                providerFactory.ReBuild(dbConnectionStringBuilder.Build());
+                MetadataService.MetadataProvider(providerFactory.MetadataProvider);
+                MetadataService.GetMetadata();
+                MetadataService.StorTables();
+                _queryService = new QueryService(providerFactory);
+
+                frmExplore.LoadTables();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+        }
         private void ShowFormDock()
         {
 
-
             frmExplore.Show(dockPanel, DockState.DockLeft);
             dockPanel.DockLeftPortion = 350;
-            frmExplore.LoadTables();
-
-
+            frmExplore.loaddatabases();
 
 
             // form center
@@ -137,8 +180,8 @@ namespace Presentation
         }
         public void SetupStyle()
         {
-            btmStatusStrip.BackColor = AppTheme.Background;
-            btmStatusStrip.ForeColor = AppTheme.Text;
+            btmStatusStrip.BackColor = Theme.Background;
+            btmStatusStrip.ForeColor = Theme.Text;
 
 
         }
@@ -277,6 +320,19 @@ namespace Presentation
         private void dockPanel_ActiveContentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (providerFactory.ConnectionFactory.connection.State == ConnectionState.Open)
+            {
+                StatusLabelConnection.Text = "Connected";
+            }
+            else 
+            {
+                StatusLabelConnection.Text = "Disconnected";
+                
+            }
         }
     }
 

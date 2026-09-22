@@ -11,8 +11,8 @@ namespace Presentation.Forms.Docks
             InitializeComponent();
 
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = AppTheme.Background;
-            ForeColor = AppTheme.Text;
+            BackColor = Theme.Background;
+            ForeColor = Theme.Text;
         }
 
         private void tsmiClose_Click(object sender, System.EventArgs e)
