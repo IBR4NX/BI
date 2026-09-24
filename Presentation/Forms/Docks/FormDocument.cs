@@ -1,4 +1,6 @@
-﻿namespace Presentation.Forms.Docks
+﻿using Presentation.Forms.Base;
+
+namespace Presentation.Forms.Docks
 {
     public partial class FormDocument : frmDockWindowBase
     {
@@ -34,5 +36,16 @@
             rtbox.ForeColor = Theme.Text;
 
         }
+
+        private void tpToolStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+        
     }
 }

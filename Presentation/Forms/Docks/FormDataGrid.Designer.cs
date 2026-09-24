@@ -34,12 +34,13 @@
             DgvData = new DataGridView();
             panel1 = new Panel();
             dateTimePicker1 = new DateTimePicker();
-            txtlabel = new Label();
-            cmbFilters = new ComboBox();
             txtFilter = new TextBox();
-            errProvider = new ErrorProvider(components);
-            groupBox1 = new GroupBox();
             cmbFilterOperator = new ComboBox();
+            groupBox1 = new GroupBox();
+            cmbFilters = new ComboBox();
+            txtlabel = new Label();
+            errProvider = new ErrorProvider(components);
+            contextMenuStrip1 = new ContextMenuStrip(components);
             ((System.ComponentModel.ISupportInitialize)DgvData).BeginInit();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errProvider).BeginInit();
@@ -110,25 +111,6 @@
             dateTimePicker1.Size = new Size(218, 27);
             dateTimePicker1.TabIndex = 3;
             // 
-            // txtlabel
-            // 
-            txtlabel.AutoSize = true;
-            txtlabel.Location = new Point(675, 11);
-            txtlabel.Name = "txtlabel";
-            txtlabel.Size = new Size(50, 20);
-            txtlabel.TabIndex = 2;
-            txtlabel.Text = "label1";
-            // 
-            // cmbFilters
-            // 
-            cmbFilters.Dock = DockStyle.Left;
-            cmbFilters.FormattingEnabled = true;
-            cmbFilters.Location = new Point(4, 4);
-            cmbFilters.Margin = new Padding(6);
-            cmbFilters.Name = "cmbFilters";
-            cmbFilters.Size = new Size(151, 28);
-            cmbFilters.TabIndex = 1;
-            // 
             // txtFilter
             // 
             txtFilter.Dock = DockStyle.Left;
@@ -139,9 +121,15 @@
             txtFilter.TabIndex = 0;
             txtFilter.TextChanged += txtFilter_TextChanged;
             // 
-            // errProvider
+            // cmbFilterOperator
             // 
-            errProvider.ContainerControl = this;
+            cmbFilterOperator.Dock = DockStyle.Left;
+            cmbFilterOperator.FormattingEnabled = true;
+            cmbFilterOperator.Location = new Point(161, 4);
+            cmbFilterOperator.Margin = new Padding(6);
+            cmbFilterOperator.Name = "cmbFilterOperator";
+            cmbFilterOperator.Size = new Size(151, 28);
+            cmbFilterOperator.TabIndex = 2;
             // 
             // groupBox1
             // 
@@ -154,15 +142,34 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
             // 
-            // cmbFilterOperator
+            // cmbFilters
             // 
-            cmbFilterOperator.Dock = DockStyle.Left;
-            cmbFilterOperator.FormattingEnabled = true;
-            cmbFilterOperator.Location = new Point(161, 4);
-            cmbFilterOperator.Margin = new Padding(6);
-            cmbFilterOperator.Name = "cmbFilterOperator";
-            cmbFilterOperator.Size = new Size(151, 28);
-            cmbFilterOperator.TabIndex = 2;
+            cmbFilters.Dock = DockStyle.Left;
+            cmbFilters.FormattingEnabled = true;
+            cmbFilters.Location = new Point(4, 4);
+            cmbFilters.Margin = new Padding(6);
+            cmbFilters.Name = "cmbFilters";
+            cmbFilters.Size = new Size(151, 28);
+            cmbFilters.TabIndex = 1;
+            // 
+            // txtlabel
+            // 
+            txtlabel.AutoSize = true;
+            txtlabel.Location = new Point(675, 11);
+            txtlabel.Name = "txtlabel";
+            txtlabel.Size = new Size(50, 20);
+            txtlabel.TabIndex = 2;
+            txtlabel.Text = "label1";
+            // 
+            // errProvider
+            // 
+            errProvider.ContainerControl = this;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(211, 32);
             // 
             // FormDataGrid
             // 
@@ -195,5 +202,6 @@
         private ErrorProvider errProvider;
         private GroupBox groupBox1;
         private ComboBox cmbFilterOperator;
+        private ContextMenuStrip contextMenuStrip1;
     }
 }

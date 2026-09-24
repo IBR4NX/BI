@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using Presentation.Forms.Base;
 
 namespace Presentation.Forms.Docks
 {
@@ -24,7 +25,7 @@ namespace Presentation.Forms.Docks
         public void SetDataSource(DataTable dataTable)
         {
             table = dataTable;
-            Text = EventCenterAction._selectedTableInfo.Name;
+            Text = dataTable.TableName;
             DgvData.DataSource = table;
             foreach (DataColumn column in table.Columns)
             {

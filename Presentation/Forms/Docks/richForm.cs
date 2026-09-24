@@ -1,4 +1,4 @@
-using Presentation.Forms.Docks;
+using Presentation.Forms.Base;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Presentation.Forms.Windows

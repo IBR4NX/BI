@@ -102,12 +102,14 @@
             // 
             // ShwoMessage
             // 
+            AcceptButton = btnClose;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(36, 38, 44);
             ClientSize = new Size(431, 450);
             Controls.Add(message);
             Controls.Add(panel1);
+            ForeColor = Color.FromArgb(240, 246, 252);
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;

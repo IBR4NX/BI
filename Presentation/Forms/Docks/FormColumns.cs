@@ -9,7 +9,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-
+using Presentation.Forms.Base;
 namespace Presentation.Forms.Docks
 {
     public partial class FormColumns : frmDockWindowBase
@@ -18,19 +18,22 @@ namespace Presentation.Forms.Docks
         {
             InitializeComponent();
             lstVColumns.BackColor = Theme.Surface;
-            ConfigureControls();
+            //ConfigureControls();
+            // clsEventActions
+            clsEventActions.ColumnsChanged += LoadColumns;
+        }
+        public List<FilterDefinition> GetFilters()
+        {
+            return ucFilter1.GetFilters();
         }
 
-
-        public void LoadColumns()
+        public void LoadColumns(List<ColumnInfo> columns)
         {
             this.Text = "Yap";
-            TableInfo tableInfo = EventCenterAction._selectedTableInfo;
             lstVColumns.Items.Clear();
-            List<ColumnInfo> columns = MetadataService.GetColumns(tableInfo);
             if (columns.Count == 0)
             {
-                Helper.Show($"No columns found for table {tableInfo.Name} {tableInfo.Schema}.");
+                Helper.Show($"No columns found for table  33 formcolumns.");
                 return;
             }
             foreach (var column in columns)
@@ -53,19 +56,32 @@ namespace Presentation.Forms.Docks
         public List<ColumnInfo> GetColumns()
         {
             List<ColumnInfo> columns = new();
-               columns= lstVColumns.CheckedItems
-    .Cast<ListViewItem>()
-    .Select(item => (ColumnInfo)item.Tag!)
-    .ToList()!;
+            columns = lstVColumns.CheckedItems
+ .Cast<ListViewItem>()
+ .Select(item => (ColumnInfo)item.Tag!)
+ .ToList()!;
             return columns;
         }
 
 
         public void ConfigureControls()
         {
-            EventCenterAction.RefreshNavigator += LoadColumns;
+
         }
 
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lstVColumns_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
 
     }
 }

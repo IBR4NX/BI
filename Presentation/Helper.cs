@@ -2,6 +2,7 @@
 using Domain.Definition;
 using Domain.Entities;
 using System.Data;
+using System.Diagnostics;
 
 namespace Presentation
 {
@@ -15,20 +16,15 @@ namespace Presentation
                 MessageBoxButtons.OK,
                 icon);
         }
-
-    }
-    public static class EventsDB
-    {
-        public static event Action DatabaseChanged;
-        public static string _database;
-
-        public static void NotifyDatabasesChanged(string? database)
+       public static void MyMethod()
         {
-            _database = database;
-            DatabaseChanged?.Invoke();
+            StackTrace stackTrace = new StackTrace(true);
+            StackFrame? frame = stackTrace.GetFrame(1);
+            string filename = frame.GetFileName().Replace("C:\\Users\\IBOVS\\source\\repos\\", "BI: ");
+            Console.WriteLine($"Method: {frame?.GetMethod()?.Name}" + $"File: {filename}" + $"Line: {frame?.GetFileLineNumber()}");
         }
+
     }
-    public delegate void RefreshNavigatorFolderHandler();
 
 
 
@@ -37,12 +33,48 @@ namespace Presentation
     {
         public static event Action? RefreshNavigator;
         public static event Action? RefreshDatabase;
-        public static TableInfo _selectedTableInfo= new();
-        public static List<FilterDefinition> _filters = new();
         public static List<string> _database = new();
+        public static TableInfo _selectedTableInfo = new();
+
+        private static event Action TableSelected = delegate { };
+        public static event Action DatabaseChanged = delegate { };
+
         public static void NotifyRefresh()
         {
             RefreshNavigator?.Invoke();
         }
+
+        public static TableInfo CorrectTable
+        {
+            get => field;
+            set
+            {
+                field = value;
+                TableSelected.Invoke();
+            }
+        } = new();
+
+        public static string CorrectDatabase
+        {
+            get => field;
+            set
+            {
+                field = value;
+                DatabaseChanged.Invoke();
+            }
+        } = string.Empty;
+
+
+        public static List<FilterDefinition> filters
+        {
+            get; set
+            {
+                if (value is List<FilterDefinition>)
+                {
+                    if (value.Count == 1) field.Add(value.First());
+                    else field.AddRange(value);
+                }
+            }
+        } = new();
     }
 }

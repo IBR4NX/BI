@@ -1,32 +1,36 @@
 ﻿using Business.Metadata;
 using Domain.Definition;
 using Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
-using Presentation.Forms.Base;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 
-
-namespace Presentation.Forms.Docks
+namespace Presentation.Controls
 {
-    public partial class
-        FormFilters : frmDockWindowBase
+    public partial class ucFilter : UserControl
     {
-        public FormFilters()
+        public ucFilter()
         {
             InitializeComponent();
             ConfigureControls();
             SetupStyle();
             clsEventActions.ColumnsChanged += LoadFilter;
         }
-
-
         public void LoadFilter(List<ColumnInfo> columns)
         {
+            lstFilters.Items.Clear();
             CbColumnsFilter.Items.Clear();
+
             foreach (var column in columns)
             {
                 CbColumnsFilter.Items.Add(column);
                 cbFilterValue.Items.Add(column.Name);
             }
+            cbFilterValue.SelectedIndex = 0;
         }
         #region Start ConfigureControls and SetupStyle
         private void ConfigureControls()
@@ -44,6 +48,7 @@ namespace Presentation.Forms.Docks
         }
         #endregion
 
+
         private void BtnAddFilter_Click(object sender, EventArgs e)
         {
             try
@@ -59,7 +64,7 @@ namespace Presentation.Forms.Docks
             }
             catch (Exception exception)
             {
-                errorProvider1.SetError(lstFilters, exception.Message);
+                //errorProvider1.SetError(lstFilters, exception.Message);
             }
 
 
@@ -99,6 +104,10 @@ namespace Presentation.Forms.Docks
             return filter;
         }
 
+        private void lstFilters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
         private void BtnClearFilters_Click(object sender, EventArgs e)
         {
             lstFilters.Items.Clear();
@@ -110,13 +119,7 @@ namespace Presentation.Forms.Docks
 
         }
 
-
-        private void FormFilters_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormFilters_Load_1(object sender, EventArgs e)
+        private void ucFilter_Load(object sender, EventArgs e)
         {
 
         }

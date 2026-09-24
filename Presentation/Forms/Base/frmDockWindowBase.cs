@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
-namespace Presentation.Forms.Docks
+namespace Presentation.Forms.Base
 {
     public partial class frmDockWindowBase : DockContent
     {
@@ -11,7 +11,7 @@ namespace Presentation.Forms.Docks
             InitializeComponent();
 
             AutoScaleMode = AutoScaleMode.Dpi;
-            BackColor = Theme.Background;
+            BackColor = Theme.Surface;
             ForeColor = Theme.Text;
         }
 

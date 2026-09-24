@@ -46,6 +46,7 @@ namespace Presentation.Forms.Docks
             vS2015DarkTheme1 = new WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme();
             rtbox = new RichTextBox();
             ssbtm = new StatusStrip();
+            toolStripButton2 = new ToolStripButton();
             tpToolStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -54,7 +55,7 @@ namespace Presentation.Forms.Docks
             tpToolStrip.BackColor = Color.FromArgb(13, 17, 23);
             tpToolStrip.GripMargin = new Padding(0);
             tpToolStrip.ImageScalingSize = new Size(20, 20);
-            tpToolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator7, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator8, helpToolStripButton, toolStripSeparator9, toolStripButton1 });
+            tpToolStrip.Items.AddRange(new ToolStripItem[] { newToolStripButton, openToolStripButton, saveToolStripButton, printToolStripButton, toolStripSeparator7, cutToolStripButton, copyToolStripButton, pasteToolStripButton, toolStripSeparator8, helpToolStripButton, toolStripSeparator9, toolStripButton1, toolStripButton2 });
             tpToolStrip.Location = new Point(0, 0);
             tpToolStrip.Margin = new Padding(4);
             tpToolStrip.Name = "tpToolStrip";
@@ -65,6 +66,7 @@ namespace Presentation.Forms.Docks
             tpToolStrip.TabIndex = 7;
             tpToolStrip.Text = "toolStrip1";
             tpToolStrip.UseWaitCursor = true;
+            tpToolStrip.ItemClicked += tpToolStrip_ItemClicked;
             // 
             // newToolStripButton
             // 
@@ -161,6 +163,7 @@ namespace Presentation.Forms.Docks
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new Size(58, 24);
             toolStripButton1.Text = "Run";
+            toolStripButton1.Click += toolStripButton1_Click;
             // 
             // rtbox
             // 
@@ -174,11 +177,20 @@ namespace Presentation.Forms.Docks
             // ssbtm
             // 
             ssbtm.ImageScalingSize = new Size(20, 20);
-            ssbtm.Location = new Point(0, 768);
+            ssbtm.Location = new Point(0, 770);
             ssbtm.Name = "ssbtm";
-            ssbtm.Size = new Size(1114, 24);
+            ssbtm.Size = new Size(1114, 22);
             ssbtm.TabIndex = 9;
             ssbtm.Text = "statusStrip1";
+            // 
+            // toolStripButton2
+            // 
+            toolStripButton2.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton2.Image = (Image)resources.GetObject("toolStripButton2.Image");
+            toolStripButton2.ImageTransparentColor = Color.Magenta;
+            toolStripButton2.Name = "toolStripButton2";
+            toolStripButton2.Size = new Size(29, 24);
+            toolStripButton2.Text = "toolStripButton2";
             // 
             // FormDocument
             // 
@@ -214,7 +226,8 @@ namespace Presentation.Forms.Docks
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripButton toolStripButton1;
         private WeifenLuo.WinFormsUI.Docking.VS2015DarkTheme vS2015DarkTheme1;
-        private RichTextBox rtbox;
+        public RichTextBox rtbox;
         private StatusStrip ssbtm;
+        private ToolStripButton toolStripButton2;
     }
 }

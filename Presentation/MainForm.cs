@@ -3,17 +3,10 @@ using Business.Services;
 using DataAccess.Factory;
 using DataAccess.Interfaces;
 using DataAccess.QueryBuilder;
-using DataAccess.SqlServer;
 using Domain.Definition;
-using Domain.Entities;
-using Domain.Settings;
-using Microsoft.VisualBasic.Logging;
 using Presentation.Forms.Docks;
 using System.Data;
-using System.Data.Common;
 using System.Diagnostics;
-using System.Windows.Forms;
-using System.Windows.Media.Animation;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace Presentation
@@ -28,7 +21,7 @@ namespace Presentation
 
         public FormExplore frmExplore = new FormExplore();
         public FormColumns frmColumns = new FormColumns();
-        public FormFilters frmFilters = new FormFilters();
+        //public FormFilters frmFilters = new FormFilters();
         public FormDocument frmDocument = new FormDocument();
         public FormDataGrid frmDataGrid = new FormDataGrid();
         public DockPane documentPane;
@@ -60,11 +53,12 @@ namespace Presentation
                 dbConnectionStringBuilder = login.dbConnectionStringBuilder;
                 providerFactory = login.providerFactory;
                 MetadataService.MetadataProvider(login.providerFactory.MetadataProvider);
-                MetadataService.DatabaseChanged += notifi;
+                clsEventActions.DatabaseChanged += notifi;
             }
             else
             {
                 errProvider.SetError(login, " no");
+                Application.Exit();
             }
 
             ShowFormDock();
@@ -72,22 +66,29 @@ namespace Presentation
             ConfigureControls();
             SetupStyle();
         }
+        
         #endregion
 
 
-        public void notifi()
+        public void notifi(string database)
         {
+                Debug.WriteLine("notif.before: ");
             try
             {
-                string database = MetadataService.Metadata.NameOfDatabase;
+
+                Debug.WriteLine("notif.0: ");
+                MetadataService.CorrectDataBase(database);
+                Debug.WriteLine("notif.1: ");
                 dbConnectionStringBuilder.Database = database;
+                Debug.WriteLine("notif.2: ");
                 providerFactory.ReBuild(dbConnectionStringBuilder.Build());
                 MetadataService.MetadataProvider(providerFactory.MetadataProvider);
-                MetadataService.GetMetadata();
+                Debug.WriteLine("notif.3: ");
                 MetadataService.StorTables();
+                Debug.WriteLine("notif.4: ");
                 _queryService = new QueryService(providerFactory);
-
                 frmExplore.LoadTables();
+                MetadataService.GetMetadata();
             }
             catch (Exception ex)
             {
@@ -117,31 +118,38 @@ namespace Presentation
 
             frmColumns.Show(documentPane, DockAlignment.Bottom, 0.5);
             //frmColumns.AllowEndUserDocking = false;
-            documentPane2 = frmColumns.Pane;
-            frmFilters.Show(documentPane2, DockAlignment.Right, 0.5);
+            //documentPane2 = frmColumns.Pane;
+            //frmFilters.Show(documentPane2, DockAlignment.Right, 0.5);
         }
 
 
         #region Btn Start , Fetch data
         private void BtnStart_Click(object sender, EventArgs e)
         {
-
+            
             try
             {
+                var result = new DataTable();
+                if (frmDocument.IsActivated)
+                {
+                    result = _queryService.Execute(frmDocument.rtbox.Text.Trim());
+                    frmDataGrid.SetDataSource(result);
+                    frmDataGrid.Show();
+                    return;
+                }
 
                 IQueryBuilder queryBuilder = new QueryBuilder(providerFactory.ParameterFactory);
                 queryBuilder.Select(frmColumns.GetColumns())
-                    .From(EventCenterAction._selectedTableInfo!).Where(frmFilters.GetFilters());
+                    .From(frmExplore.GetTableInfo()).Where(frmColumns.GetFilters());
                 var query = queryBuilder.Build();
                 //MessageBox.Show("00000" + query );
-                var result = new DataTable();
                 var p = queryBuilder.GetParameters().ToArray();
                 if (p.Length > 0)
                 {
-                    foreach (var param in p)
-                    {
-                        MessageBox.Show($"Parameter: {param.ParameterName}, Value: {param.Value}");
-                    }
+                    //foreach (var param in p)
+                    //{
+                    //    MessageBox.Show($"Parameter: {param.ParameterName}, Value: {param.Value}");
+                    //}
                     result = _queryService.Execute(query, p);
                 }
                 else
@@ -190,7 +198,7 @@ namespace Presentation
         {
 
 
-
+               
         }
 
         private void tsLabel_Click(object sender, EventArgs e)
@@ -307,7 +315,7 @@ namespace Presentation
 
         private void listFilterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmFilters.Show();
+            //frmFilters.Show();
         }
 
         private void listExploreToolStripMenuItem_Click(object sender, EventArgs e)

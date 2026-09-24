@@ -1,4 +1,4 @@
-﻿namespace Presentation.Forms.Docks
+﻿namespace Presentation.Forms.Base
 {
     partial class frmDockWindowBase
     {

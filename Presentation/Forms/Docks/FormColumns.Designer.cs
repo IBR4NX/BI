@@ -28,12 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormColumns));
             lstVColumns = new ListView();
             cHeader1 = new ColumnHeader();
             cHeader2 = new ColumnHeader();
             cHeader3 = new ColumnHeader();
             cHeader4 = new ColumnHeader();
             cHeader5 = new ColumnHeader();
+            splitContainer1 = new SplitContainer();
+            imageList1 = new ImageList(components);
+            ucFilter1 = new Presentation.Controls.ucFilter();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
             // lstVColumns
@@ -48,12 +57,15 @@
             lstVColumns.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lstVColumns.HoverSelection = true;
             lstVColumns.LabelWrap = false;
+            lstVColumns.LargeImageList = imageList1;
             lstVColumns.Location = new Point(0, 0);
             lstVColumns.Name = "lstVColumns";
-            lstVColumns.Size = new Size(575, 450);
+            lstVColumns.Size = new Size(539, 450);
+            lstVColumns.SmallImageList = imageList1;
             lstVColumns.TabIndex = 9;
             lstVColumns.UseCompatibleStateImageBehavior = false;
             lstVColumns.View = View.Details;
+            lstVColumns.SelectedIndexChanged += lstVColumns_SelectedIndexChanged;
             // 
             // cHeader1
             // 
@@ -79,15 +91,58 @@
             // 
             cHeader5.Text = "Key";
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(lstVColumns);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(ucFilter1);
+            splitContainer1.Panel2.Paint += splitContainer1_Panel2_Paint;
+            splitContainer1.Size = new Size(1162, 450);
+            splitContainer1.SplitterDistance = 539;
+            splitContainer1.SplitterWidth = 10;
+            splitContainer1.TabIndex = 10;
+            // 
+            // imageList1
+            // 
+            imageList1.ColorDepth = ColorDepth.Depth32Bit;
+            imageList1.ImageStream = (ImageListStreamer)resources.GetObject("imageList1.ImageStream");
+            imageList1.TransparentColor = Color.Transparent;
+            imageList1.Images.SetKeyName(0, "icons8_key.ico");
+            imageList1.Images.SetKeyName(1, "icons8_cut_32.png");
+            imageList1.Images.SetKeyName(2, "add-icon(3).png");
+            // 
+            // ucFilter1
+            // 
+            ucFilter1.AutoSize = true;
+            ucFilter1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            ucFilter1.Dock = DockStyle.Top;
+            ucFilter1.Location = new Point(0, 0);
+            ucFilter1.Name = "ucFilter1";
+            ucFilter1.Size = new Size(613, 227);
+            ucFilter1.TabIndex = 0;
+            // 
             // FormColumns
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(575, 450);
-            Controls.Add(lstVColumns);
+            ClientSize = new Size(1162, 450);
+            Controls.Add(splitContainer1);
             HideOnClose = true;
             Name = "FormColumns";
             Text = "frmColumnsInfo";
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            splitContainer1.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -99,5 +154,8 @@
         private ColumnHeader cHeader3;
         private ColumnHeader cHeader4;
         private ColumnHeader cHeader5;
+        private SplitContainer splitContainer1;
+        private Controls.ucFilter ucFilter1;
+        private ImageList imageList1;
     }
 }

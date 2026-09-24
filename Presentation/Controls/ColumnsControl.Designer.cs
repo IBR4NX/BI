@@ -28,33 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            uClabel1 = new UClabel();
             SuspendLayout();
-            // 
-            // uClabel1
-            // 
-            uClabel1.AutoSize = true;
-            uClabel1.ForeColor = Color.FromArgb(240, 246, 252);
-            uClabel1.Location = new Point(25, 15);
-            uClabel1.Name = "uClabel1";
-            uClabel1.Size = new Size(67, 20);
-            uClabel1.TabIndex = 0;
-            uClabel1.Text = "uClabel1";
             // 
             // ColumnsControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            Controls.Add(uClabel1);
             Name = "ColumnsControl";
-            Size = new Size(264, 150);
+            Size = new Size(479, 240);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private UClabel uClabel1;
     }
 }

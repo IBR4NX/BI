@@ -9,6 +9,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using Presentation.Forms.Base;
+
 namespace Presentation.Forms.Docks;
 
 public partial class FormExplore : frmDockWindowBase
@@ -22,11 +24,23 @@ public partial class FormExplore : frmDockWindowBase
         trTableInfo.ForeColor = txtSearch.ForeColor = Theme.Text;
         DockAreas = DockAreas.DockLeft | DockAreas.DockRight;
     }
+
+    public TableInfo GetTableInfo()
+    {
+        if (trTableInfo.SelectedNode is not TreeNode)
+            throw new Exception("GetTableInfo : frm Explore : trTableInfo.SelectedNode is not TreeNode ");
+
+        if (trTableInfo.SelectedNode.Tag is TableInfo tableInfo)
+            return tableInfo;
+        else
+            throw new Exception("GetTableInfo : frm Explore : it isn't selected table ");
+
+    }
     public FormExplore LoadTables()
     {
+        var tableInfo = MetadataService.Metadata.treeTableInfo;
         trTableInfo.Nodes.Clear();
-
-        foreach (var info in MetadataService.Metadata.treeTableInfo
+        foreach (var info in tableInfo
             .Where(table => table.Key.Contains(txtSearch.Text.Trim(), StringComparison.OrdinalIgnoreCase)))
         {
             TreeNode node = new TreeNode(info.Key);
@@ -57,10 +71,8 @@ public partial class FormExplore : frmDockWindowBase
             comboBox1.DataSource = MetadataService.Metadata.Databases;
         //Debug.WriteLine("###############for:");
 
-        comboBox1.SelectedIndex= 0;
-        Debug.WriteLine("###############"+comboBox1.SelectedItem);
         if (comboBox1.Items.Count > 0)
-            MetadataService.CorrectDataBase(comboBox1.SelectedItem.ToString());
+            comboBox1.SelectedIndex= 0;
     }
 
     private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -70,17 +82,13 @@ public partial class FormExplore : frmDockWindowBase
 
     private void trTableInfo_AfterSelect(object sender, TreeViewEventArgs e)
     {
-        if (trTableInfo.SelectedNode is not TreeNode)
-            return;
 
-        if (trTableInfo.SelectedNode.Tag is TableInfo tableInfo)
+        if (trTableInfo.SelectedNode?.Tag is TableInfo tableInfo)
         {
-            EventCenterAction._selectedTableInfo = tableInfo;
-            EventCenterAction.NotifyRefresh();
-            txtSearch.Text = EventCenterAction._selectedTableInfo.Name;
+        clsEventActions.SelectTable(tableInfo);
         }
-
     }
+
     public void ConfigureControls()
     {
 
@@ -94,9 +102,8 @@ public partial class FormExplore : frmDockWindowBase
 
     private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        MetadataService.CorrectDataBase(comboBox1.SelectedItem.ToString());
-
-
+        if (comboBox1.SelectedItem!=null)
+        clsEventActions.ChangeDatabase(comboBox1.SelectedItem.ToString());
     }
 
     private void FormExplore_Load(object sender, EventArgs e)

@@ -1,6 +1,8 @@
+using Presentation.Forms.Base;
+
 namespace Presentation
 {
-    public partial class ShwoMessage : Form
+    public partial class ShwoMessage : BaseForm
     {
         public ShwoMessage(string text)
         {

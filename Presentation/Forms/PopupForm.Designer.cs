@@ -1,6 +1,6 @@
 ﻿namespace Presentation.Forms
 {
-    partial class PopupForm
+    partial class PopupForm 
     {
         /// <summary>
         /// Required designer variable.

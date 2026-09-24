@@ -11,11 +11,8 @@ public static class MetadataService
 
     //public static DbMetadata Metadata { get; private set; } = new();
     public static clsMetadata Metadata { get; private set; } = new clsMetadata();
-    public static event Action DatabaseChanged;
-    public static void NotifyRefreshDataBase()
-    {
-        DatabaseChanged?.Invoke();
-    }
+
+
     public static void MetadataProvider(IDbMetadataProviderFactory dbMetadataProvider)
     {
         _dbMetadataProvider = dbMetadataProvider;
@@ -24,11 +21,10 @@ public static class MetadataService
     public static void CorrectDataBase(string database)
     {
         Metadata.NameOfDatabase=database;
+        //return this;
         Debug.WriteLine("MetadataService.CorrectDataBase: " + database);
         System.Diagnostics.StackTrace stackTrace = new();
         Console.WriteLine(stackTrace);
-        //return this;
-        NotifyRefreshDataBase();
     }
     public static void GetDatabases()
     {
@@ -42,11 +38,10 @@ public static class MetadataService
     public static void GetMetadata()
     {
         Debug.WriteLine("MetadataService.GetMetadata: "  );
-        if (Metadata.Tables.Count < 1 || Metadata.Columns.Count < 1)
-        {
+        if (Metadata.Tables.Count < 1)
             LoadAllTable();
+        if (Metadata.Columns.Count < 1)
             LoadAllColumns();
-        }
         if (Metadata.TablesInfo.Count > 0)
             return;
 
@@ -100,15 +95,16 @@ public static class MetadataService
     }
     public static void LoadAllColumns()
     {
-        Debug.WriteLine("MetadataService.LoadAllColumns: ");
-
-        Metadata.Columns = _dbMetadataProvider.GetColumns();
+        var c = _dbMetadataProvider.GetColumns();
+        Debug.WriteLine("MetadataService.LoadAllColumns: "+c.Count);
+        
+        Metadata.Columns =c;
 
     }
 
     public static List<ColumnInfo> GetColumns(TableInfo table)
     {
-        Debug.WriteLine("MetadataService.GetColumns: ");
+        Debug.WriteLine("MetadataService.GetColumns: " + table.Name);
         if (!Metadata.TablesInfo.TryGetValue(table, out var columns))
             return new List<ColumnInfo>();
 
