@@ -4,7 +4,6 @@ using Domain.Entities;
 using System.Data;
 using Presentation.Forms.Base;
 
-
 namespace Presentation.Forms.Docks
 {
     public partial class

@@ -1,9 +1,6 @@
-﻿using Domain.Entities;
-using System.Data;
-
-namespace DataAccess.Interfaces
+﻿namespace Domain.Interfaces
 {
-    public interface IDbConnectionStringBuilder
+    public interface IConnectionSettings
     {
         string Server { get; set; }
 
@@ -15,6 +12,5 @@ namespace DataAccess.Interfaces
 
         string? Password { get; set; }
 
-        string Build();
     }
 }

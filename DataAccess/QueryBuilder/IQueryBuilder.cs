@@ -15,9 +15,18 @@ namespace DataAccess.QueryBuilder
 
         IQueryBuilder Join(JoinDefinition join);
 
+        IQueryBuilder? Where(FilterDefinition filter);
         IQueryBuilder Where(List<FilterDefinition> filter);
 
         IQueryBuilder OrderBy(string column, bool descending = false);
+
+        string Build();
+        List<IDbDataParameter> GetParameters();
+    }
+    public interface IDeleteQueryBuilder
+    {
+        IDeleteQueryBuilder From(TableInfo tableInfo);
+        IDeleteQueryBuilder Where(List<FilterDefinition> filters);
 
         string Build();
         List<IDbDataParameter> GetParameters();

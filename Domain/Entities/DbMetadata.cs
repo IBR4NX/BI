@@ -15,20 +15,19 @@ namespace Domain.Entities
     public class clsMetadata
     {
         public string NameOfDatabase { get; set; } = string.Empty;
-        private HashSet<string> _databases = new();
         public Dictionary<string, DbMetadata> Metadata { get; set; } = new();
 
 
 
         public List<string> Databases { get {
-                return _databases.ToList();
+                return field.ToList();
             } set
             {
-                if (value is List<string>)_databases = value.ToHashSet();
-                else if (value is HashSet<string>) _databases = value.ToHashSet();
+                if (value is List<string>)field = value.ToList();
+                else if (value is List<string>) field = value.ToList();
                 else return;
             }
-        }
+        } = new();
 
 
 

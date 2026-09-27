@@ -61,6 +61,7 @@ partial class Login
         LblTitle.TabIndex = 14;
         LblTitle.Text = "Server Connect";
         LblTitle.TextAlign = ContentAlignment.MiddleCenter;
+        LblTitle.Click += LblTitle_Click;
         // 
         // LblHint
         // 
@@ -100,7 +101,7 @@ partial class Login
         LblUsername.AutoSize = true;
         LblUsername.Font = new Font("Segoe UI", 9.5F);
         LblUsername.ForeColor = Color.FromArgb(235, 235, 240);
-        LblUsername.Location = new Point(5, 50);
+        LblUsername.Location = new Point(5, 21);
         LblUsername.Name = "LblUsername";
         LblUsername.Size = new Size(81, 21);
         LblUsername.TabIndex = 9;
@@ -247,7 +248,6 @@ partial class Login
         AcceptButton = BtnLogin;
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
-        BackColor = Color.FromArgb(18, 18, 20);
         CancelButton = BtnCancel;
         ClientSize = new Size(340, 533);
         Controls.Add(cmbTypeDB);
@@ -261,6 +261,7 @@ partial class Login
         Controls.Add(LblTitle);
         Controls.Add(pictureBox1);
         Controls.Add(groupBox1);
+        ForeColor = Color.FromArgb(240, 246, 252);
         FormBorderStyle = FormBorderStyle.None;
         MaximizeBox = false;
         MinimizeBox = false;

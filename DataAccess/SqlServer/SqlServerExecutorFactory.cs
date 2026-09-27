@@ -51,9 +51,9 @@ namespace DataAccess.SqlServer
         }
         public DataTable ExecuteQuery(string commandText, params IDbDataParameter[] parameters)
         {
-            using IDbConnection connection = _connectionFactory.CreateConnection();
+            IDbConnection connection = _connectionFactory.CreateConnection();
 
-            connection.Open();
+            //connection.Open();
 
              SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(commandText, (SqlConnection)connection);
 

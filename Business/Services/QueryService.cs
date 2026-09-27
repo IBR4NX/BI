@@ -23,18 +23,6 @@ public class QueryService
 
     public DataTable Execute(string query, params IDbDataParameter[] parameters)
     {
-        //_validator.Validate(query);
-        //Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(
-        // query, new JsonSerializerOptions
-        // {
-        //     WriteIndented = true
-        // }));
-        //Debug.WriteLine(System.Text.Json.JsonSerializer.Serialize(
-        // parameters, new JsonSerializerOptions
-        // {
-        //     WriteIndented = true
-        // }));
-
         Debug.WriteLine(query);
         return _dbProviderFactory.DatabaseExecutor.ExecuteQuery(query, parameters );
     }

@@ -1,25 +1,18 @@
-﻿using Business.Builder;
-using DataAccess;
-using DataAccess.Factory;
-using DataAccess.Interfaces;
+﻿using DataAccess.Factory;
 using DataAccess.SqlServer;
 using Domain.Settings;
-using Infrastructure.Configuration;
-using Infrastructure.Settings;
+using Domain.Configuration;
 
 using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Data.Common;
+using Presentation.Forms.Base;
 namespace Presentation;
 
-public partial class Login : Form
+public partial class Login : BaseForm
 {
     private ConnectionSettingsStore store = new ConnectionSettingsStore(AppPaths.ConnectionsFile);
-    public string ConnectionString { get; private set; } = string.Empty;
-    public string server { get; private set; } = string.Empty;
 
-    public IDbProviderFactory providerFactory;
-    public IDbConnectionStringBuilder dbConnectionStringBuilder;
+    public IDbProviderFactory? providerFactory { get; private set; }
 
     public Login()
     {
@@ -78,7 +71,7 @@ public partial class Login : Form
         }
     }
 
-    private void BtnLogin_Click(object? sender, EventArgs e)
+    private async void BtnLogin_Click(object? sender, EventArgs e)
     {
         string server = CmBxServer.Text.Trim();
         string Username = TxtUsername.Text.Trim();
@@ -91,13 +84,6 @@ public partial class Login : Form
             CmBxServer.Focus();
             return;
         }
-
-        //if (string.IsNullOrWhiteSpace(database))
-        //{
-        //    Helper.Show("Please enter the database name.");
-        //    CmBxDatabase.Focus();
-        //    return;
-        //}
 
         if (sqlAuthentication && string.IsNullOrWhiteSpace(Username))
         {
@@ -115,19 +101,18 @@ public partial class Login : Form
 
         try
         {
-            if(cmbTypeDB.SelectedItem?.ToString()== "sqlServer")
-            {
-                dbConnectionStringBuilder = new SqlServerConnectionStringBuilder(new ConnectionSettings { Server = server });
-                dbConnectionStringBuilder.Server = server;
-                ConnectionString =   dbConnectionStringBuilder.Build();
-            providerFactory = new SqlServerDatabaseProviderFactory(ConnectionString);
-            providerFactory.ConnectionFactory.OpenConnection();
-
             BtnLogin.Enabled = false;
             BtnLogin.Text = "Connecting...";
-            SaveConnection(server, "", sqlAuthentication);
-            DialogResult = DialogResult.OK;
-            Close();
+            if (cmbTypeDB.SelectedItem?.ToString() == "sqlServer")
+            {
+                providerFactory = new SqlServerDatabaseProviderFactory();
+                providerFactory.ConnectionStringBuilder.ConnectionSettings.Server = server;
+                providerFactory.ReBuild(providerFactory.ConnectionStringBuilder.Build());
+                providerFactory.ConnectionFactory.ConnectionOpened();
+                SaveConnection(server, "", sqlAuthentication);
+                await GetData();
+                DialogResult = DialogResult.OK;
+
             }
         }
         catch (SqlException ex)
@@ -140,8 +125,8 @@ public partial class Login : Form
         }
         catch (Exception ex)
         {
-            MessageBox.Show(
-                ex.Message,
+            MessageBox.Show(ex+
+                ex.HelpLink,
                 "Login Error",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
@@ -155,7 +140,13 @@ public partial class Login : Form
             }
         }
     }
+    public async Task GetData()
+    {
+        await Task.Delay(2000);
 
+        Console.WriteLine("Done");
+
+    }
     private void SaveConnection(
         string server,
         string database,
@@ -175,10 +166,20 @@ public partial class Login : Form
 
     private void BtnCancel_Click(object sender, EventArgs e)
     {
+        //if (MessageBox.Show("do you want to exit from Application?  ", "Application exit", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+        //{
+        //Application.Exit();
+        //}
+        //return;
 
     }
 
     private void CmBxServer_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void LblTitle_Click(object sender, EventArgs e)
     {
 
     }

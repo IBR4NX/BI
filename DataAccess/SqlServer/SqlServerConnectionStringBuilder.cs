@@ -1,45 +1,36 @@
-﻿using DataAccess.Interfaces;
+﻿using DataAccess.Factory;
+using Domain.Interfaces;
 using Domain.Settings;
 using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccess.SqlServer
 {
 
     public class SqlServerConnectionStringBuilder : IDbConnectionStringBuilder
     {
-        public string Server { get; set; } = ".";
+        public IConnectionSettings ConnectionSettings { get; set; } = new ConnectionSettings();
 
-        public int? Port { get; set; } = 1433;
-
-        public string Database { get; set; } = "";
-
-        public string Username { get; set; } = "";
-
-        public string Password { get; set; } = "";
-
-        public SqlServerConnectionStringBuilder(ConnectionSettings builder) {
-            this.Server = builder.Server;   
-            //this.Port = builder.Port;
-            //this.Database = builder.Database;
-            //this.Username = builder.Username;
-            //this.Password = builder.Password;
+        public SqlServerConnectionStringBuilder(IConnectionSettings? connectionSettings=null) {
+            if (connectionSettings != null)
+            {
+                if (connectionSettings.Server != string.Empty)
+                    ConnectionSettings.Server = connectionSettings.Server;
+            }
+          
         }
 
         public string Build()
         {
             SqlConnectionStringBuilder builder = new();
 
-            builder.DataSource = $"{Server},{Port}";
-            if(Database != null)
-            builder.InitialCatalog = Database;
+            builder.DataSource = $"{ConnectionSettings.Server},{ConnectionSettings.Port}";
+            if(ConnectionSettings.Database != null)
+            builder.InitialCatalog = ConnectionSettings.Database;
 
-            if (!string.IsNullOrWhiteSpace(Username))
+            if (!string.IsNullOrWhiteSpace(ConnectionSettings.Username))
             {
-                builder.UserID = Username;
-                builder.Password = Password;
+                builder.UserID = ConnectionSettings.Username;
+                builder.Password = ConnectionSettings.Password;
                 builder.IntegratedSecurity = false;
             }
             else

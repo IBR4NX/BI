@@ -1,7 +1,6 @@
 ﻿using Business.Metadata;
 using Business.Services;
 using DataAccess.Factory;
-using DataAccess.Interfaces;
 using DataAccess.QueryBuilder;
 using Domain.Definition;
 using Presentation.Forms.Docks;
@@ -13,11 +12,11 @@ namespace Presentation
 {
     public partial class MainForm : Form
     {
-        private QueryService _queryService;
+        public static QueryService _queryService;
         private readonly List<FilterDefinition> _filters = new();
         private int dgvOpenDistance;
         private readonly List<JoinDefinition> _joins = new();
-        private IDbProviderFactory providerFactory;
+        public static IDbProviderFactory providerFactory;
 
         public FormExplore frmExplore = new FormExplore();
         public FormColumns frmColumns = new FormColumns();
@@ -27,9 +26,8 @@ namespace Presentation
         public DockPane documentPane;
         public DockPane documentPane2;
 
-        public string ConnectionString = "";
-        public string server = "";
-        public IDbConnectionStringBuilder dbConnectionStringBuilder;
+        //public string ConnectionString = "";
+        //public string server = "";
 
 
 
@@ -38,7 +36,7 @@ namespace Presentation
         public MainForm()
         {
             InitializeComponent();
-            string connectionString = @"Server=.;Database=AdventureWorks2025;Trusted_Connection=True;TrustServerCertificate=True;";
+            //string connectionString = @"Server=.;Database=AdventureWorks2025;Trusted_Connection=True;TrustServerCertificate=True;";
 
         }
 
@@ -46,11 +44,11 @@ namespace Presentation
         private void MainForm_Load(object sender, EventArgs e)
         {
             var login = new Login();
-            if (login.ShowDialog() == DialogResult.OK)
+            ShowFormDock();
+            login.ShowDialog();
+            if (login.DialogResult == DialogResult.OK)
             {
-                ConnectionString = login.ConnectionString.Trim();
-                server = login.server.Trim();
-                dbConnectionStringBuilder = login.dbConnectionStringBuilder;
+
                 providerFactory = login.providerFactory;
                 MetadataService.MetadataProvider(login.providerFactory.MetadataProvider);
                 clsEventActions.DatabaseChanged += notifi;
@@ -60,8 +58,7 @@ namespace Presentation
                 errProvider.SetError(login, " no");
                 Application.Exit();
             }
-
-            ShowFormDock();
+            frmExplore.loaddatabases();
 
             ConfigureControls();
             SetupStyle();
@@ -79,9 +76,9 @@ namespace Presentation
                 Debug.WriteLine("notif.0: ");
                 MetadataService.CorrectDataBase(database);
                 Debug.WriteLine("notif.1: ");
-                dbConnectionStringBuilder.Database = database;
+               providerFactory.ConnectionStringBuilder.ConnectionSettings.Database = database;
                 Debug.WriteLine("notif.2: ");
-                providerFactory.ReBuild(dbConnectionStringBuilder.Build());
+                providerFactory.ReBuild(providerFactory.ConnectionStringBuilder.Build());
                 MetadataService.MetadataProvider(providerFactory.MetadataProvider);
                 Debug.WriteLine("notif.3: ");
                 MetadataService.StorTables();
@@ -89,6 +86,8 @@ namespace Presentation
                 _queryService = new QueryService(providerFactory);
                 frmExplore.LoadTables();
                 MetadataService.GetMetadata();
+                frmDocument.SetupAutocomplete();
+                QueryBuilderService._ProviderFactory = providerFactory;
             }
             catch (Exception ex)
             {
@@ -97,12 +96,11 @@ namespace Presentation
 
 
         }
-        private void ShowFormDock()
+        private async void ShowFormDock()
         {
 
             frmExplore.Show(dockPanel, DockState.DockLeft);
             dockPanel.DockLeftPortion = 350;
-            frmExplore.loaddatabases();
 
 
             // form center
@@ -116,7 +114,7 @@ namespace Presentation
             //frmDataGrid.DockAreas = DockAreas.Document;
             frmDataGrid.Hide();
 
-            frmColumns.Show(documentPane, DockAlignment.Bottom, 0.5);
+            frmColumns.Show(documentPane, DockAlignment.Bottom, 0.3);
             //frmColumns.AllowEndUserDocking = false;
             //documentPane2 = frmColumns.Pane;
             //frmFilters.Show(documentPane2, DockAlignment.Right, 0.5);
@@ -129,10 +127,13 @@ namespace Presentation
             
             try
             {
+                var table = frmExplore.GetTableInfo();
+                frmDataGrid.tableInfo = table;
                 var result = new DataTable();
-                if (frmDocument.IsActivated)
+                Debug.WriteLine(table.Name);
+                if (frmDocument.IsActivated || table.Name =="")
                 {
-                    result = _queryService.Execute(frmDocument.rtbox.Text.Trim());
+                    result = _queryService.Execute(frmDocument.Editor.Text.Trim());
                     frmDataGrid.SetDataSource(result);
                     frmDataGrid.Show();
                     return;
@@ -140,7 +141,7 @@ namespace Presentation
 
                 IQueryBuilder queryBuilder = new QueryBuilder(providerFactory.ParameterFactory);
                 queryBuilder.Select(frmColumns.GetColumns())
-                    .From(frmExplore.GetTableInfo()).Where(frmColumns.GetFilters());
+                    .From(table).Where(frmColumns.GetFilters());
                 var query = queryBuilder.Build();
                 //MessageBox.Show("00000" + query );
                 var p = queryBuilder.GetParameters().ToArray();
@@ -243,7 +244,7 @@ namespace Presentation
         {
             frmDataGrid.ShowInTaskbar = false;
             tsltest1.Text = frmDataGrid.IsDisposed + " : " + frmDataGrid.IsActivated + " : " + frmDataGrid.DockState;
-            tsltest2.Text = ((short)frmExplore.DockState) + "====" + "" + " : dis=" + frmExplore.IsDisposed + " : ictv=" + frmExplore.IsActivated + " :hid " + frmExplore.IsHidden;
+            tsltest2.Text = ": "+((short)frmDocument.DockState)  + "" + " : dis=" + frmExplore.IsDisposed + " : ictv=" + frmDocument.IsActivated + " :hid " + frmDocument.IsHidden;
         }
 
 
@@ -332,15 +333,15 @@ namespace Presentation
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (providerFactory.ConnectionFactory.connection.State == ConnectionState.Open)
-            {
-                StatusLabelConnection.Text = "Connected";
-            }
-            else 
-            {
-                StatusLabelConnection.Text = "Disconnected";
+            //if (providerFactory.ConnectionFactory.ConnectionOpened())
+            //{
+            //    StatusLabelConnection.Text = "Connected";
+            //}
+            //else 
+            //{
+            //    StatusLabelConnection.Text = "Disconnected";
                 
-            }
+            //}
         }
     }
 

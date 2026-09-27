@@ -3,9 +3,11 @@ namespace DataAccess.Factory
 {
     public interface IDbConnectionFactory
     {
-        IDbConnection connection { get; set; }
+        IDbConnection Connection { get; set; }
 
         IDbConnection CreateConnection();
         IDbConnection OpenConnection();
+
+        bool ConnectionOpened();
     }
 }

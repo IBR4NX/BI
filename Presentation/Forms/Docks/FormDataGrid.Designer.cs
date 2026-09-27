@@ -32,6 +32,13 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DgvData = new DataGridView();
+            contextDgvData = new ContextMenuStrip(components);
+            EditItem = new ToolStripMenuItem();
+            deleteTheItemToolStripMenuItem = new ToolStripMenuItem();
+            extrnaToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
+            tsmiCopy = new ToolStripMenuItem();
+            cpToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             dateTimePicker1 = new DateTimePicker();
             txtFilter = new TextBox();
@@ -40,8 +47,8 @@
             cmbFilters = new ComboBox();
             txtlabel = new Label();
             errProvider = new ErrorProvider(components);
-            contextMenuStrip1 = new ContextMenuStrip(components);
             ((System.ComponentModel.ISupportInitialize)DgvData).BeginInit();
+            contextDgvData.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errProvider).BeginInit();
             SuspendLayout();
@@ -64,6 +71,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             DgvData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             DgvData.ColumnHeadersHeight = 35;
+            DgvData.ContextMenuStrip = contextDgvData;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(36, 38, 44);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
@@ -85,6 +93,66 @@
             DgvData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvData.Size = new Size(800, 405);
             DgvData.TabIndex = 4;
+            DgvData.CellContentClick += DgvData_CellContentClick;
+            // 
+            // contextDgvData
+            // 
+            contextDgvData.BackColor = Color.Black;
+            contextDgvData.Font = new Font("Segoe UI", 10.2F);
+            contextDgvData.ImageScalingSize = new Size(20, 20);
+            contextDgvData.Items.AddRange(new ToolStripItem[] { EditItem, deleteTheItemToolStripMenuItem, extrnaToolStripMenuItem, toolStripSeparator6, tsmiCopy, cpToolStripMenuItem });
+            contextDgvData.Name = "contextMenuStrip1";
+            contextDgvData.RenderMode = ToolStripRenderMode.System;
+            contextDgvData.ShowCheckMargin = true;
+            contextDgvData.Size = new Size(219, 150);
+            // 
+            // EditItem
+            // 
+            EditItem.BackColor = Color.Black;
+            EditItem.ForeColor = Color.White;
+            EditItem.Name = "EditItem";
+            EditItem.Size = new Size(218, 28);
+            EditItem.Text = "Edit item";
+            // 
+            // deleteTheItemToolStripMenuItem
+            // 
+            deleteTheItemToolStripMenuItem.BackColor = Color.Black;
+            deleteTheItemToolStripMenuItem.ForeColor = Color.White;
+            deleteTheItemToolStripMenuItem.Name = "deleteTheItemToolStripMenuItem";
+            deleteTheItemToolStripMenuItem.Size = new Size(218, 28);
+            deleteTheItemToolStripMenuItem.Text = "delete the item";
+            deleteTheItemToolStripMenuItem.Click += deleteTheItemToolStripMenuItem_Click;
+            // 
+            // extrnaToolStripMenuItem
+            // 
+            extrnaToolStripMenuItem.BackColor = Color.Black;
+            extrnaToolStripMenuItem.ForeColor = Color.White;
+            extrnaToolStripMenuItem.Name = "extrnaToolStripMenuItem";
+            extrnaToolStripMenuItem.Size = new Size(218, 28);
+            extrnaToolStripMenuItem.Text = "extrna";
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.BackColor = Color.Black;
+            toolStripSeparator6.ForeColor = SystemColors.ButtonFace;
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(215, 6);
+            // 
+            // tsmiCopy
+            // 
+            tsmiCopy.BackColor = Color.Black;
+            tsmiCopy.ForeColor = Color.White;
+            tsmiCopy.Name = "tsmiCopy";
+            tsmiCopy.ShortcutKeys = Keys.Control | Keys.C;
+            tsmiCopy.Size = new Size(218, 28);
+            tsmiCopy.Text = "copy";
+            // 
+            // cpToolStripMenuItem
+            // 
+            cpToolStripMenuItem.ForeColor = Color.White;
+            cpToolStripMenuItem.Name = "cpToolStripMenuItem";
+            cpToolStripMenuItem.Size = new Size(218, 28);
+            cpToolStripMenuItem.Text = "cp";
             // 
             // panel1
             // 
@@ -165,12 +233,6 @@
             // 
             errProvider.ContainerControl = this;
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.ImageScalingSize = new Size(20, 20);
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(211, 32);
-            // 
             // FormDataGrid
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -185,6 +247,7 @@
             FormClosing += FormDataGrid_FormClosing;
             Load += FormDataGrid_Load;
             ((System.ComponentModel.ISupportInitialize)DgvData).EndInit();
+            contextDgvData.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errProvider).EndInit();
@@ -202,6 +265,12 @@
         private ErrorProvider errProvider;
         private GroupBox groupBox1;
         private ComboBox cmbFilterOperator;
-        private ContextMenuStrip contextMenuStrip1;
+        private ContextMenuStrip contextDgvData;
+        private ToolStripMenuItem EditItem;
+        private ToolStripMenuItem deleteTheItemToolStripMenuItem;
+        private ToolStripMenuItem extrnaToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripMenuItem tsmiCopy;
+        private ToolStripMenuItem cpToolStripMenuItem;
     }
 }

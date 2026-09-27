@@ -2,7 +2,7 @@
 using Domain.Definition;
 using System.Data;
 
-namespace DataAccess;
+namespace DataAccess.QueryBuilder;
 
 public class FilterBuilder
 {

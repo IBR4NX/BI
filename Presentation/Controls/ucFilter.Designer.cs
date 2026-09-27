@@ -42,7 +42,6 @@
             lblValue = new Label();
             cmbFilterOperator = new ComboBox();
             CbColumnsFilter = new ComboBox();
-            label1 = new Label();
             SuspendLayout();
             // 
             // cbFilterValue
@@ -207,22 +206,12 @@
             CbColumnsFilter.Size = new Size(120, 28);
             CbColumnsFilter.TabIndex = 23;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(434, 17);
-            label1.Name = "label1";
-            label1.Size = new Size(50, 20);
-            label1.TabIndex = 31;
-            label1.Text = "label1";
-            // 
             // ucFilter
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoSize = true;
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            Controls.Add(label1);
             Controls.Add(cbFilterValue);
             Controls.Add(lstFilters);
             Controls.Add(label2);
@@ -257,6 +246,5 @@
         private Label lblValue;
         private ComboBox cmbFilterOperator;
         private ComboBox CbColumnsFilter;
-        private Label label1;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Configuration;
+﻿namespace Domain.Configuration;
 public static class AppPaths
 {
     public static string ApplicationFolder =>

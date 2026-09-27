@@ -2,6 +2,7 @@
 using Domain.Definition;
 using Domain.Entities;
 using System.Data;
+using System.Diagnostics;
 using System.Text;
 
 
@@ -9,66 +10,110 @@ namespace DataAccess.QueryBuilder
 {
     public class QueryBuilder : IQueryBuilder
     {
-        private  List<ColumnInfo> _columns = new();
+        private string QueryType = "SELECT";
+        private string QueryAfterTypeBeforeColumns = "";
+        private List<ColumnInfo> _columns = new();
 
-        private  List<JoinDefinition> _joins = new();
+        private List<JoinDefinition> _joins = new();
 
-        private  List<string> _conditions = new();
-
+        private List<string> _conditions = new();
         private string? _schema;
-
         private string? _table;
-
         private string? _orderBy;
-        private  FilterBuilder _filterBuilder ;
+        private FilterBuilder _filterBuilder;
         private List<IDbDataParameter> _parameters = new();
         private IDbParameterFactory _ParameterFactory;
 
         private int _parameterIndex;
+        private StringBuilder query = new StringBuilder();
+
+        #region This method QueryBuilder
         public QueryBuilder(IDbParameterFactory parameterFactory)
         {
             _ParameterFactory = parameterFactory;
+
             _filterBuilder = new FilterBuilder(_ParameterFactory);
         }
+        #endregion
+
+        #region This method Select
         public IQueryBuilder Select(List<ColumnInfo> columns)
         {
             _columns.Clear();
-
             _columns.AddRange(columns);
-
+            QueryType = "SELECT";
             return this;
         }
+        #endregion
 
+        #region This method Delete
+        public IQueryBuilder Delete
+        {
+            get
+            {
+                _columns.Clear();
+                QueryType = "Delete";
+                return this;
+            }
+            set
+            {
+                _columns.Clear();
+                QueryType = "Delete";
+            }
+        }
+        #endregion
+
+        #region This method From
         public IQueryBuilder From(TableInfo tableInfo)
         {
             _schema = tableInfo.Schema;
-
-            _table =tableInfo.Name;
-
+            _table = tableInfo.Name;
             return this;
         }
+        #endregion
 
+        #region This method Join
         public IQueryBuilder Join(JoinDefinition join)
         {
             _joins.Add(join);
-
             return this;
         }
+        #endregion
 
+        #region This method Where
+        public IQueryBuilder Where(FilterDefinition? filter)
+        {
+            if (filter == null) return this;
+            FilterResult result = new FilterResult();
+            GetFilterResult(filter, ref result, ref _parameterIndex);
+            return this;
+        }
         public IQueryBuilder Where(List<FilterDefinition> filter)
         {
             FilterResult result = new FilterResult();
-            foreach (FilterDefinition filterDef in filter) {
-                result = _filterBuilder.Build(filterDef, ref _parameterIndex);
-                _conditions.Add(result.Sql);
-                foreach (var parameter in result.Parameters)
-                {
-                    _parameters.Add(parameter);
-                }
-            }
 
+            foreach (FilterDefinition filterDef in filter)
+            {
+                GetFilterResult(filterDef, ref result, ref _parameterIndex);
+            }
             return this;
         }
+        #endregion
+
+        #region This method GetFilterResult
+        private bool GetFilterResult(FilterDefinition filterDef, ref FilterResult result, ref int _parameterIndex)
+        {
+            result = _filterBuilder.Build(filterDef, ref _parameterIndex);
+            _conditions.Add(result.Sql);
+            foreach (var parameter in result.Parameters)
+            {
+                _parameters.Add(parameter);
+            }
+            return true;
+        }
+        #endregion
+
+        #region This method OrderBy
         public IQueryBuilder OrderBy(string column, bool descending = false)
         {
             _orderBy = descending
@@ -77,10 +122,20 @@ namespace DataAccess.QueryBuilder
 
             return this;
         }
+        #endregion
+
+        #region This method GetParameters
         public List<IDbDataParameter> GetParameters()
         {
+            //var p = _parameters;
+            //_conditions.Clear();
+            //_parameters.Clear();
+            //_parameterIndex = 0;
             return _parameters;
         }
+        #endregion
+
+        #region This method Build
         public string Build()
         {
             if (string.IsNullOrWhiteSpace(_table))
@@ -97,9 +152,10 @@ namespace DataAccess.QueryBuilder
                 ? _table
                 : $"[{_schema}].[{_table}]";
 
-            StringBuilder query = new StringBuilder();
-
-            query.Append($"SELECT {columns} FROM {from}");
+            if (QueryType == "Delete")
+                query.Append($"{QueryType} FROM {from}");
+            else
+                query.Append($"{QueryType} {QueryAfterTypeBeforeColumns} {columns} FROM {from}");
 
             foreach (JoinDefinition join in _joins)
             {
@@ -118,12 +174,16 @@ namespace DataAccess.QueryBuilder
                     ? fk.ReferencedTable!
                     : $"[{fk.ReferencedSchema}].[{fk.ReferencedTable}]";
 
+                //Debug.WriteLine($" {joinType} {referencedTable}");
                 query.Append($" {joinType} {referencedTable}");
                 query.Append($" ON [{fk.TableName}].[{fk.Name}] = {referencedTable}.[{fk.ReferencedColumn}]");
             }
-
             if (_conditions.Count > 0)
             {
+                //Debug.WriteLine(_conditions[0] + " ");
+                //Debug.WriteLine(string.Join(" AND ", _conditions) + " " + string.Join(" ", _parameters) + " " + _parameterIndex);
+
+
                 query.Append(" WHERE ");
                 query.Append(string.Join(" AND ", _conditions));
             }
@@ -132,9 +192,12 @@ namespace DataAccess.QueryBuilder
             {
                 query.Append($" ORDER BY {_orderBy}");
             }
-
+            _joins.Clear();
+            _columns.Clear();
             return query.ToString();
         }
+        #endregion
+
 
         #region Backward Compatibility old methods
         public string Build2()

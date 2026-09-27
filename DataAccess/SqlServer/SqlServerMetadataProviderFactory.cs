@@ -1,5 +1,4 @@
 ﻿using DataAccess.Factory;
-using Domain;
 using Domain.Entities;
 using Microsoft.Data.SqlClient;
 using System.Data;
@@ -37,9 +36,7 @@ public class SqlServerMetadataProviderFactory : IDbMetadataProviderFactory
     public List<string> GetSchemas()
     {
         List<string> schemas = new();
-
         string query = "SELECT name FROM sys.schemas ORDER BY name";
-
         using IDataReader reader = _databaseExecutor.ExecuteReader(query);
 
         while (reader.Read())
@@ -52,15 +49,36 @@ public class SqlServerMetadataProviderFactory : IDbMetadataProviderFactory
 
     public List<TableInfo> GetTables()
     {
-        List<string> tables = new();
         List<TableInfo> tableInfo = new();
 
 
+        //string query = """
+        //SELECT TABLE_SCHEMA, TABLE_NAME
+        //FROM INFORMATION_SCHEMA.TABLES
+        //WHERE TABLE_TYPE = 'BASE TABLE'
+        //ORDER BY TABLE_SCHEMA, TABLE_NAME;
+        //""";
         string query = """
-        SELECT TABLE_SCHEMA, TABLE_NAME
-        FROM INFORMATION_SCHEMA.TABLES
-        WHERE TABLE_TYPE = 'BASE TABLE'
-        ORDER BY TABLE_SCHEMA, TABLE_NAME;
+        SELECT
+            s.name AS SchemaName,
+            t.name AS TableName,
+            c.name AS PrimaryKeyColumn
+        FROM sys.tables t
+        INNER JOIN sys.schemas s
+            ON t.schema_id = s.schema_id
+        INNER JOIN sys.indexes i
+            ON t.object_id = i.object_id
+            AND i.is_primary_key = 1
+        INNER JOIN sys.index_columns ic
+            ON i.object_id = ic.object_id
+            AND i.index_id = ic.index_id
+        INNER JOIN sys.columns c
+            ON ic.object_id = c.object_id
+            AND ic.column_id = c.column_id
+        ORDER BY
+            s.name,
+            t.name,
+            ic.key_ordinal;
         """;
 
         using IDataReader reader = _databaseExecutor.ExecuteReader(query);
@@ -70,8 +88,11 @@ public class SqlServerMetadataProviderFactory : IDbMetadataProviderFactory
 
 
             tableInfo.Add( new TableInfo {
-                Schema = reader["TABLE_SCHEMA"].ToString()!,
-                Name = reader["TABLE_NAME"].ToString()! }
+                Schema = reader["SchemaName"].ToString()!,
+                Name = reader["TableName"].ToString()!,
+                PrimaryKeyColumn = reader["PrimaryKeyColumn"].ToString()!
+            }
+                
              );
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,7 @@ namespace DataAccess.Factory
 {
     public interface IDbProviderFactory
     {
+        IDbConnectionStringBuilder ConnectionStringBuilder { get; set; }
         IDbConnectionFactory ConnectionFactory { get; set; }
 
         IDbExecutorFactory DatabaseExecutor { get; set; }

@@ -1,7 +1,7 @@
 ﻿using Domain.Settings;
 using System.Text.Json;
 
-namespace Infrastructure.Settings;
+namespace Infrastructure.Configuration;
 
 public class ConnectionSettingsStore
 {

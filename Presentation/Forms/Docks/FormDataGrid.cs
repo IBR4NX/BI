@@ -1,17 +1,17 @@
 ﻿using Domain.Definition;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
 using Presentation.Forms.Base;
+using Domain.Entities;
+using DataAccess.QueryBuilder;
+using Business.Services;
+using System.Diagnostics;
 
 namespace Presentation.Forms.Docks
 {
     public partial class FormDataGrid : frmDockWindowBase
     {
+        public TableInfo tableInfo=new ();
+
         private DataTable? table;
         public FormDataGrid()
         {
@@ -31,7 +31,7 @@ namespace Presentation.Forms.Docks
             {
                 cmbFilters.Items.Add(column.ColumnName);
             }
-
+            cmbFilters.SelectedIndex = 0;
         }
 
         private void ConfigureControls()
@@ -47,7 +47,8 @@ namespace Presentation.Forms.Docks
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
             string name = cmbFilters.Text.Trim();
-
+            if (table == null)
+                return;
             if (name is "choose filter" || txtFilter.Text.Trim() == "")
             {
                 table.DefaultView.RowFilter = "";
@@ -102,6 +103,29 @@ namespace Presentation.Forms.Docks
 
         private void FormDataGrid_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void DgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void deleteTheItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow row = DgvData.SelectedRows[0];
+
+            var filter = new FilterDefinition
+            {
+                Column = new ColumnInfo { Name = tableInfo.PrimaryKeyColumn.Trim() },
+                Operator = ComparisonOperator.Equal,
+            };
+            filter.Values.Add(row.Cells[filter.Column.Name].Value?.ToString()!);
+            Debug.WriteLine("val:" + filter.Column.Name + " "+filter.Values[0]);
+
+            if(QueryBuilderService.DeleteColumns(tableInfo, filter))
+                table?.Rows.RemoveAt(row.Index);
+
 
         }
     }

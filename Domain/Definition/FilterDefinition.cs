@@ -16,8 +16,6 @@ public class FilterDefinition
 
     public FilterValueType? ValueType { get; set; }
 
-    public object? Value { get; set; }
-
     public string? ValueColumnName { get; set; }
 
     public List<object> Values { get; set; } = new();

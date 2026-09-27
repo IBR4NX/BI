@@ -28,12 +28,14 @@ public partial class FormExplore : frmDockWindowBase
     public TableInfo GetTableInfo()
     {
         if (trTableInfo.SelectedNode is not TreeNode)
-            throw new Exception("GetTableInfo : frm Explore : trTableInfo.SelectedNode is not TreeNode ");
+            return new TableInfo();
+            //throw new Exception("GetTableInfo : frm Explore : trTableInfo.SelectedNode is not TreeNode ");
 
         if (trTableInfo.SelectedNode.Tag is TableInfo tableInfo)
             return tableInfo;
         else
-            throw new Exception("GetTableInfo : frm Explore : it isn't selected table ");
+            return new TableInfo();
+            //throw new Exception("GetTableInfo : frm Explore : it isn't selected table ");
 
     }
     public FormExplore LoadTables()

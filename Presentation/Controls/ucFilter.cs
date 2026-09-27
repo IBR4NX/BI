@@ -30,7 +30,7 @@ namespace Presentation.Controls
                 CbColumnsFilter.Items.Add(column);
                 cbFilterValue.Items.Add(column.Name);
             }
-            cbFilterValue.SelectedIndex = 0;
+            CbColumnsFilter.SelectedIndex = 0;
         }
         #region Start ConfigureControls and SetupStyle
         private void ConfigureControls()

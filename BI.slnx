@@ -1,10 +1,7 @@
 <Solution>
- <Folder Name="/Tests/" />
  <Project Path="Business/Business.csproj" />
  <Project Path="DataAccess/DataAccess.csproj" />
  <Project Path="Domain/Domain.csproj" />
- <Project Path="Infrastructure/Infrastructure.csproj" />
  <Project Path="Presentation/Presentation.csproj" />
  <Project Path="Testing/Testing.csproj" Id="89b68355-43cc-402b-8e1e-657023891c60" />
-
 </Solution>

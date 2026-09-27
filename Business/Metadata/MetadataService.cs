@@ -97,7 +97,6 @@ public static class MetadataService
     {
         var c = _dbMetadataProvider.GetColumns();
         Debug.WriteLine("MetadataService.LoadAllColumns: "+c.Count);
-        
         Metadata.Columns =c;
 
     }
@@ -125,6 +124,10 @@ public static class MetadataService
         return GetColumns(tableName)
             .Where(c => c.IsForeignKey)
             .ToList();
+    }
+    public static ColumnInfo GetPrimaryKeyColumn(TableInfo tableName)
+    {
+        return GetColumns(tableName).FirstOrDefault(c => c.IsPrimaryKey)! ;
     }
 
 
